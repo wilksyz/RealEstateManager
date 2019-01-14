@@ -2,6 +2,10 @@ package com.openclassrooms.realestatemanager;
 
 import org.junit.Test;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import static org.junit.Assert.*;
 
 /**
@@ -15,5 +19,15 @@ public class UnitTest {
         int dollars = Utils.convertEuroDollar(25876);
 
         assertEquals(30741, dollars);
+    }
+
+    @Test
+    public void checkDateFormat(){
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+        String date = dateFormat.format(new Date());
+
+        String dateToday = Utils.getTodayDate();
+
+        assertEquals(date, dateToday);
     }
 }
