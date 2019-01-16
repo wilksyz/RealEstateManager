@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.configureTextViewMain();
         this.configureTextViewQuantity();
+
     }
 
     private void configureTextViewMain(){
