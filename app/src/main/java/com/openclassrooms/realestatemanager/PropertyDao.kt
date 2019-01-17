@@ -13,11 +13,11 @@ interface PropertyDao {
     fun getProperty(): LiveData<List<Property>>
 
     @Insert
-    fun insertItem(property: Property): Long
+    fun insertProperty(property: Property): Long
 
     @Update
-    fun updateItem(property: Property): Int
+    fun updateProperty(property: Property): Int
 
     @Query("DELETE FROM Property WHERE id = :propertyId")
-    fun deleteItem(propertyId: Long): Int
+    fun deleteProperty(propertyId: Long): Int
 }
