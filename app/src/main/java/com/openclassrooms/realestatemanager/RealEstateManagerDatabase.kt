@@ -7,7 +7,7 @@ import android.arch.persistence.room.Room
 import android.content.Context
 
 
-@Database(entities = [Property::class], version = 1)
+@Database(entities = [Property::class], version = 1, exportSchema = false)
 abstract class RealEstateManagerDatabase : RoomDatabase() {
 
     @Volatile

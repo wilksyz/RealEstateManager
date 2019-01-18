@@ -1,13 +1,11 @@
 package com.openclassrooms.realestatemanager
 
 import java.util.concurrent.Executor
-import android.os.AsyncTask.execute
-import android.content.ClipData.Item
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModel
 
 
-
-class PropertyViewModel(propertyDataRepository: PropertyDataRepository, executor: Executor) {
+class PropertyViewModel(propertyDataRepository: PropertyDataRepository, executor: Executor) : ViewModel() {
 
     private val mPropertyDataSource: PropertyDataRepository = propertyDataRepository
     private val mExecutor: Executor = executor
