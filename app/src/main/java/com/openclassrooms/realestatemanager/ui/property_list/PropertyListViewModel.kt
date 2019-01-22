@@ -1,17 +1,23 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.ui.property_list
 
 import java.util.concurrent.Executor
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import com.openclassrooms.realestatemanager.model.Property
+import com.openclassrooms.realestatemanager.repository.PropertyDataRepository
 
 
-class PropertyViewModel(propertyDataRepository: PropertyDataRepository, executor: Executor) : ViewModel() {
+class PropertyListViewModel(propertyDataRepository: PropertyDataRepository, executor: Executor) : ViewModel() {
 
     private val mPropertyDataSource: PropertyDataRepository = propertyDataRepository
     private val mExecutor: Executor = executor
 
-    fun getProperty(): LiveData<List<Property>> {
-        return mPropertyDataSource.getProperty()
+    fun getAllProperty(): LiveData<List<Property>> {
+        return mPropertyDataSource.getAllProperty()
+    }
+
+    fun getProperty(id: Long): LiveData<Property>{
+        return mPropertyDataSource.getProperty(id)
     }
 
     fun createProperty(property: Property) {

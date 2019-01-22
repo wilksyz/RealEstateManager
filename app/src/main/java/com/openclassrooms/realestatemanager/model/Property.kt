@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
@@ -17,7 +17,7 @@ data class Property(var typeProperty: String,
                     var descriptionProperty: String,
                     var photos: Array<String>,
                     var address: String,
-                    var interestPoint: Array<String>,
+                    var interestPoint: String,
                     var saleStatus: Boolean,
                     var dateOfSale: String,
                     var dateSold: String,

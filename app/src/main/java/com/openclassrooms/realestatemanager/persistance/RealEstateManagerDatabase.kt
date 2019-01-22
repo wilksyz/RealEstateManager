@@ -1,10 +1,11 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.persistance
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.openclassrooms.realestatemanager.model.Property
 
 
 @Database(entities = [Property::class], version = 1, exportSchema = false)

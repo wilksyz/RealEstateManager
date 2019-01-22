@@ -1,7 +1,9 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.di
 
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.openclassrooms.realestatemanager.persistance.RealEstateManagerDatabase
+import com.openclassrooms.realestatemanager.repository.PropertyDataRepository
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
