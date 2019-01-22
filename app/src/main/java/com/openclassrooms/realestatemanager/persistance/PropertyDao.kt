@@ -13,8 +13,8 @@ interface PropertyDao {
     @Query("SELECT * FROM Property")
     fun getAllProperty(): LiveData<List<Property>>
 
-    @Query("SELECT * FROM Property WHERE Id = :id")
-    fun getProperty(id: Long): LiveData<Property>
+    @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
+    fun getProperty(propertyId: Long): LiveData<Property>
 
     @Insert
     fun insertProperty(property: Property): Long
@@ -22,6 +22,6 @@ interface PropertyDao {
     @Update
     fun updateProperty(property: Property): Int
 
-    @Query("DELETE FROM Property WHERE id = :propertyId")
+    @Query("DELETE FROM Property WHERE mPropertyId = :propertyId")
     fun deleteProperty(propertyId: Long): Int
 }

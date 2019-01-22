@@ -10,12 +10,11 @@ data class Property(var typeProperty: String,
                     var numberOfRooms: Int
                     ) {
 
-    @PrimaryKey(autoGenerate = true) var id: Long = 0
+    @PrimaryKey(autoGenerate = true) var mPropertyId: Long = 0
 
 /*
                     ,
                     var descriptionProperty: String,
-                    var photos: Array<String>,
                     var address: String,
                     var interestPoint: String,
                     var saleStatus: Boolean,

@@ -70,7 +70,7 @@ class PropertyListFragment : Fragment() {
 
     // Delete an property
     private fun deleteProperty(property: Property) {
-        this.mPropertyListViewModel.deleteProperty(property.id)
+        this.mPropertyListViewModel.deleteProperty(property.mPropertyId)
     }
 
     // Update an property
