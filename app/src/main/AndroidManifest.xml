@@ -3,6 +3,9 @@
     package="com.openclassrooms.realestatemanager">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -11,16 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.openclassrooms.realestatemanager.ui.property_list.PropertyListActivity">
+        <activity android:name=".ui.property_list.PropertyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity">
-        </activity>
+        <activity android:name=".ui.property_details.PropertyDetailActivity"></activity>
+        <activity android:name=".ui.property_create.PropertyCreateActivity"></activity>
     </application>
 
 </manifest>

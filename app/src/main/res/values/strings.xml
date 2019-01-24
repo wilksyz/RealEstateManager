@@ -3,4 +3,33 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_property">Create property</string>
+    <string name="popup_title_permission_files_access">this application needs to access the images to create a new property</string>
+
+
+
+    // PropertyCreateActivity
+    <string name="surface_m2">Surface ( m2 )</string>
+    <string name="number_of_rooms">Number of rooms</string>
+    <string name="price">Price ( $ )</string>
+    <string name="describe_the_property">Describe the property</string>
+    <string name="location">Location</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="select_from">Select from:</string>
+    <string name="estate_agent">Estate agent</string>
+    <string name="type_of_property">Type of property</string>
+    <string-array name="type_property_array">
+        <item>House</item>
+        <item>Loft</item>
+        <item>Castle</item>
+        <item>Apartment</item>
+        <item>Ranch</item>
+        <item>penthouse</item>
+        <item>Manor</item>
+    </string-array>
+    <string-array name="estate_agent_array">
+        <item>PELTIER Antoine</item>
+        <item>PLAZA Stephane</item>
+        <item>RYAN Jack</item>
+    </string-array>
 </resources>
