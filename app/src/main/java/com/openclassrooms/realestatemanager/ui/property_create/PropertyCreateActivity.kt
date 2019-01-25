@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.property_create
 
 import android.Manifest
+import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +11,8 @@ import android.os.Environment.DIRECTORY_DCIM
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.widget.AdapterView
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_property_create.*
 import pub.devrel.easypermissions.AfterPermissionGranted
@@ -18,24 +21,39 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
-
-
+import android.widget.Toast
+import com.openclassrooms.realestatemanager.di.Injection
+import com.openclassrooms.realestatemanager.model.Picture
+import com.openclassrooms.realestatemanager.ui.property_list.PropertyListViewModel
+import com.openclassrooms.realestatemanager.utils.Utils
+import kotlin.collections.ArrayList
 
 
 private const val RC_IMAGE_PERMS = 100
 private const val RC_CHOOSE_PHOTO = 200
 class PropertyCreateActivity : AppCompatActivity() {
 
-    private lateinit var outputFileUri: Uri
+    private lateinit var mOutputFileUri: Uri
+    private lateinit var mCurrentPhotoPath: String
+    private lateinit var mAdapter: PropertyGridViewAdapter
+    private var mPictureList = ArrayList<Picture>()
+    private lateinit var mPropertyListViewModel: PropertyListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_create)
         this.configureSpinner()
+        this.configureViewModel()
+        this.configureGridView()
 
         add_photo_button.setOnClickListener {
             checkAccessImageFromPhone()
         }
+    }
+
+    private fun configureViewModel() {
+        val mViewModelFactory = Injection().provideViewModelFactory(this)
+        this.mPropertyListViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyListViewModel::class.java)
     }
 
     private fun configureSpinner(){
@@ -45,6 +63,16 @@ class PropertyCreateActivity : AppCompatActivity() {
         val estateAgentAdapter = ArrayAdapter.createFromResource(this, R.array.estate_agent_array, android.R.layout.simple_spinner_item)
         estateAgentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         estate_agent_spinner.adapter = estateAgentAdapter
+    }
+
+    private fun configureGridView(){
+        this.mAdapter = PropertyGridViewAdapter(this)
+        picture_gridview_create.adapter = this.mAdapter
+
+        picture_gridview_create.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, v, position, id ->
+                    Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
+                }
     }
 
     @AfterPermissionGranted(RC_IMAGE_PERMS)
@@ -70,10 +98,10 @@ class PropertyCreateActivity : AppCompatActivity() {
         val root = File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).toString() + File.separator + "Collage" + File.separator)
         root.mkdirs()
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val fname = "$timeStamp.jpg"
-        val sdImageMainDirectory = File(root, fname)
-        outputFileUri = Uri.fromFile(sdImageMainDirectory)
-
+        val fileName = "$timeStamp.jpg"
+        val imageMainDirectory = File(root, fileName)
+        mOutputFileUri = Uri.fromFile(imageMainDirectory)
+        mCurrentPhotoPath = imageMainDirectory.absolutePath
         val cameraIntents = ArrayList<Intent>()
         val captureIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         val packageManager = packageManager
@@ -83,7 +111,7 @@ class PropertyCreateActivity : AppCompatActivity() {
             val intent = Intent(captureIntent)
             intent.component = ComponentName(packageName, res.activityInfo.name)
             intent.setPackage(packageName)
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mOutputFileUri)
             cameraIntents.add(intent)
         }
 
@@ -112,14 +140,32 @@ class PropertyCreateActivity : AppCompatActivity() {
                 }
 
                 val selectedImageUri: Uri?
+
                 if (isCamera) {
-                    selectedImageUri = outputFileUri
+                    selectedImageUri = mOutputFileUri
                     imageView_create.setImageURI(selectedImageUri)
+                    galleryAddPic()
+                    mPictureList.add(Picture("essai", mOutputFileUri.toString(), Utils.getTodayDate(), 1))
+                    mAdapter.updateData(mPictureList)
                 } else {
                     selectedImageUri = data?.data
                     imageView_create.setImageURI(selectedImageUri)
+                    mPictureList.add(Picture("essai gallery", data?.data.toString(), Utils.getTodayDate(), 1))
+                    mAdapter.updateData(mPictureList)
                 }
             }
+        }
+    }
+
+    private fun createPicture(picture: Picture) {
+        this.mPropertyListViewModel.createPicture(picture)
+    }
+
+    private fun galleryAddPic() {
+        Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
+            val f = File(mCurrentPhotoPath)
+            mediaScanIntent.data = Uri.fromFile(f)
+            sendBroadcast(mediaScanIntent)
         }
     }
 }

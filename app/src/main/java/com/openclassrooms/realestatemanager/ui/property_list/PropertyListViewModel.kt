@@ -45,15 +45,15 @@ class PropertyListViewModel(private val mPropertyDataRepository: PropertyDataRep
 
     // --- CREATE ---
     fun createPicture(picture: Picture) {
-        mPictureDataRepository.createPicture(picture)
+        mExecutor.execute { mPictureDataRepository.createPicture(picture) }
     }
 
     // --- DELETE ---
     fun deletePicture(pictureId: Long) {
-        mPictureDataRepository.deletePicture(pictureId)
+        mExecutor.execute { mPictureDataRepository.deletePicture(pictureId) }
     }
 
     fun deleteAllPictureFromProperty(propertyId: Long) {
-        mPictureDataRepository.deleteAllPictureFromProperty(propertyId)
+        mExecutor.execute { mPictureDataRepository.deleteAllPictureFromProperty(propertyId) }
     }
 }
