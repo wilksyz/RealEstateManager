@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.repository
 
 import android.arch.lifecycle.LiveData
+import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.persistance.PropertyDao
 
@@ -16,8 +17,8 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
     }
 
     // --- CREATE ---
-    fun createProperty(property: Property) {
-        mPropertyDao.insertProperty(property)
+    fun createProperty(property: Property, pictureList: ArrayList<Picture>) {
+        mPropertyDao.createProperty(property, pictureList)
     }
 
     // --- DELETE ---

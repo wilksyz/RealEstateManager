@@ -10,7 +10,10 @@ import java.net.URI
         parentColumns = arrayOf("mPropertyId"),
         childColumns = arrayOf("propertyId"))]
 )
-data class Picture(var tittle: String, var uri: String, var creationDate: String, var propertyId: Long) {
+data class Picture(var title: String,
+                   var uri: String,
+                   var creationDate: String,
+                   var propertyId: Long) {
 
     @PrimaryKey(autoGenerate = true) var mPictureId: Long = 0
 }

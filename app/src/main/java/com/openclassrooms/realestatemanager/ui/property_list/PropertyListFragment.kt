@@ -39,10 +39,6 @@ class PropertyListFragment : Fragment() {
         return viewOfLayout
     }
 
-    private fun createPicture(picture: Picture) {
-        this.mPropertyListViewModel.createPicture(picture)
-    }
-
     private fun configureRecyclerView(){
         this.mAdapter = PropertyRecyclerViewAdapter(Glide.with(this))
         viewOfLayout.property_recyclerView_container.adapter = this.mAdapter
@@ -71,7 +67,7 @@ class PropertyListFragment : Fragment() {
 
     // Create a new property
     private fun createProperty(property: Property) {
-        this.mPropertyListViewModel.createProperty(property)
+        //this.mPropertyListViewModel.createProperty(property)
     }
 
     // Delete an property

@@ -42,7 +42,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:text="@string/type_of_property"
             android:textSize="18sp"
@@ -66,6 +66,7 @@
                 android:id="@+id/surface_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="@string/surface_m2" />
         </android.support.design.widget.TextInputLayout>
 
@@ -82,8 +83,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/number_of_room_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="@string/number_of_rooms" />
         </android.support.design.widget.TextInputLayout>
 
@@ -100,8 +103,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/price_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:hint="@string/price" />
         </android.support.design.widget.TextInputLayout>
 
@@ -118,6 +123,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/description_property_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/describe_the_property" />
@@ -136,8 +142,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/location_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
                 android:hint="@string/location" />
         </android.support.design.widget.TextInputLayout>
 
@@ -160,7 +168,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/estate_agent"
             android:textSize="18sp"
@@ -176,44 +184,16 @@
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/imageView_create"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/add_photo_button"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <GridView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/picture_gridview_create"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:horizontalSpacing="10dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_photo_button" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/picture_gridview_create" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

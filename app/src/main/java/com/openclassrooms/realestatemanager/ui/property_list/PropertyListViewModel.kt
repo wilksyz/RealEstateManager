@@ -21,10 +21,7 @@ class PropertyListViewModel(private val mPropertyDataRepository: PropertyDataRep
         return mPropertyDataRepository.getProperty(propertyId)
     }
 
-    // --- CREATE ---
-    fun createProperty(property: Property) {
-        mExecutor.execute {mPropertyDataRepository.createProperty(property)}
-    }
+
 
     // --- DELETE ---
     fun deleteProperty(propertyId: Long) {

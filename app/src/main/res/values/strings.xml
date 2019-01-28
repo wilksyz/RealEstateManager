@@ -18,6 +18,7 @@
     <string name="select_from">Select from:</string>
     <string name="estate_agent">Estate agent</string>
     <string name="type_of_property">Type of property</string>
+    <string name="create">Create</string>
     <string-array name="type_property_array">
         <item>House</item>
         <item>Loft</item>

@@ -11,8 +11,11 @@ import android.os.Environment.DIRECTORY_DCIM
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.AdapterView
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
+import android.view.ViewGroup
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_property_create.*
 import pub.devrel.easypermissions.AfterPermissionGranted
@@ -21,10 +24,9 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
-import com.openclassrooms.realestatemanager.ui.property_list.PropertyListViewModel
+import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.utils.Utils
 import kotlin.collections.ArrayList
 
@@ -35,9 +37,9 @@ class PropertyCreateActivity : AppCompatActivity() {
 
     private lateinit var mOutputFileUri: Uri
     private lateinit var mCurrentPhotoPath: String
-    private lateinit var mAdapter: PropertyGridViewAdapter
+    private var mAdapterRecycler: PropertyGridRecyclerViewAdapter = PropertyGridRecyclerViewAdapter()
     private var mPictureList = ArrayList<Picture>()
-    private lateinit var mPropertyListViewModel: PropertyListViewModel
+    private lateinit var mPropertyCreateViewModel: PropertyCreateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +53,14 @@ class PropertyCreateActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar_activity_property_create, menu)
+        return true
+    }
+
     private fun configureViewModel() {
         val mViewModelFactory = Injection().provideViewModelFactory(this)
-        this.mPropertyListViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyListViewModel::class.java)
+        this.mPropertyCreateViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyCreateViewModel::class.java)
     }
 
     private fun configureSpinner(){
@@ -66,13 +73,40 @@ class PropertyCreateActivity : AppCompatActivity() {
     }
 
     private fun configureGridView(){
-        this.mAdapter = PropertyGridViewAdapter(this)
-        picture_gridview_create.adapter = this.mAdapter
+        val recyclerView = RecyclerView(this)
+        val layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        recyclerView.layoutParams = layoutParams
+        val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+        picture_gridview_create.adapter = mAdapterRecycler
+        picture_gridview_create.layoutManager = gridLayoutManager
 
-        picture_gridview_create.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, v, position, id ->
-                    Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
-                }
+
+
+
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.create -> {
+            retrieveInformationEntered()
+            true
+        }else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun retrieveInformationEntered() {
+        val surface = surface_edit_text.text.toString()
+        val rooms = number_of_room_edit_text.text.toString()
+        val price = price_edit_text.text.toString()
+        val description = description_property_edit_text.text.toString()
+        val location = location_edit_text.text.toString()
+        val typeProperty = type_of_property_spinner.selectedItem.toString()
+        val estateAgent = estate_agent_spinner.selectedItem.toString()
+        val property = Property(typeProperty, price, surface, rooms, description, location, Utils.getTodayDate(), estateAgent)
+        this.mPropertyCreateViewModel.createProperty(property, mPictureList)
+        finish()
     }
 
     @AfterPermissionGranted(RC_IMAGE_PERMS)
@@ -95,7 +129,7 @@ class PropertyCreateActivity : AppCompatActivity() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryIntent.type = "image/*"
 
-        val root = File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).toString() + File.separator + "Collage" + File.separator)
+        val root = File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).toString() + File.separator + "Real Estate Manager" + File.separator)
         root.mkdirs()
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val fileName = "$timeStamp.jpg"
@@ -143,22 +177,16 @@ class PropertyCreateActivity : AppCompatActivity() {
 
                 if (isCamera) {
                     selectedImageUri = mOutputFileUri
-                    imageView_create.setImageURI(selectedImageUri)
                     galleryAddPic()
                     mPictureList.add(Picture("essai", mOutputFileUri.toString(), Utils.getTodayDate(), 1))
-                    mAdapter.updateData(mPictureList)
+                    mAdapterRecycler.updateData(mPictureList)
                 } else {
                     selectedImageUri = data?.data
-                    imageView_create.setImageURI(selectedImageUri)
                     mPictureList.add(Picture("essai gallery", data?.data.toString(), Utils.getTodayDate(), 1))
-                    mAdapter.updateData(mPictureList)
+                    mAdapterRecycler.updateData(mPictureList)
                 }
             }
         }
-    }
-
-    private fun createPicture(picture: Picture) {
-        this.mPropertyListViewModel.createPicture(picture)
     }
 
     private fun galleryAddPic() {
