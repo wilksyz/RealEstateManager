@@ -6,15 +6,18 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.*
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_list.recycler_view.PropertyRecyclerViewAdapter
+import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.fragment_list_property.view.*
 
@@ -33,7 +36,8 @@ class PropertyListFragment : Fragment() {
         viewOfLayout = inflater.inflate(R.layout.fragment_list_property, container, false)
         this.configureRecyclerView()
         this.configureViewModel()
-        getAllProperty()
+        this.configureClickRecyclerView()
+        this.getAllProperty()
         //createProperty(Property("Manoir",650_000,300,27))
 
         return viewOfLayout
@@ -43,6 +47,15 @@ class PropertyListFragment : Fragment() {
         this.mAdapter = PropertyRecyclerViewAdapter(Glide.with(this))
         viewOfLayout.property_recyclerView_container.adapter = this.mAdapter
         viewOfLayout.property_recyclerView_container.layoutManager = LinearLayoutManager(this.context)
+    }
+
+    private fun configureClickRecyclerView(){
+        ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
+                .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
+                    override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+                        Toast.makeText(context,"$position", Toast.LENGTH_SHORT).show()
+                    }
+                })
     }
 
     private fun configureViewModel() {

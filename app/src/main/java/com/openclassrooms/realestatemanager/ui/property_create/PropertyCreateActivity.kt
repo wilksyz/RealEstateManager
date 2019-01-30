@@ -1,10 +1,8 @@
 package com.openclassrooms.realestatemanager.ui.property_create
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -28,10 +26,10 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
+import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.dialog_add_picture.view.*
 import kotlin.collections.ArrayList
@@ -54,7 +52,8 @@ class PropertyCreateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_property_create)
         this.configureSpinner()
         this.configureViewModel()
-        this.configureGridView()
+        this.configureGridRecyclerView()
+        this.configureClickGridRecyclerView()
 
         add_photo_button.setOnClickListener {
             onCreateDialog()
@@ -98,13 +97,31 @@ class PropertyCreateActivity : AppCompatActivity() {
         estate_agent_spinner.adapter = estateAgentAdapter
     }
 
-    private fun configureGridView(){
+    private fun configureGridRecyclerView(){
         val recyclerView = RecyclerView(this)
         val layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         recyclerView.layoutParams = layoutParams
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
         picture_gridview_create.adapter = mAdapterRecycler
         picture_gridview_create.layoutManager = gridLayoutManager
+    }
+
+    private fun configureClickGridRecyclerView(){
+        ItemClickSupport.addTo(picture_gridview_create, R.layout.item_create_property)
+                .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
+                    override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+                        val builder = AlertDialog.Builder(this@PropertyCreateActivity)
+                        builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_the_image))
+                                .setPositiveButton(getString(R.string.delete)) { dialog, id ->
+                                    mPictureList.removeAt(position)
+                                    mAdapterRecycler.updateData(mPictureList)
+                                }
+                                .setNegativeButton(R.string.cancel) { dialog, id ->
+                                }
+                        builder.create()
+                        builder.show()
+                    }
+                })
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
@@ -178,7 +195,6 @@ class PropertyCreateActivity : AppCompatActivity() {
         startActivityForResult(chooserIntent, RC_CHOOSE_PHOTO)
     }
 
-    @SuppressLint("PrivateResource")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             if (requestCode == RC_CHOOSE_PHOTO) {

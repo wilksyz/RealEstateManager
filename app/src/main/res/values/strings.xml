@@ -22,6 +22,8 @@
     <string name="describe_the_photo">Describe the photo</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="are_you_sure_you_want_to_delete_the_image">are you sure you want to delete the photo ?</string>
+    <string name="delete">Delete</string>
     <string-array name="type_property_array">
         <item>House</item>
         <item>Loft</item>
