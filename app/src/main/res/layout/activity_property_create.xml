@@ -66,8 +66,8 @@
                 android:id="@+id/surface_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/surface_m2" />
+                android:hint="@string/surface_m2"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -86,8 +86,8 @@
                 android:id="@+id/number_of_room_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/number_of_rooms" />
+                android:hint="@string/number_of_rooms"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -106,8 +106,8 @@
                 android:id="@+id/price_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="@string/price" />
+                android:hint="@string/price"
+                android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -145,8 +145,8 @@
                 android:id="@+id/location_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress"
-                android:hint="@string/location" />
+                android:hint="@string/location"
+                android:inputType="textPostalAddress" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -194,6 +194,81 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_photo_button" />
+
+        <RadioButton
+            android:id="@+id/radioButton_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/school"
+            app:layout_constraintBottom_toTopOf="@+id/radioButton_parc"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/picture_gridview_create" />
+
+        <RadioButton
+            android:id="@+id/radioButton_parc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/parc"
+            app:layout_constraintBottom_toTopOf="@+id/radioButton_stores"
+            app:layout_constraintStart_toStartOf="@+id/radioButton_school"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton_school" />
+
+        <RadioButton
+            android:id="@+id/radioButton_stores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/stores"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/radioButton_parc"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton_parc" />
+
+        <RadioButton
+            android:id="@+id/radioButton_public_transport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/public_transport"
+            app:layout_constraintBottom_toTopOf="@+id/radioButton_doctor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/picture_gridview_create" />
+
+        <RadioButton
+            android:id="@+id/radioButton_doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/doctor"
+            app:layout_constraintBottom_toTopOf="@+id/radioButton_hobbies"
+            app:layout_constraintStart_toStartOf="@+id/radioButton_public_transport"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton_public_transport" />
+
+        <RadioButton
+            android:id="@+id/radioButton_hobbies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/hobbies"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/radioButton_doctor"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton_doctor" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

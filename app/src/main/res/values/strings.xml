@@ -24,6 +24,12 @@
     <string name="cancel">Cancel</string>
     <string name="are_you_sure_you_want_to_delete_the_image">are you sure you want to delete the photo ?</string>
     <string name="delete">Delete</string>
+    <string name="school">School</string>
+    <string name="parc">Parc</string>
+    <string name="stores">Stores</string>
+    <string name="public_transport">Public transport</string>
+    <string name="doctor">Doctor</string>
+    <string name="hobbies">Hobbies</string>
     <string-array name="type_property_array">
         <item>House</item>
         <item>Loft</item>

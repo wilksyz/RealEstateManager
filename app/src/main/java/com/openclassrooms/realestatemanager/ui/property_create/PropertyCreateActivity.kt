@@ -26,6 +26,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
@@ -141,9 +142,21 @@ class PropertyCreateActivity : AppCompatActivity() {
         val location = location_edit_text.text.toString()
         val typeProperty = type_of_property_spinner.selectedItem.toString()
         val estateAgent = estate_agent_spinner.selectedItem.toString()
-        val property = Property(typeProperty, price, surface, rooms, description, location, Utils.getTodayDate(), estateAgent)
+        val interestPoint = retrieveInterestPoint()
+        val property = Property(typeProperty, price, surface, rooms, description, location, Utils.getTodayDate(), interestPoint, estateAgent)
         this.mPropertyCreateViewModel.createProperty(property, mPictureList)
         finish()
+    }
+
+    private fun retrieveInterestPoint(): String {
+        var interestPoint = ""
+        if (radioButton_doctor.isChecked) interestPoint += "doctor,"
+        if (radioButton_hobbies.isChecked) interestPoint += "hobbies,"
+        if (radioButton_public_transport.isChecked) interestPoint += "transport,"
+        if (radioButton_school.isChecked) interestPoint += "school,"
+        if (radioButton_stores.isChecked) interestPoint += "stores,"
+        if (radioButton_parc.isChecked) interestPoint += "parc"
+        return interestPoint
     }
 
     @AfterPermissionGranted(RC_IMAGE_PERMS)

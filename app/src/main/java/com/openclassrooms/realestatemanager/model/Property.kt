@@ -11,6 +11,7 @@ data class Property(var typeProperty: String,
                     var descriptionProperty: String,
                     var address: String,
                     var dateOfSale: String,
+                    var interestPoint: String,
                     var estateAgent: String
                     ) {
 
