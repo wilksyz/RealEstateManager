@@ -24,6 +24,10 @@
         </activity>
         <activity android:name=".ui.property_details.PropertyDetailActivity"></activity>
         <activity android:name=".ui.property_create.PropertyCreateActivity"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

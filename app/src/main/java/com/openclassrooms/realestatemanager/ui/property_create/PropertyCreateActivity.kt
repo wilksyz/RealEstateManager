@@ -5,11 +5,10 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.os.Environment
+import android.os.*
 import android.os.Environment.DIRECTORY_DCIM
-import android.os.Parcelable
 import android.provider.MediaStore
+import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -26,7 +25,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
@@ -36,8 +34,10 @@ import kotlinx.android.synthetic.main.dialog_add_picture.view.*
 import kotlin.collections.ArrayList
 
 
+private const val STATE_PICTURE_LIST = "state picture list"
 private const val RC_IMAGE_PERMS = 100
 private const val RC_CHOOSE_PHOTO = 200
+
 class PropertyCreateActivity : AppCompatActivity() {
 
     private lateinit var mOutputFileUri: Uri
@@ -222,6 +222,7 @@ class PropertyCreateActivity : AppCompatActivity() {
                         isCamera = action == android.provider.MediaStore.ACTION_IMAGE_CAPTURE
                     }
                 }
+
                 if (isCamera) {
                     mView.image_button_dialog.setImageURI(mOutputFileUri)
                     mPictureUri = mOutputFileUri
@@ -241,5 +242,21 @@ class PropertyCreateActivity : AppCompatActivity() {
             mediaScanIntent.data = Uri.fromFile(f)
             sendBroadcast(mediaScanIntent)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.run {
+            putAll(outState)
+            putParcelableArrayList(STATE_PICTURE_LIST, mPictureList)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        savedInstanceState.run {
+            mPictureList = savedInstanceState?.getParcelableArrayList<Picture>(STATE_PICTURE_LIST) as ArrayList<Picture>
+            mAdapterRecycler.updateData(mPictureList)
+        }
+        super.onRestoreInstanceState(savedInstanceState)
     }
 }

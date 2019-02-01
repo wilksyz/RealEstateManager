@@ -7,8 +7,8 @@ import com.openclassrooms.realestatemanager.persistance.PictureDao
 class PictureDataRepository(private val mPictureDao: PictureDao) {
 
     // --- GET ---
-    fun getPicture(pictureId: Long): LiveData<List<Picture>> {
-        return this.mPictureDao.getPicture(pictureId)
+    fun getPicture(propertyId: Long): LiveData<List<Picture>> {
+        return this.mPictureDao.getPicture(propertyId)
     }
 
     // --- CREATE ---

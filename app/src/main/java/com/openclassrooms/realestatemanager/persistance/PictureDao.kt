@@ -9,8 +9,8 @@ import com.openclassrooms.realestatemanager.model.Picture
 @Dao
 interface PictureDao {
 
-    @Query("SELECT * FROM Picture WHERE mPictureId = :pictureId")
-    fun getPicture(pictureId: Long): LiveData<List<Picture>>
+    @Query("SELECT * FROM Picture WHERE propertyId = :propertyId")
+    fun getPicture(propertyId: Long): LiveData<List<Picture>>
 
     @Insert
     fun insertPicture(picture: Picture): Long

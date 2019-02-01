@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.persistance
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-import android.util.Log
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 

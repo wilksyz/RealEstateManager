@@ -3,11 +3,14 @@ package com.openclassrooms.realestatemanager.ui.property_list
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.facebook.stetho.Stetho
 import com.openclassrooms.realestatemanager.*
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateActivity
+import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
 import kotlinx.android.synthetic.main.activity_list_property.*
 
@@ -19,7 +22,7 @@ class PropertyListActivity : AppCompatActivity() {
         Stetho.initializeWithDefaults(this)
 
         this.configureFragment()
-        this.configureDetailsPropertyFragment()
+        //this.configureDetailsPropertyFragment()
 
     }
 

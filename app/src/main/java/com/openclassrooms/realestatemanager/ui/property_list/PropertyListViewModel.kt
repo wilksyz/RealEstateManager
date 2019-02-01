@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.property_list
 
 import java.util.concurrent.Executor
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
@@ -36,8 +37,8 @@ class PropertyListViewModel(private val mPropertyDataRepository: PropertyDataRep
     // --- FOR PICTURE ---
 
     // --- GET ---
-    fun getPicture(pictureId: Long): LiveData<List<Picture>> {
-        return mPictureDataRepository.getPicture(pictureId)
+    fun getPicture(propertyId: Long): LiveData<List<Picture>> {
+        return mPictureDataRepository.getPicture(propertyId)
     }
 
     // --- CREATE ---
