@@ -1,18 +1,13 @@
 package com.openclassrooms.realestatemanager.ui.property_list
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.facebook.stetho.Stetho
-import com.openclassrooms.realestatemanager.*
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateActivity
-import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
-import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
-import kotlinx.android.synthetic.main.activity_list_property.*
 
 class PropertyListActivity : AppCompatActivity() {
 
@@ -22,7 +17,6 @@ class PropertyListActivity : AppCompatActivity() {
         Stetho.initializeWithDefaults(this)
 
         this.configureFragment()
-        //this.configureDetailsPropertyFragment()
 
     }
 
@@ -50,15 +44,10 @@ class PropertyListActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun configureDetailsPropertyFragment(){
-        var detailsPropertyFragment = supportFragmentManager.findFragmentById(R.id.details_of_the_property_container)
-
-        if (detailsPropertyFragment == null && details_of_the_property_container != null){
-            val fragmentManager = supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            detailsPropertyFragment = PropertyDetailFragment()
-            fragmentTransaction.add(R.id.details_of_the_property_container, detailsPropertyFragment)
-            fragmentTransaction.commit()
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.run {
+            putAll(outState)
         }
+        super.onSaveInstanceState(outState)
     }
 }

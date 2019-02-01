@@ -15,13 +15,4 @@ class PictureDataRepository(private val mPictureDao: PictureDao) {
     fun createPicture(picture: Picture) {
         mPictureDao.insertPicture(picture)
     }
-
-    // --- DELETE ---
-    fun deletePicture(pictureId: Long) {
-        mPictureDao.deletePicture(pictureId)
-    }
-
-    fun deleteAllPictureFromProperty(propertyId: Long) {
-        mPictureDao.deleteAllPictureFromProperty(propertyId)
-    }
 }

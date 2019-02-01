@@ -27,7 +27,4 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
 
     @Update
     abstract fun updateProperty(property: Property): Int
-
-    @Query("DELETE FROM Property WHERE mPropertyId = :propertyId")
-    abstract fun deleteProperty(propertyId: Long): Int
 }

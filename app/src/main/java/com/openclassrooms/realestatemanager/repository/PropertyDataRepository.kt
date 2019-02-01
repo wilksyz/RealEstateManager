@@ -21,11 +21,6 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
         mPropertyDao.createProperty(property, pictureList)
     }
 
-    // --- DELETE ---
-    fun deleteProperty(propertyId: Long) {
-        mPropertyDao.deleteProperty(propertyId)
-    }
-
     // --- UPDATE ---
     fun updateProperty(property: Property) {
         mPropertyDao.updateProperty(property)

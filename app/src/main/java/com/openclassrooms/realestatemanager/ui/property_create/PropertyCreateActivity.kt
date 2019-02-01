@@ -5,10 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
-import android.os.*
+import android.os.Bundle
+import android.os.Environment
 import android.os.Environment.DIRECTORY_DCIM
+import android.os.Parcelable
 import android.provider.MediaStore
-import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -17,20 +18,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import com.openclassrooms.realestatemanager.R
-import kotlinx.android.synthetic.main.activity_property_create.*
-import pub.devrel.easypermissions.AfterPermissionGranted
-import pub.devrel.easypermissions.EasyPermissions
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 import android.widget.ArrayAdapter
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
+import kotlinx.android.synthetic.main.activity_property_create.*
 import kotlinx.android.synthetic.main.dialog_add_picture.view.*
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 

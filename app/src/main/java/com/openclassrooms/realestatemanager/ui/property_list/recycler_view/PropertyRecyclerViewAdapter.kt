@@ -1,9 +1,9 @@
 package com.openclassrooms.realestatemanager.ui.property_list.recycler_view
 
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import android.view.LayoutInflater
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property

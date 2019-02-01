@@ -1,9 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.property_list.recycler_view
 
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
