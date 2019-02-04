@@ -7,8 +7,13 @@ import android.view.Menu
 import android.view.MenuItem
 import com.facebook.stetho.Stetho
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateActivity
+import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
+import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
+import kotlinx.android.synthetic.main.activity_list_property.*
 
+private const val PROPERTY_ID: String = "property id"
 class PropertyListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +22,6 @@ class PropertyListActivity : AppCompatActivity() {
         Stetho.initializeWithDefaults(this)
 
         this.configureFragment()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,6 +46,23 @@ class PropertyListActivity : AppCompatActivity() {
         val fragment = PropertyListFragment()
         fragmentTransaction.add(R.id.main_fragment_container, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun configureDetailsPropertyFragment(property: Property){
+        if (detail_of_the_property_container != null){
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val detailsPropertyFragment = PropertyDetailFragment()
+            val args = Bundle()
+            args.putLong(PROPERTY_ID, property.mPropertyId)
+            detailsPropertyFragment.arguments = args
+            fragmentTransaction.replace(R.id.detail_of_the_property_container, detailsPropertyFragment)
+            fragmentTransaction.commit()
+        }else{
+            val intent = Intent(this, PropertyDetailActivity::class.java)
+            intent.putExtra(PROPERTY_ID, property.mPropertyId)
+            startActivity(intent)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

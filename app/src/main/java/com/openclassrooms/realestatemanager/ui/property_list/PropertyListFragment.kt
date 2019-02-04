@@ -20,6 +20,7 @@ import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailAc
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
 import com.openclassrooms.realestatemanager.ui.property_list.recycler_view.PropertyRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
+import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.fragment_list_property.view.*
 
 
@@ -27,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_list_property.view.*
  * A simple [Fragment] subclass.
  *
  */
-private const val PROPERTY_ID: String = "property id"
 class PropertyListFragment : Fragment() {
 
     private lateinit var mPropertyListViewModel: PropertyListViewModel
@@ -55,38 +55,14 @@ class PropertyListFragment : Fragment() {
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
                 .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
                     override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
-                        //Toast.makeText(context,"$position", Toast.LENGTH_SHORT).show()
                         val property = mAdapter.getProperty(position)
-                        checkDetailsFragment(property)
+                        (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
                     }
                 })
     }
 
-    private fun checkDetailsFragment(property: Property){
-        var detailsPropertyFragment = activity?.supportFragmentManager?.findFragmentById(R.id.details_of_the_property_container)
-        val displayMetrics = context?.resources?.displayMetrics
-        val dpWidth = displayMetrics?.widthPixels?.div(displayMetrics.density)
-
-        if (dpWidth != null) {
-            if (dpWidth > 600){
-                val fragmentManager = activity?.supportFragmentManager
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                detailsPropertyFragment = PropertyDetailFragment()
-                val args = Bundle()
-                args.putLong(PROPERTY_ID, property.mPropertyId)
-                detailsPropertyFragment.setArguments(args)
-                fragmentTransaction?.replace(R.id.details_of_the_property_container, detailsPropertyFragment)
-                fragmentTransaction?.commit()
-            }else{
-                val intent = Intent(activity, PropertyDetailActivity::class.java)
-                intent.putExtra(PROPERTY_ID, property.mPropertyId)
-                startActivity(intent)
-            }
-        }
-    }
-
     private fun configureViewModel() {
-        val mViewModelFactory = Injection().provideViewModelFactory(this.context!!)
+        val mViewModelFactory = context?.let { Injection().provideViewModelFactory(it) }
         this.mPropertyListViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyListViewModel::class.java)
     }
 

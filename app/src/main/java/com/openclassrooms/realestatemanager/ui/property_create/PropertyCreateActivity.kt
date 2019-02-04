@@ -1,9 +1,12 @@
 package com.openclassrooms.realestatemanager.ui.property_create
 
 import android.Manifest
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -235,6 +238,21 @@ class PropertyCreateActivity : AppCompatActivity() {
                 mView.image_button_dialog.setBackgroundResource(R.color.colorWhite)
             }
         }
+    }
+
+    fun getRealPathFromURI(contentURI: Uri): String?{
+        val projection =  MediaStore.Images.Media.DATA
+        @SuppressWarnings("deprecation")
+        val cursor: Cursor = this.managedQuery(contentURI, arrayOf(projection), null, null, null)
+                ?: return null
+        val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        if (cursor.moveToFirst()) {
+            val s = cursor.getString(columnIndex)
+            cursor.close()
+            return s
+        }
+        cursor.close()
+        return null
     }
 
     private fun galleryAddPic() {
