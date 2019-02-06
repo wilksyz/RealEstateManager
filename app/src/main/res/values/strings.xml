@@ -44,4 +44,15 @@
         <item>PLAZA Stephane</item>
         <item>RYAN Jack</item>
     </string-array>
+
+    // PropertyDetailActivity
+    <string name="picture_in_full_screen">Picture in full screen</string>
+    <string name="close">Close</string>
+    <string name="city">City</string>
+    <string name="postal_code">Postal code</string>
+    <string name="number">Number</string>
+    <string name="street">Street</string>
+    <string name="n_c">N C</string>
+    <string name="description">Description</string>
+    <string name="interest_point">Interest point</string>
 </resources>

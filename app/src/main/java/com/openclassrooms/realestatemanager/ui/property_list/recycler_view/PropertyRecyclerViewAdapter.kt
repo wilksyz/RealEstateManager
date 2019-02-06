@@ -26,7 +26,7 @@ class PropertyRecyclerViewAdapter(glide: RequestManager) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(propertyViewHolder: PropertyViewHolder, position: Int) {
-        return propertyViewHolder.updateListOfProperty(mPropertyList[position], mPictureList[position], mGlide)
+        return propertyViewHolder.updateListOfProperty(mPropertyList[position], mPictureList[position])
     }
 
     fun updateData(propertyList: List<Property>, pictureList: List<Picture?>) {

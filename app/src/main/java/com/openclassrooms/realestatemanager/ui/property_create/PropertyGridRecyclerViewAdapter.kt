@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Picture
-import kotlinx.android.synthetic.main.item_create_property.view.*
-import java.util.*
+import kotlinx.android.synthetic.main.item_grid_picture_property.view.*
+import kotlin.collections.ArrayList
 
 class PropertyGridRecyclerViewAdapter: RecyclerView.Adapter<PropertyGridRecyclerViewAdapter.PropertyGridRecyclerViewViewHolder>() {
-    private var mPictureList = ArrayList<Picture>()
+    private var mPictureList: List<Picture> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): PropertyGridRecyclerViewViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_create_property, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_grid_picture_property, parent, false)
         return PropertyGridRecyclerViewViewHolder(v)
     }
 
@@ -26,9 +26,13 @@ class PropertyGridRecyclerViewAdapter: RecyclerView.Adapter<PropertyGridRecycler
         holder.updateUiGridLayout(mPictureList[position])
     }
 
-    fun updateData(propertyList: ArrayList<Picture>) {
+    fun updateData(propertyList: List<Picture>) {
         this.mPictureList = propertyList
         this.notifyDataSetChanged()
+    }
+
+    fun getPicture(position: Int): Picture{
+        return mPictureList[position]
     }
 
     class PropertyGridRecyclerViewViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {

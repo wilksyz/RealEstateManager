@@ -1,9 +1,12 @@
 package com.openclassrooms.realestatemanager.ui.property_details
 
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.*
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -15,6 +18,7 @@ import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
+import kotlinx.android.synthetic.main.dialog_full_screen_picture.view.*
 import kotlinx.android.synthetic.main.fragment_details_property.*
 import kotlinx.android.synthetic.main.fragment_details_property.view.*
 
@@ -68,10 +72,18 @@ class PropertyDetailFragment : Fragment() {
     }
 
     private fun configureClickGridRecyclerView(){
-        ItemClickSupport.addTo(viewOfLayout.detail_property_recycler_view, R.layout.item_create_property)
+        ItemClickSupport.addTo(viewOfLayout.detail_property_recycler_view, R.layout.item_grid_picture_property)
                 .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
                     override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
-
+                        val picture = mAdapterRecycler.getPicture(position)
+                        val builder = context?.let { AlertDialog.Builder(it) }
+                        val mView = layoutInflater.inflate(R.layout.dialog_full_screen_picture, null)
+                        builder?.setView(mView)
+                        mView.full_screen_picture_imageView.setImageURI(Uri.parse(picture.uri))
+                        builder?.setPositiveButton(getString(R.string.close)) { _, _ ->
+                        }
+                        builder?.create()
+                        builder?.show()
                     }
                 })
     }
@@ -82,12 +94,13 @@ class PropertyDetailFragment : Fragment() {
     }
 
     // get an property
+    @SuppressLint("SetTextI18n")
     private fun getProperty(id: Long) {
         this.mPropertyDetailViewModel.getProperty(id).observe(this, Observer { property ->
             property?.let { mProperty = it }
             detail_property_surface_textView.text = property?.surface
             detail_property_room_textView.text = property?.numberOfRooms
-            detail_property_location_textView.text = property?.address
+            detail_property_location_textView.text = property?.address?.number+" "+property?.address?.street+"\n"+property?.address?.postCode+"\n"+property?.address?.city
             detail_property_description_textView.text = property?.descriptionProperty
             Toast.makeText(context,"$mPropertyId type: ${mProperty.typeProperty}", Toast.LENGTH_SHORT).show()
         })
@@ -95,7 +108,7 @@ class PropertyDetailFragment : Fragment() {
 
     private fun getPicture(id: Long){
         this.mPropertyDetailViewModel.getPicture(id).observe(this, Observer { list ->
-
+            list?.let { mAdapterRecycler.updateData(it) }
         })
     }
 

@@ -14,16 +14,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.property_list.PropertyListActivity">
+        <activity
+            android:name=".ui.property_list.PropertyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.property_details.PropertyDetailActivity"></activity>
-        <activity android:name=".ui.property_create.PropertyCreateActivity"></activity>
+        <activity
+            android:name=".ui.property_details.PropertyDetailActivity"
+            android:parentActivityName=".ui.property_list.PropertyListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.property_list.PropertyListActivity"/>
+        </activity>
+        <activity
+            android:name=".ui.property_create.PropertyCreateActivity"
+            android:parentActivityName=".ui.property_list.PropertyListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.property_list.PropertyListActivity"/>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

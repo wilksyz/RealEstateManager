@@ -16,7 +16,7 @@ class ViewModelFactory(private val mPropertyDataRepository: PropertyDataReposito
             return PropertyListViewModel(mPropertyDataRepository, mPictureDataRepository, mExecutor) as T
                 }
         if (modelClass.isAssignableFrom(PropertyCreateViewModel::class.java)) {
-            return PropertyCreateViewModel(mPropertyDataRepository, mPictureDataRepository, mExecutor) as T
+            return PropertyCreateViewModel(mPropertyDataRepository, mExecutor) as T
         }
         if (modelClass.isAssignableFrom(PropertyDetailViewModel::class.java)) {
             return PropertyDetailViewModel(mPropertyDataRepository, mPictureDataRepository, mExecutor) as T

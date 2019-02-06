@@ -1,10 +1,8 @@
 package com.openclassrooms.realestatemanager.ui.property_create
 
 import android.Manifest
-import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
@@ -24,6 +22,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
+import com.openclassrooms.realestatemanager.model.Address
+import com.openclassrooms.realestatemanager.model.InterestPoint
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
@@ -50,7 +50,7 @@ class PropertyCreateActivity : AppCompatActivity() {
     private var mPictureList = ArrayList<Picture>()
     private lateinit var mPropertyCreateViewModel: PropertyCreateViewModel
     private lateinit var mView: View
-    private var mPictureUri: Uri? = null
+    private var mPictureUri: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,12 +69,12 @@ class PropertyCreateActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         mView = layoutInflater.inflate(R.layout.dialog_add_picture, null)
         builder.setView(mView)
-        builder.setPositiveButton(getString(R.string.ok)) { dialog, which ->
+        builder.setPositiveButton(getString(R.string.ok)) { _, _ ->
             val description = mView.description_picture_dialog.text.toString()
-            mPictureList.add(Picture(description, mPictureUri.toString(), Utils.getTodayDate(), 0))
+            mPictureList.add(Picture(0, description, mPictureUri.toString(), Utils.getTodayDate()))
             mAdapterRecycler.updateData(mPictureList)
         }
-        builder.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
+        builder.setNegativeButton(getString(R.string.cancel)) { _, _ ->
         }
         builder.create()
         builder.show()
@@ -112,16 +112,16 @@ class PropertyCreateActivity : AppCompatActivity() {
     }
 
     private fun configureClickGridRecyclerView(){
-        ItemClickSupport.addTo(picture_gridview_create, R.layout.item_create_property)
+        ItemClickSupport.addTo(picture_gridview_create, R.layout.item_grid_picture_property)
                 .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
                     override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                         val builder = AlertDialog.Builder(this@PropertyCreateActivity)
                         builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_the_image))
-                                .setPositiveButton(getString(R.string.delete)) { dialog, id ->
+                                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                                     mPictureList.removeAt(position)
                                     mAdapterRecycler.updateData(mPictureList)
                                 }
-                                .setNegativeButton(R.string.cancel) { dialog, id ->
+                                .setNegativeButton(R.string.cancel) { _, _ ->
                                 }
                         builder.create()
                         builder.show()
@@ -143,24 +143,31 @@ class PropertyCreateActivity : AppCompatActivity() {
         val rooms = number_of_room_edit_text.text.toString()
         val price = price_edit_text.text.toString()
         val description = description_property_edit_text.text.toString()
-        val location = location_edit_text.text.toString()
+        val location = retrieveAddress()
         val typeProperty = type_of_property_spinner.selectedItem.toString()
         val estateAgent = estate_agent_spinner.selectedItem.toString()
         val interestPoint = retrieveInterestPoint()
-        val property = Property(typeProperty, price, surface, rooms, description, location, Utils.getTodayDate(), interestPoint, estateAgent)
+        val property = Property(typeProperty, price, surface, rooms, description, Utils.getTodayDate(), interestPoint, estateAgent, location)
         this.mPropertyCreateViewModel.createProperty(property, mPictureList)
         finish()
     }
 
-    private fun retrieveInterestPoint(): String {
-        var interestPoint = ""
-        if (radioButton_doctor.isChecked) interestPoint += "doctor,"
-        if (radioButton_hobbies.isChecked) interestPoint += "hobbies,"
-        if (radioButton_public_transport.isChecked) interestPoint += "transport,"
-        if (radioButton_school.isChecked) interestPoint += "school,"
-        if (radioButton_stores.isChecked) interestPoint += "stores,"
-        if (radioButton_parc.isChecked) interestPoint += "parc"
-        return interestPoint
+    private fun retrieveInterestPoint(): InterestPoint {
+        return InterestPoint(
+                radioButton_doctor.isChecked,
+                radioButton_hobbies.isChecked,
+                radioButton_public_transport.isChecked,
+                radioButton_school.isChecked,
+                radioButton_stores.isChecked,
+                radioButton_parc.isChecked)
+    }
+
+    private fun retrieveAddress(): Address{
+        val number = number_edit_text.text.toString()
+        val street = street_edit_text.text.toString()
+        val postCode = postal_code_edit_text.text.toString()
+        val city = city_edit_text.text.toString()
+        return Address(number, street, postCode, city)
     }
 
     @AfterPermissionGranted(RC_IMAGE_PERMS)
@@ -229,29 +236,29 @@ class PropertyCreateActivity : AppCompatActivity() {
 
                 if (isCamera) {
                     mView.image_button_dialog.setImageURI(mOutputFileUri)
-                    mPictureUri = mOutputFileUri
+                    mPictureUri = getRealPathFromURI(mOutputFileUri)
                     galleryAddPic()
                 } else {
                     mView.image_button_dialog.setImageURI(data?.data)
-                    mPictureUri = data?.data
+                    mPictureUri = data?.data?.let { getRealPathFromURI(it) }
                 }
                 mView.image_button_dialog.setBackgroundResource(R.color.colorWhite)
             }
         }
     }
 
-    fun getRealPathFromURI(contentURI: Uri): String?{
+    private fun getRealPathFromURI(contentURI: Uri): String?{
         val projection =  MediaStore.Images.Media.DATA
-        @SuppressWarnings("deprecation")
+        @Suppress("DEPRECATION")
         val cursor: Cursor = this.managedQuery(contentURI, arrayOf(projection), null, null, null)
                 ?: return null
         val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         if (cursor.moveToFirst()) {
             val s = cursor.getString(columnIndex)
-            cursor.close()
+            //cursor.close()
             return s
         }
-        cursor.close()
+        //cursor.close()
         return null
     }
 

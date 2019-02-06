@@ -8,9 +8,11 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
@@ -40,7 +42,8 @@ class PropertyListFragment : Fragment() {
         this.configureRecyclerView()
         this.configureViewModel()
         this.configureClickRecyclerView()
-        this.getAllProperty()
+        //this.getAllProperty()
+        Log.e("TAG", "on Create")
 
         return viewOfLayout
     }
@@ -59,6 +62,12 @@ class PropertyListFragment : Fragment() {
                         (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
                     }
                 })
+    }
+
+    override fun onResume() {
+        Log.e("TAG", "on Resume")
+        this.getAllProperty()
+        super.onResume()
     }
 
     private fun configureViewModel() {
