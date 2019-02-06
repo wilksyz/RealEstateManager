@@ -103,7 +103,35 @@ class PropertyDetailFragment : Fragment() {
             detail_property_location_textView.text = property?.address?.number+" "+property?.address?.street+"\n"+property?.address?.postCode+"\n"+property?.address?.city
             detail_property_description_textView.text = property?.descriptionProperty
             Toast.makeText(context,"$mPropertyId type: ${mProperty.typeProperty}", Toast.LENGTH_SHORT).show()
+            property?.let { getInterestPoint(it) }
         })
+    }
+
+    private fun getInterestPoint(property: Property){
+        if (!property.interestPoint.doctor){
+            doctor_imageView.visibility = View.GONE
+            doctor_textView.visibility = View.GONE
+        }
+        if (property.interestPoint.hobbies){
+            hobbies_imageView.visibility = View.GONE
+            hobbies_textView.visibility = View.GONE
+        }
+        if (property.interestPoint.parc){
+            parc_imageView.visibility = View.GONE
+            parc_textView.visibility = View.GONE
+        }
+        if (property.interestPoint.school){
+            school_imageView.visibility = View.GONE
+            school_textView.visibility = View.GONE
+        }
+        if (property.interestPoint.store){
+            stores_imageView.visibility = View.GONE
+            stores_textView.visibility = View.GONE
+        }
+        if (property.interestPoint.transport){
+            public_transport_imageView.visibility = View.GONE
+            public_transport_textView.visibility = View.GONE
+        }
     }
 
     private fun getPicture(id: Long){

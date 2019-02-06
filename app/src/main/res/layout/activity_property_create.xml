@@ -201,13 +201,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/school"
             app:layout_constraintBottom_toTopOf="@+id/radioButton_parc"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/picture_gridview_create" />
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <CheckBox
             android:id="@+id/radioButton_parc"
@@ -235,13 +235,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/public_transport"
             app:layout_constraintBottom_toTopOf="@+id/radioButton_doctor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/picture_gridview_create" />
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <CheckBox
             android:id="@+id/radioButton_doctor"
@@ -347,6 +347,18 @@
                 android:hint="@string/city"
                 android:inputType="textPostalAddress" />
         </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/interest_point"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/picture_gridview_create" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
