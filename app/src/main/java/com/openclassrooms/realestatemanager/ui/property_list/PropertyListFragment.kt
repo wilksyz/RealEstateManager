@@ -42,8 +42,6 @@ class PropertyListFragment : Fragment() {
         this.configureRecyclerView()
         this.configureViewModel()
         this.configureClickRecyclerView()
-        //this.getAllProperty()
-        Log.e("TAG", "on Create")
 
         return viewOfLayout
     }
@@ -65,7 +63,6 @@ class PropertyListFragment : Fragment() {
     }
 
     override fun onResume() {
-        Log.e("TAG", "on Resume")
         this.getAllProperty()
         super.onResume()
     }

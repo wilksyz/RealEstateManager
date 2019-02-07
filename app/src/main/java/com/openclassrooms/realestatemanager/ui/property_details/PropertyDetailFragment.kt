@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.property_details
 
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.arch.lifecycle.*
 import android.net.Uri
 import android.os.Bundle
@@ -9,25 +10,37 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
+import com.openclassrooms.realestatemanager.utils.Utils
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_full_screen_picture.view.*
 import kotlinx.android.synthetic.main.fragment_details_property.*
 import kotlinx.android.synthetic.main.fragment_details_property.view.*
+import java.io.IOException
+import java.net.InetSocketAddress
+import java.net.Socket
+import java.time.Month
+import java.time.Year
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 private const val PROPERTY_ID: String = "property id"
-class PropertyDetailFragment : Fragment() {
+class PropertyDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var viewOfLayout: View
     private lateinit var mPropertyDetailViewModel: PropertyDetailViewModel
@@ -45,6 +58,9 @@ class PropertyDetailFragment : Fragment() {
         this.configureClickGridRecyclerView()
         this.getProperty(mPropertyId)
         this.getPicture(mPropertyId)
+        sold_button.setOnClickListener {
+            this.getSoldDate()
+        }
 
         return viewOfLayout
     }
@@ -88,6 +104,14 @@ class PropertyDetailFragment : Fragment() {
                 })
     }
 
+    private fun getSoldDate(){
+
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     // Update an property
     private fun updateProperty(property: Property) {
         this.mPropertyDetailViewModel.updateProperty(property)
@@ -102,8 +126,8 @@ class PropertyDetailFragment : Fragment() {
             detail_property_room_textView.text = property?.numberOfRooms
             detail_property_location_textView.text = property?.address?.number+" "+property?.address?.street+"\n"+property?.address?.postCode+"\n"+property?.address?.city
             detail_property_description_textView.text = property?.descriptionProperty
-            Toast.makeText(context,"$mPropertyId type: ${mProperty.typeProperty}", Toast.LENGTH_SHORT).show()
             property?.let { getInterestPoint(it) }
+            property?.let { getStaticMap(it) }
         })
     }
 
@@ -134,16 +158,33 @@ class PropertyDetailFragment : Fragment() {
         }
     }
 
+    private fun getStaticMap(property: Property){
+        Utils{
+            Toast.makeText(context,"$it", Toast.LENGTH_SHORT).show()
+            if (it){
+                val url = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=color:blue%7C${property.address.number}${property.address.street}${property.address.postCode}${property.address.city}&key="
+                Log.e("TAG", url)
+                activity?.let { it1 ->
+                    Glide.with(it1)
+                            .load(url)
+                            .into(static_maps_imageView)
+                }
+            }
+        }
+    }
+
     private fun getPicture(id: Long){
         this.mPropertyDetailViewModel.getPicture(id).observe(this, Observer { list ->
             list?.let { mAdapterRecycler.updateData(it) }
         })
     }
-
-    override fun onSaveInstanceState(outState: Bundle) {
+/*
+override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
             putAll(outState)
         }
         super.onSaveInstanceState(outState)
     }
+ */
+
 }

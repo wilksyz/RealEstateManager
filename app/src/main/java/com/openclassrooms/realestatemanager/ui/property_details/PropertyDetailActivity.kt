@@ -20,11 +20,13 @@ class PropertyDetailActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.details_of_the_property_container, fragment)
         fragmentTransaction.commit()
     }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
+/*
+override fun onSaveInstanceState(outState: Bundle?) {
         outState?.run {
             putAll(outState)
         }
         super.onSaveInstanceState(outState)
     }
+ */
+
 }
