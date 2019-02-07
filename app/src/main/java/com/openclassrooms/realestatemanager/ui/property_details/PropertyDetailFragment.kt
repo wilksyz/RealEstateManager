@@ -4,6 +4,7 @@ package com.openclassrooms.realestatemanager.ui.property_details
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.arch.lifecycle.*
+import android.arch.lifecycle.Observer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,7 +15,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
@@ -23,24 +23,17 @@ import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_full_screen_picture.view.*
 import kotlinx.android.synthetic.main.fragment_details_property.*
 import kotlinx.android.synthetic.main.fragment_details_property.view.*
-import java.io.IOException
-import java.net.InetSocketAddress
-import java.net.Socket
-import java.time.Month
-import java.time.Year
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 private const val PROPERTY_ID: String = "property id"
-class PropertyDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener {
+class PropertyDetailFragment : Fragment() {
 
     private lateinit var viewOfLayout: View
     private lateinit var mPropertyDetailViewModel: PropertyDetailViewModel
@@ -58,8 +51,8 @@ class PropertyDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         this.configureClickGridRecyclerView()
         this.getProperty(mPropertyId)
         this.getPicture(mPropertyId)
-        sold_button.setOnClickListener {
-            this.getSoldDate()
+        viewOfLayout.sold_buttons.setOnClickListener {
+            getSoldDate()
         }
 
         return viewOfLayout
@@ -105,11 +98,16 @@ class PropertyDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun getSoldDate(){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
 
-    }
+        val dialog = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, y, m, d ->
+            Toast.makeText(context,"$y $m $d", Toast.LENGTH_SHORT).show()
 
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }, year, month, day)
+        dialog.show()
     }
 
     // Update an property
@@ -127,7 +125,7 @@ class PropertyDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             detail_property_location_textView.text = property?.address?.number+" "+property?.address?.street+"\n"+property?.address?.postCode+"\n"+property?.address?.city
             detail_property_description_textView.text = property?.descriptionProperty
             property?.let { getInterestPoint(it) }
-            property?.let { getStaticMap(it) }
+            //property?.let { getStaticMap(it) }
         })
     }
 
@@ -162,7 +160,7 @@ class PropertyDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         Utils{
             Toast.makeText(context,"$it", Toast.LENGTH_SHORT).show()
             if (it){
-                val url = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=color:blue%7C${property.address.number}${property.address.street}${property.address.postCode}${property.address.city}&key="
+                val url = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=color:blue%7C${property.address.number}${property.address.street}${property.address.postCode}${property.address.city}&key=AIzaSyCCYa3cdF0CoazglX8oHAkFSFZsjWz3BSE"
                 Log.e("TAG", url)
                 activity?.let { it1 ->
                     Glide.with(it1)

@@ -59,7 +59,6 @@ class PropertyCreateActivity : AppCompatActivity() {
         this.configureViewModel()
         this.configureGridRecyclerView()
         this.configureClickGridRecyclerView()
-
         add_photo_button.setOnClickListener {
             onCreateDialog()
         }
