@@ -130,7 +130,7 @@ class PropertyDetailFragment : Fragment() {
             detail_property_location_textView.text = property?.address?.number+" "+property?.address?.street+"\n"+property?.address?.postCode+"\n"+property?.address?.city
             detail_property_description_textView.text = property?.descriptionProperty
             property?.let { getInterestPoint(it) }
-            //property?.let { getStaticMap(it) }
+            property?.let { getStaticMap(it) }
         })
     }
 
@@ -172,6 +172,8 @@ class PropertyDetailFragment : Fragment() {
                             .load(url)
                             .into(static_maps_imageView)
                 }
+            }else{
+                static_maps_imageView.visibility = View.GONE
             }
         }
     }

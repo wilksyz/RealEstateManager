@@ -7,7 +7,6 @@
     <string name="popup_title_permission_files_access">this application needs to access the images to create a new property</string>
 
 
-
     // PropertyCreateActivity
     <string name="surface_m2">Surface ( m2 )</string>
     <string name="number_of_rooms">Number of rooms</string>

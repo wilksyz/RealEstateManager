@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -16,11 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.property_list.PropertyListActivity">
+        <activity android:name=".ui.property_maps.PropertyMapsActivity"></activity>
+        <activity android:name=".ui.property_list.PropertyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,14 +32,14 @@
             android:parentActivityName=".ui.property_list.PropertyListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.property_list.PropertyListActivity"/>
+                android:value=".ui.property_list.PropertyListActivity" />
         </activity>
         <activity
             android:name=".ui.property_create.PropertyCreateActivity"
             android:parentActivityName=".ui.property_list.PropertyListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.property_list.PropertyListActivity"/>
+                android:value=".ui.property_list.PropertyListActivity" />
         </activity>
 
         <meta-data
