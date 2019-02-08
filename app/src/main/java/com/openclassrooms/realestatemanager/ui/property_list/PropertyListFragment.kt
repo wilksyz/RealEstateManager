@@ -3,26 +3,19 @@ package com.openclassrooms.realestatemanager.ui.property_list
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
-import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
-import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
 import com.openclassrooms.realestatemanager.ui.property_list.recycler_view.PropertyRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
-import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.fragment_list_property.view.*
 
 
