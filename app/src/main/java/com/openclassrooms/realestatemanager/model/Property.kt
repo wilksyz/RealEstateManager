@@ -20,19 +20,3 @@ data class Property(var typeProperty: String,
     var dateSold: String = ""
     var saleStatus: Boolean = false
 }
-
-data class Address(
-        var number: String,
-        var street: String,
-        var postCode: String,
-        var city: String
-)
-
-data class InterestPoint(
-        var doctor: Boolean,
-        var school: Boolean,
-        var hobbies: Boolean,
-        var transport: Boolean,
-        var parc: Boolean,
-        var store: Boolean
-)
