@@ -103,16 +103,21 @@ class PropertyDetailFragment : Fragment() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dialog = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, y, m, d ->
-            Toast.makeText(context,"$y $m $d", Toast.LENGTH_SHORT).show()
-
+        val dialog = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, pYear, pMonth, pDay ->
+            val formattedDay = if (pDay < 10) "0$pDay" else "$pDay"
+            val formattedMonth = pMonth + 1
+            val date = if (formattedMonth < 10) "$formattedDay/0$formattedMonth/$pYear" else "$formattedDay/$formattedMonth/$pYear"
+            updateProperty(date)
         }, year, month, day)
+        dialog.datePicker.maxDate = Date().time
         dialog.show()
     }
 
     // Update an property
-    private fun updateProperty(property: Property) {
-        this.mPropertyDetailViewModel.updateProperty(property)
+    private fun updateProperty(date: String) {
+        mProperty.dateSold = date
+        mProperty.saleStatus = true
+        this.mPropertyDetailViewModel.updateProperty(mProperty)
     }
 
     // get an property

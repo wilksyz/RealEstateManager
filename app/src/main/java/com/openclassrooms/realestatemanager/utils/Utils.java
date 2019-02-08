@@ -1,20 +1,13 @@
 package com.openclassrooms.realestatemanager.utils;
 
-import android.content.Context;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Philippe on 21/02/2018.
