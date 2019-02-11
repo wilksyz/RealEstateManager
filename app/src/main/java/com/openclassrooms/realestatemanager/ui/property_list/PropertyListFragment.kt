@@ -1,12 +1,10 @@
 package com.openclassrooms.realestatemanager.ui.property_list
 
-
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,6 @@ import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.ui.property_list.recycler_view.PropertyRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import kotlinx.android.synthetic.main.fragment_list_property.view.*
-
 
 /**
  * A simple [Fragment] subclass.
@@ -47,12 +44,10 @@ class PropertyListFragment : Fragment() {
 
     private fun configureClickRecyclerView(){
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
-                .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
-                    override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
-                        val property = mAdapter.getProperty(position)
-                        (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
-                    }
-                })
+                .setOnItemClickListener { _, position, _ ->
+                    val property = mAdapter.getProperty(position)
+                    (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
+                }
     }
 
     override fun onResume() {

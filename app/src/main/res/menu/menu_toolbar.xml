@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_create"
         android:title="@string/create_property"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/maps_view"
+        android:title="maps"
+        app:showAsAction="withText"/>
 </menu>

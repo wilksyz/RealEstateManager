@@ -121,17 +121,24 @@ class PropertyDetailFragment : Fragment() {
     }
 
     // get an property
-    @SuppressLint("SetTextI18n")
+
     private fun getProperty(id: Long) {
         this.mPropertyDetailViewModel.getProperty(id).observe(this, Observer { property ->
-            property?.let { mProperty = it }
-            detail_property_surface_textView.text = property?.surface
-            detail_property_room_textView.text = property?.numberOfRooms
-            detail_property_location_textView.text = property?.address?.number+" "+property?.address?.street+"\n"+property?.address?.postCode+"\n"+property?.address?.city
-            detail_property_description_textView.text = property?.descriptionProperty
-            property?.let { getInterestPoint(it) }
-            property?.let { getStaticMap(it) }
+            if (property != null) {
+                mProperty = property
+                updateUI(property)
+                getInterestPoint(property)
+                getStaticMap(property)
+            }
         })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateUI(property: Property){
+        detail_property_surface_textView.text = property.surface
+        detail_property_room_textView.text = property.numberOfRooms
+        detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city
+        detail_property_description_textView.text = property.descriptionProperty
     }
 
     private fun getInterestPoint(property: Property){

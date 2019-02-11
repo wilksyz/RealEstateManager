@@ -11,6 +11,7 @@ import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateActivity
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
+import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
 private const val PROPERTY_ID: String = "property id"
@@ -32,6 +33,11 @@ class PropertyListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.create_property -> {
             val intent= Intent(this, PropertyCreateActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.maps_view -> {
+            val intent = Intent(this, PropertyMapsActivity::class.java)
             startActivity(intent)
             true
         }
