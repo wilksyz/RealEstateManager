@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.property_details
 
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.R

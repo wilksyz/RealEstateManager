@@ -73,7 +73,8 @@ public class Utils extends AsyncTask<Void,Void,Boolean> {
         }
     }
 
-    @Override protected void onPostExecute(Boolean internet) {
+    @Override
+    protected void onPostExecute(Boolean internet) {
         mConsumer.accept(internet);
     }
 

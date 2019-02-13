@@ -3,8 +3,8 @@ package com.openclassrooms.realestatemanager.ui.property_details
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.arch.lifecycle.*
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment

@@ -23,6 +23,7 @@
         android:id="@+id/picture_view_holder_imageView"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/picture_view_holder_imageView"
         app:layout_constraintTop_toBottomOf="@+id/type_property_view_holder_textView"
-        tools:text="Manhatan" />
+        tools:text="Manhatan " />
 
     <TextView
         android:id="@+id/price_view_holder_textView"
@@ -69,6 +70,5 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/picture_view_holder_imageView" />
 </android.support.constraint.ConstraintLayout>

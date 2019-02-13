@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.ui.property_create
 import android.arch.lifecycle.ViewModel
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.repository.PictureDataRepository
 import com.openclassrooms.realestatemanager.repository.PropertyDataRepository
 import java.util.concurrent.Executor
 

@@ -112,20 +112,18 @@ class PropertyCreateActivity : AppCompatActivity() {
 
     private fun configureClickGridRecyclerView(){
         ItemClickSupport.addTo(picture_gridview_create, R.layout.item_grid_picture_property)
-                .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
-                    override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
-                        val builder = AlertDialog.Builder(this@PropertyCreateActivity)
-                        builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_the_image))
-                                .setPositiveButton(getString(R.string.delete)) { _, _ ->
-                                    mPictureList.removeAt(position)
-                                    mAdapterRecycler.updateData(mPictureList)
-                                }
-                                .setNegativeButton(R.string.cancel) { _, _ ->
-                                }
-                        builder.create()
-                        builder.show()
-                    }
-                })
+                .setOnItemClickListener { _, position, _ ->
+                    val builder = AlertDialog.Builder(this@PropertyCreateActivity)
+                    builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_the_image))
+                            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                                mPictureList.removeAt(position)
+                                mAdapterRecycler.updateData(mPictureList)
+                            }
+                            .setNegativeButton(R.string.cancel) { _, _ ->
+                            }
+                    builder.create()
+                    builder.show()
+                }
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

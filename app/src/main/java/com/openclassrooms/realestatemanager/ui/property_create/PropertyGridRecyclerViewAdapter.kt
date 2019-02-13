@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Picture
 import kotlinx.android.synthetic.main.item_grid_picture_property.view.*
-import kotlin.collections.ArrayList
 
 class PropertyGridRecyclerViewAdapter: RecyclerView.Adapter<PropertyGridRecyclerViewAdapter.PropertyGridRecyclerViewViewHolder>() {
     private var mPictureList: List<Picture> = ArrayList()
