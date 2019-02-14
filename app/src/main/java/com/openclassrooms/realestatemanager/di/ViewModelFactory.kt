@@ -8,6 +8,7 @@ import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateVie
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailViewModel
 import com.openclassrooms.realestatemanager.ui.property_list.PropertyListViewModel
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsViewModel
+import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchViewModel
 import java.util.concurrent.Executor
 
 class ViewModelFactory(private val mPropertyDataRepository: PropertyDataRepository, private val mPictureDataRepository: PictureDataRepository, private val mExecutor: Executor) :ViewModelProvider.Factory{
@@ -24,6 +25,9 @@ class ViewModelFactory(private val mPropertyDataRepository: PropertyDataReposito
         }
         if (modelClass.isAssignableFrom(PropertyMapsViewModel::class.java)) {
             return PropertyMapsViewModel(mPropertyDataRepository) as T
+        }
+        if (modelClass.isAssignableFrom(PropertyResultOfResearchViewModel::class.java)){
+            return PropertyResultOfResearchViewModel(mPropertyDataRepository, mPictureDataRepository) as T
         }
             throw IllegalArgumentException("Unknown ViewModel class")
     }

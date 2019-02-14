@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.model
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import java.util.*
 
 @Entity
 data class Property(var typeProperty: String,
@@ -10,7 +11,7 @@ data class Property(var typeProperty: String,
                     var surface: String,
                     var numberOfRooms: String,
                     var descriptionProperty: String,
-                    var dateOfSale: String,
+                    var dateOfSale: Date,
                     @Embedded var interestPoint: InterestPoint,
                     var estateAgent: String,
                     @Embedded var address: Address

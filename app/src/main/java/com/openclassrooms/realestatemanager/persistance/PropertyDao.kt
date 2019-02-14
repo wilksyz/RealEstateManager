@@ -12,8 +12,28 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
     abstract fun getAllProperty(): LiveData<List<Property>>
 
     @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
-    abstract fun getProperty(propertyId: Long): LiveData<Property>
-
+    abstract fun getPropertyFromId(propertyId: Long): LiveData<Property>
+/*
+    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty " +
+            "AND surface BETWEEN :pMinSurface AND :pMaxSurface " +
+            "AND doctor IN (:pDoctor) " +
+            "AND school IN (:pSchool) " +
+            "AND hobbies IN (:pHobbies) " +
+            "AND transport IN (:pTransport) " +
+            "AND parc IN (:pParc)" +
+            "AND store IN (:pStore)" +
+            "AND ")
+    abstract fun getPropertyFromResearch(pTypeProperty: String,
+                                         pMinSurface: String,
+                                         pMaxSurface: String,
+                                         pDoctor: List<String>,
+                                         pSchool: List<String>,
+                                         pHobbies: List<String>,
+                                         pTransport: List<String>,
+                                         pParc: List<String>,
+                                         pStore: List<String>,
+                                         ): LiveData<Property>
+*/
     @Transaction
     open fun createProperty(property: Property, pictureList: ArrayList<Picture>){
         val id = insertProperty(property)

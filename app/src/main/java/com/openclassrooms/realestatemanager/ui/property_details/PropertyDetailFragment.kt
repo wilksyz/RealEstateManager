@@ -174,7 +174,6 @@ class PropertyDetailFragment : Fragment() {
             if (it){
                 val key = getString(R.string.google_maps_api)
                 val url = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=color:blue%7C${property.address.number}${property.address.street}${property.address.postCode}${property.address.city}&key=$key"
-                Log.e("TAG", url)
                 activity?.let { it1 ->
                     Glide.with(it1)
                             .load(url)

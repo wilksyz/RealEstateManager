@@ -13,7 +13,7 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
     }
 
     fun getProperty(propertyId: Long): LiveData<Property>{
-        return  this.mPropertyDao.getProperty(propertyId)
+        return  this.mPropertyDao.getPropertyFromId(propertyId)
     }
 
     // --- CREATE ---

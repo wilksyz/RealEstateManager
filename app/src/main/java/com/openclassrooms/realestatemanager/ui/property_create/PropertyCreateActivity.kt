@@ -11,6 +11,7 @@ import android.os.Environment
 import android.os.Environment.DIRECTORY_DCIM
 import android.os.Parcelable
 import android.provider.MediaStore
+import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -144,7 +145,7 @@ class PropertyCreateActivity : AppCompatActivity() {
         val typeProperty = type_of_property_spinner.selectedItem.toString()
         val estateAgent = estate_agent_spinner.selectedItem.toString()
         val interestPoint = retrieveInterestPoint()
-        val property = Property(typeProperty, price, surface, rooms, description, Utils.getTodayDate(), interestPoint, estateAgent, location)
+        val property = Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, location)
         this.mPropertyCreateViewModel.createProperty(property, mPictureList)
         finish()
     }
@@ -233,8 +234,9 @@ class PropertyCreateActivity : AppCompatActivity() {
 
                 if (isCamera) {
                     mView.image_button_dialog.setImageURI(mOutputFileUri)
-                    mPictureUri = getRealPathFromURI(mOutputFileUri)
                     galleryAddPic()
+                    mPictureUri = getRealPathFromURI(mOutputFileUri)
+
                 } else {
                     mView.image_button_dialog.setImageURI(data?.data)
                     mPictureUri = data?.data?.let { getRealPathFromURI(it) }
@@ -259,10 +261,27 @@ class PropertyCreateActivity : AppCompatActivity() {
         return null
     }
 
+    /*
+    public String getRealPathFromURI(Uri uri) {
+    String path = "";
+    if (getContentResolver() != null) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            path = cursor.getString(idx);
+            cursor.close();
+        }
+    }
+    return path;
+}
+     */
+
     private fun galleryAddPic() {
         Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
             val f = File(mCurrentPhotoPath)
             mediaScanIntent.data = Uri.fromFile(f)
+            val t = mediaScanIntent.data
             sendBroadcast(mediaScanIntent)
         }
     }
