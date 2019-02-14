@@ -10,6 +10,12 @@
 
     <item
         android:id="@+id/maps_view"
-        android:title="maps"
-        app:showAsAction="withText"/>
+        android:title="@string/maps_view"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/search_property"
+        android:title="@string/search"
+        app:showAsAction="never"/>
+
 </menu>
