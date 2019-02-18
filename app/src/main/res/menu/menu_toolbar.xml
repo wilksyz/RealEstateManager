@@ -14,8 +14,8 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/search_property"
-        android:title="@string/search"
+        android:id="@+id/research_property"
+        android:title="@string/research"
         app:showAsAction="never"/>
 
 </menu>

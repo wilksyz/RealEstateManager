@@ -12,6 +12,7 @@ import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateAct
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
+import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
 private const val PROPERTY_ID: String = "property id"
@@ -38,6 +39,11 @@ class PropertyListActivity : AppCompatActivity() {
         }
         R.id.maps_view -> {
             val intent = Intent(this, PropertyMapsActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.research_property -> {
+            val intent = Intent(this, PropertyResultOfResearchActivity::class.java)
             startActivity(intent)
             true
         }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
+import java.util.*
 
 @Dao
 abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
@@ -13,27 +14,27 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
 
     @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
     abstract fun getPropertyFromId(propertyId: Long): LiveData<Property>
-/*
-    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty " +
-            "AND surface BETWEEN :pMinSurface AND :pMaxSurface " +
-            "AND doctor IN (:pDoctor) " +
-            "AND school IN (:pSchool) " +
-            "AND hobbies IN (:pHobbies) " +
-            "AND transport IN (:pTransport) " +
-            "AND parc IN (:pParc)" +
-            "AND store IN (:pStore)" +
-            "AND ")
-    abstract fun getPropertyFromResearch(pTypeProperty: String,
-                                         pMinSurface: String,
-                                         pMaxSurface: String,
-                                         pDoctor: List<String>,
-                                         pSchool: List<String>,
-                                         pHobbies: List<String>,
-                                         pTransport: List<String>,
-                                         pParc: List<String>,
-                                         pStore: List<String>,
-                                         ): LiveData<Property>
-*/
+
+    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor IN (:pDoctor) AND school IN (:pSchool) AND hobbies IN (:pHobbies) AND transport IN (:pTransport) AND parc IN (:pParc) AND store IN (:pStore) AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale AND saleStatus = :pSaleStatus AND dateSold BETWEEN :pMinDateSold AND :pMaxDateSold AND city = :pCity AND numberOfPhotos > :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice")
+    abstract fun getPropertyResearch(pTypeProperty: String,
+                                     pMinSurface: Int,
+                                     pMaxSurface: Int,
+                                     pDoctor: List<Int>,
+                                     pSchool: List<Int>,
+                                     pHobbies: List<Int>,
+                                     pTransport: List<Int>,
+                                     pParc: List<Int>,
+                                     pStore: List<Int>,
+                                     pMinDateOfSale: Date,
+                                     pMaxDateOfSale: Date,
+                                     pSaleStatus: Int,
+                                     pMinDateSold: Date,
+                                     pMaxDateSold: Date,
+                                     pCity: String,
+                                     pNumberOfPhotos: Int,
+                                     pMinPrice: Int,
+                                     pMaxPrice: Int): LiveData<List<Property>>
+
     @Transaction
     open fun createProperty(property: Property, pictureList: ArrayList<Picture>){
         val id = insertProperty(property)

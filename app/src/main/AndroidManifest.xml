@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.property_result_research.PropertyResultOfResearchActivity"></activity>
-        <activity android:name=".ui.property_search.PropertySearchActivity" />
+        <activity android:name=".ui.property_research.PropertyResearchActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

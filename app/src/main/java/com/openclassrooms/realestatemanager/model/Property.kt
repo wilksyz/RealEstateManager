@@ -7,17 +7,18 @@ import java.util.*
 
 @Entity
 data class Property(var typeProperty: String,
-                    var price: String,
-                    var surface: String,
+                    var price: Int?,
+                    var surface: Int?,
                     var numberOfRooms: String,
                     var descriptionProperty: String,
                     var dateOfSale: Date,
                     @Embedded var interestPoint: InterestPoint,
                     var estateAgent: String,
-                    @Embedded var address: Address
+                    @Embedded var address: Address,
+                    var numberOfPhotos: Int
                     ) {
 
     @PrimaryKey(autoGenerate = true) var mPropertyId: Long = 0
-    var dateSold: String = ""
+    var dateSold: Date? = null
     var saleStatus: Boolean = false
 }

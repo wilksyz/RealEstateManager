@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.ui.property_list
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
@@ -45,6 +45,7 @@ class PropertyListFragment : Fragment() {
     private fun configureClickRecyclerView(){
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
                 .setOnItemClickListener { _, position, _ ->
+                    Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
                     val property = mAdapter.getProperty(position)
                     (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
                 }
@@ -63,11 +64,11 @@ class PropertyListFragment : Fragment() {
     // Get all properties in database
     private fun getAllProperty() {
         val pictureList: MutableList<Picture?> = ArrayList()
-        this.mPropertyListViewModel.getAllProperty().observe(this, Observer{list ->
+        this.mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ list ->
             val propertyList = list?.iterator()
             if (propertyList != null) {
                 for (property in propertyList){
-                    this.mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, Observer {l ->
+                    this.mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {l ->
                         if (l?.size == 0){
                             pictureList.add(null)
                         }else{

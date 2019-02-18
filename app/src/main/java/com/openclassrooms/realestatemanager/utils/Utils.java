@@ -1,6 +1,11 @@
 package com.openclassrooms.realestatemanager.utils;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -76,6 +81,29 @@ public class Utils extends AsyncTask<Void,Void,Boolean> {
     @Override
     protected void onPostExecute(Boolean internet) {
         mConsumer.accept(internet);
+    }
+
+    public static String getRealPathFromURI(Context context,Uri contentURI) {
+        String result;
+        Cursor cursor = context.getContentResolver().query(contentURI, null,
+                null, null, null);
+
+        if (cursor == null) {
+            // path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            try {
+                int idx = cursor
+                        .getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                result = cursor.getString(idx);
+            } catch (Exception e) {
+                Log.e("Exception getRealPath", "e: " + e);
+                result = "";
+            }
+            cursor.close();
+        }
+        return result;
     }
 
     /*

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.property_search.PropertySearchActivity">
+    tools:context=".ui.property_research.PropertyResearchActivity">
 
     <TextView
         android:id="@+id/textView9"
@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/search"
+        android:text="@string/research"
         android:textAllCaps="true"
         android:textSize="30sp"
         android:textStyle="bold"

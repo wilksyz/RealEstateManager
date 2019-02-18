@@ -14,7 +14,9 @@ class PropertyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.picture_view_holder_imageView.setImageURI(Uri.parse(picture.uri))
         }
         itemView.type_property_view_holder_textView.text = property.typeProperty
-        itemView.price_view_holder_textView.text = "$ ${property.price}"
+        if (property.price != null){
+            itemView.price_view_holder_textView.text = "$ ${property.price}"
+        }
         itemView.location_view_holder_textView.text = "${property.address.postCode} ${property.address.city}"
     }
 

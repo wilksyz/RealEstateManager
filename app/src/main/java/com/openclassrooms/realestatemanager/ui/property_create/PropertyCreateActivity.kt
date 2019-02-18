@@ -4,14 +4,12 @@ import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.DIRECTORY_DCIM
 import android.os.Parcelable
 import android.provider.MediaStore
-import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -137,17 +135,18 @@ class PropertyCreateActivity : AppCompatActivity() {
     }
 
     private fun retrieveInformationEntered() {
-        val surface = surface_edit_text.text.toString()
+        val surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else null
+        val price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else null
         val rooms = number_of_room_edit_text.text.toString()
-        val price = price_edit_text.text.toString()
         val description = description_property_edit_text.text.toString()
         val location = retrieveAddress()
         val typeProperty = type_of_property_spinner.selectedItem.toString()
         val estateAgent = estate_agent_spinner.selectedItem.toString()
         val interestPoint = retrieveInterestPoint()
-        val property = Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, location)
+        val numberOfPhotos = mPictureList.size
+        val property = Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, location, numberOfPhotos)
         this.mPropertyCreateViewModel.createProperty(property, mPictureList)
-        finish()
+        onBackPressed()
     }
 
     private fun retrieveInterestPoint(): InterestPoint {
@@ -190,7 +189,7 @@ class PropertyCreateActivity : AppCompatActivity() {
 
         val root = File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).toString() + File.separator + "Real Estate Manager" + File.separator)
         root.mkdirs()
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(Date())
         val fileName = "$timeStamp.jpg"
         val imageMainDirectory = File(root, fileName)
         mOutputFileUri = Uri.fromFile(imageMainDirectory)
@@ -235,53 +234,20 @@ class PropertyCreateActivity : AppCompatActivity() {
                 if (isCamera) {
                     mView.image_button_dialog.setImageURI(mOutputFileUri)
                     galleryAddPic()
-                    mPictureUri = getRealPathFromURI(mOutputFileUri)
-
+                    mPictureUri = Utils.getRealPathFromURI(this, mOutputFileUri)
                 } else {
                     mView.image_button_dialog.setImageURI(data?.data)
-                    mPictureUri = data?.data?.let { getRealPathFromURI(it) }
+                    mPictureUri = Utils.getRealPathFromURI(this, data?.data)
                 }
                 mView.image_button_dialog.setBackgroundResource(R.color.colorWhite)
             }
         }
     }
 
-    private fun getRealPathFromURI(contentURI: Uri): String?{
-        val projection =  MediaStore.Images.Media.DATA
-        @Suppress("DEPRECATION")
-        val cursor: Cursor = this.managedQuery(contentURI, arrayOf(projection), null, null, null)
-                ?: return null
-        val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        if (cursor.moveToFirst()) {
-            val s = cursor.getString(columnIndex)
-            //cursor.close()
-            return s
-        }
-        //cursor.close()
-        return null
-    }
-
-    /*
-    public String getRealPathFromURI(Uri uri) {
-    String path = "";
-    if (getContentResolver() != null) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            path = cursor.getString(idx);
-            cursor.close();
-        }
-    }
-    return path;
-}
-     */
-
     private fun galleryAddPic() {
         Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
             val f = File(mCurrentPhotoPath)
             mediaScanIntent.data = Uri.fromFile(f)
-            val t = mediaScanIntent.data
             sendBroadcast(mediaScanIntent)
         }
     }

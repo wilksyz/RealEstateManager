@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +25,7 @@ import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.dialog_full_screen_picture.view.*
 import kotlinx.android.synthetic.main.fragment_details_property.*
 import kotlinx.android.synthetic.main.fragment_details_property.view.*
+import java.text.DateFormat
 import java.util.*
 
 /**
@@ -97,16 +97,20 @@ class PropertyDetailFragment : Fragment() {
                 })
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun getSoldDate(){
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dialog = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, pYear, pMonth, pDay ->
+        val dialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { _, pYear, pMonth, pDay ->
             val formattedDay = if (pDay < 10) "0$pDay" else "$pDay"
             val formattedMonth = pMonth + 1
-            val date = if (formattedMonth < 10) "$formattedDay/0$formattedMonth/$pYear" else "$formattedDay/$formattedMonth/$pYear"
+            val dateString = if (formattedMonth < 10) "$formattedDay/0$formattedMonth/$pYear" else "$formattedDay/$formattedMonth/$pYear"
+            val df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE)
+            val date: Date
+            date = df.parse(dateString)
             updateProperty(date)
         }, year, month, day)
         dialog.datePicker.maxDate = Date().time
@@ -114,7 +118,7 @@ class PropertyDetailFragment : Fragment() {
     }
 
     // Update an property
-    private fun updateProperty(date: String) {
+    private fun updateProperty(date: Date) {
         mProperty.dateSold = date
         mProperty.saleStatus = true
         this.mPropertyDetailViewModel.updateProperty(mProperty)
@@ -128,14 +132,14 @@ class PropertyDetailFragment : Fragment() {
                 mProperty = property
                 updateUI(property)
                 getInterestPoint(property)
-                getStaticMap(property)
+                //getStaticMap(property)
             }
         })
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(property: Property){
-        detail_property_surface_textView.text = property.surface
+        detail_property_surface_textView.text = property.surface.toString()
         detail_property_room_textView.text = property.numberOfRooms
         detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city
         detail_property_description_textView.text = property.descriptionProperty
@@ -146,23 +150,23 @@ class PropertyDetailFragment : Fragment() {
             doctor_imageView.visibility = View.GONE
             doctor_textView.visibility = View.GONE
         }
-        if (property.interestPoint.hobbies){
+        if (!property.interestPoint.hobbies){
             hobbies_imageView.visibility = View.GONE
             hobbies_textView.visibility = View.GONE
         }
-        if (property.interestPoint.parc){
+        if (!property.interestPoint.parc){
             parc_imageView.visibility = View.GONE
             parc_textView.visibility = View.GONE
         }
-        if (property.interestPoint.school){
+        if (!property.interestPoint.school){
             school_imageView.visibility = View.GONE
             school_textView.visibility = View.GONE
         }
-        if (property.interestPoint.store){
+        if (!property.interestPoint.store){
             stores_imageView.visibility = View.GONE
             stores_textView.visibility = View.GONE
         }
-        if (property.interestPoint.transport){
+        if (!property.interestPoint.transport){
             public_transport_imageView.visibility = View.GONE
             public_transport_textView.visibility = View.GONE
         }

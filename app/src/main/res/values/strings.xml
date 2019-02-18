@@ -56,6 +56,6 @@
     <string name="interest_point">Interest point</string>
     <string name="sold">Sold</string>
     <string name="to_see_the_good_around_you">to see the good around you, the app needs your current location.</string>
-    <string name="search">Search</string>
+    <string name="research">Research</string>
     <string name="maps_view">Maps view</string>
 </resources>
