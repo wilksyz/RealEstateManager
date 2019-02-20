@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 data class Property(var typeProperty: String,
-                    var price: Int?,
+                    var price: Int,
                     var surface: Int?,
                     var numberOfRooms: String,
                     var descriptionProperty: String,

@@ -54,7 +54,17 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
 
     @Transaction
     open fun createProperty(property: Property, pictureList: ArrayList<Picture>){
-        val id = insertProperty(property)
+        val id = this.insertProperty(property)
+        for (picture in pictureList){
+            database.pictureDao().insertPicture(picture.apply { propertyId = id })
+        }
+    }
+
+    @Transaction
+    open fun updatePropertyAndPictures(property: Property, pictureList: ArrayList<Picture>){
+        this.updateProperty(property)
+        val id = property.mPropertyId
+        database.pictureDao().deleteAllPictureFromProperty(id)
         for (picture in pictureList){
             database.pictureDao().insertPicture(picture.apply { propertyId = id })
         }

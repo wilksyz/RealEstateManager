@@ -7,12 +7,15 @@ import android.text.SpannableStringBuilder
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
-import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_form.PropertyEditForms
 import kotlinx.android.synthetic.main.activity_property_create.*
+import android.widget.Spinner
+import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.model.Address
+
 
 private const val STATE_PICTURE_LIST = "state picture list"
 private const val PROPERTY_ID: String = "property id"
@@ -27,10 +30,9 @@ class PropertyEditActivity : PropertyEditForms() {
 
         val propertyId = getPropertyId()
         this.configureViewModel()
-        this.configureSpinner()
         this.getProperty(propertyId)
-        this.getPicture(propertyId)
         configureGridRecyclerView()
+        this.getPicture(propertyId)
         configureClickGridRecyclerView()
         add_photo_button.setOnClickListener {
             onCreateDialog()
@@ -48,26 +50,46 @@ class PropertyEditActivity : PropertyEditForms() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.finish -> {
-
+            updateProperty()
             true
         }else -> {
             super.onOptionsItemSelected(item)
         }
     }
 
+    private fun updateProperty(){
+        retrieveInformationEntered()
+        this.mPropertyEditViewModel.updatePropertyAndPictures(mProperty, mPictureList)
+        finish()
+    }
+
+    private fun retrieveInformationEntered(){
+        mProperty.surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else 0
+        mProperty.price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else 0
+        mProperty.numberOfRooms = number_of_room_edit_text.text.toString()
+        mProperty.descriptionProperty = description_property_edit_text.text.toString()
+        mProperty.address = retrieveAddress()
+        mProperty.typeProperty = type_of_property_spinner.selectedItem.toString()
+        mProperty.estateAgent = estate_agent_spinner.selectedItem.toString()
+        mProperty.interestPoint = retrieveInterestPoint()
+        mProperty.numberOfPhotos = mPictureList.size
+    }
+
     private fun getProperty(propertyId: Long){
         this.mPropertyEditViewModel.getProperty(propertyId).observe(this, Observer { property ->
             if (property != null) {
                 mProperty = property
-                updateUI(property)
-                setInterestPoint(property)
+                this.updateUI(property)
+                this.setInterestPoint(property)
+                this.configureSpinner()
+                this.setAddress(property)
             }
         })
     }
 
     private fun updateUI(property: Property){
-        surface_edit_text.text = SpannableStringBuilder(property.surface.toString())
-        price_edit_text.text =SpannableStringBuilder(property.price.toString())
+        if (property.surface != 0) surface_edit_text.text = SpannableStringBuilder(property.surface.toString())
+        if (property.price != 0) price_edit_text.text =SpannableStringBuilder(property.price.toString())
         number_of_room_edit_text.text = SpannableStringBuilder(property.numberOfRooms)
         description_property_edit_text.text = SpannableStringBuilder(property.descriptionProperty)
     }
@@ -79,6 +101,13 @@ class PropertyEditActivity : PropertyEditForms() {
         radioButton_school.isChecked = property.interestPoint.school
         radioButton_stores.isChecked = property.interestPoint.store
         radioButton_parc.isChecked = property.interestPoint.parc
+    }
+
+    private fun setAddress(property: Property){
+        number_edit_text.text = SpannableStringBuilder(property.address.number)
+        street_edit_text.text = SpannableStringBuilder(property.address.street)
+        postal_code_edit_text.text = SpannableStringBuilder(property.address.postCode)
+        city_edit_text.text = SpannableStringBuilder(property.address.city)
     }
 
     private fun getPicture(propertyId: Long){
@@ -99,9 +128,22 @@ class PropertyEditActivity : PropertyEditForms() {
         val typePropertyAdapter = ArrayAdapter.createFromResource(this, R.array.type_property_array, android.R.layout.simple_spinner_item)
         typePropertyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         type_of_property_spinner.adapter = typePropertyAdapter
+        type_of_property_spinner.setSelection(getIndex(type_of_property_spinner, mProperty.typeProperty))
         val estateAgentAdapter = ArrayAdapter.createFromResource(this, R.array.estate_agent_array, android.R.layout.simple_spinner_item)
         estateAgentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         estate_agent_spinner.adapter = estateAgentAdapter
+        estate_agent_spinner.setSelection(getIndex(estate_agent_spinner, mProperty.estateAgent))
+    }
+
+    private fun getIndex(spinner: Spinner, spinnerString: String): Int {
+        var index = 0
+
+        for (i in 0 until spinner.count) {
+            if (spinner.getItemAtPosition(i) == spinnerString) {
+                index = i
+            }
+        }
+        return index
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

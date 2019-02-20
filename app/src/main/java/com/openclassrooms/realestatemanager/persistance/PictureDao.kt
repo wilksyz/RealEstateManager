@@ -14,4 +14,7 @@ interface PictureDao {
 
     @Insert
     fun insertPicture(picture: Picture): Long
+
+    @Query("DELETE FROM Picture WHERE propertyId = :propertyId")
+    fun deleteAllPictureFromProperty(propertyId: Long): Int
 }

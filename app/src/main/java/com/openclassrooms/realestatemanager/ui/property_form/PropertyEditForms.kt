@@ -18,7 +18,6 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.InterestPoint
 import com.openclassrooms.realestatemanager.model.Picture
-import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_form.recyclerView.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
@@ -102,27 +101,14 @@ abstract class PropertyEditForms: AppCompatActivity() {
                 }
     }
 
-    protected fun retrieveInformationEntered(): Property {
-        val surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else null
-        val price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else null
-        val rooms = number_of_room_edit_text.text.toString()
-        val description = description_property_edit_text.text.toString()
-        val location = retrieveAddress()
-        val typeProperty = type_of_property_spinner.selectedItem.toString()
-        val estateAgent = estate_agent_spinner.selectedItem.toString()
-        val interestPoint = retrieveInterestPoint()
-        val numberOfPhotos = mPictureList.size
-        return Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, location, numberOfPhotos)
-    }
-
-    private fun retrieveInterestPoint(): InterestPoint {
+    protected fun retrieveInterestPoint(): InterestPoint {
         return InterestPoint(
                 radioButton_doctor.isChecked,
+                radioButton_school.isChecked,
                 radioButton_hobbies.isChecked,
                 radioButton_public_transport.isChecked,
-                radioButton_school.isChecked,
-                radioButton_stores.isChecked,
-                radioButton_parc.isChecked)
+                radioButton_parc.isChecked,
+                radioButton_stores.isChecked)
     }
 
     protected fun retrieveAddress(): Address {
@@ -138,7 +124,7 @@ abstract class PropertyEditForms: AppCompatActivity() {
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    protected fun accessToImages(){
+    private fun accessToImages(){
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryIntent.type = "image/*"
 

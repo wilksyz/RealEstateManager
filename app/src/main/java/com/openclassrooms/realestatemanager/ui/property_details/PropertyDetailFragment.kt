@@ -132,15 +132,15 @@ class PropertyDetailFragment : Fragment() {
                 mProperty = property
                 updateUI(property)
                 getInterestPoint(property)
-                //getStaticMap(property)
+                getStaticMap(property)
             }
         })
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(property: Property){
-        detail_property_surface_textView.text = property.surface.toString()
-        detail_property_room_textView.text = property.numberOfRooms
+        if (property.surface != 0) detail_property_surface_textView.text = property.surface.toString() else detail_property_surface_textView.text = "N.C"
+                detail_property_room_textView.text = property.numberOfRooms
         detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city
         detail_property_description_textView.text = property.descriptionProperty
     }

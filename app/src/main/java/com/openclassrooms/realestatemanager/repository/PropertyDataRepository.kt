@@ -65,4 +65,8 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
     fun updateProperty(property: Property) {
         mPropertyDao.updateProperty(property)
     }
+
+    fun updatePropertyAndPictures(property: Property, pictureList: ArrayList<Picture>){
+        mPropertyDao.updatePropertyAndPictures(property, pictureList)
+    }
 }

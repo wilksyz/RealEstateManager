@@ -27,7 +27,7 @@ class PropertyDetailActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar_activity_property_list, menu)
+        menuInflater.inflate(R.menu.menu_toolbar_activity_property_detail, menu)
         return true
     }
 

@@ -8,8 +8,10 @@ import android.widget.ArrayAdapter
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
+import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_form.PropertyEditForms
 import kotlinx.android.synthetic.main.activity_property_create.*
+import java.util.*
 
 private const val STATE_PICTURE_LIST = "state picture list"
 
@@ -60,6 +62,19 @@ class PropertyCreateActivity : PropertyEditForms() {
         val property = retrieveInformationEntered()
         this.mPropertyCreateViewModel.createProperty(property, mPictureList)
         onBackPressed()
+    }
+
+    private fun retrieveInformationEntered(): Property {
+        val surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else 0
+        val price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else 0
+        val rooms = number_of_room_edit_text.text.toString()
+        val description = description_property_edit_text.text.toString()
+        val address = retrieveAddress()
+        val typeProperty = type_of_property_spinner.selectedItem.toString()
+        val estateAgent = estate_agent_spinner.selectedItem.toString()
+        val interestPoint = retrieveInterestPoint()
+        val numberOfPhotos = mPictureList.size
+        return Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, address, numberOfPhotos)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
