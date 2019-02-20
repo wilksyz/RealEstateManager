@@ -32,6 +32,7 @@ class PropertyListFragment : Fragment() {
         this.configureRecyclerView()
         this.configureViewModel()
         this.configureClickRecyclerView()
+        this.getAllProperty()
 
         return viewOfLayout
     }
@@ -52,7 +53,7 @@ class PropertyListFragment : Fragment() {
     }
 
     override fun onResume() {
-        this.getAllProperty()
+
         super.onResume()
     }
 

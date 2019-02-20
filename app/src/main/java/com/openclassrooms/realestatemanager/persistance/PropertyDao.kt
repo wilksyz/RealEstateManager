@@ -15,7 +15,7 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
     @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
     abstract fun getPropertyFromId(propertyId: Long): LiveData<Property>
 
-    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor IN (:pDoctor) AND school IN (:pSchool) AND hobbies IN (:pHobbies) AND transport IN (:pTransport) AND parc IN (:pParc) AND store IN (:pStore) AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale AND saleStatus = :pSaleStatus AND dateSold BETWEEN :pMinDateSold AND :pMaxDateSold AND city = :pCity AND numberOfPhotos > :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice")
+    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor IN (:pDoctor) AND school IN (:pSchool) AND hobbies IN (:pHobbies) AND transport IN (:pTransport) AND parc IN (:pParc) AND store IN (:pStore) AND city LIKE :pCity AND numberOfPhotos > :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale")
     abstract fun getPropertyResearch(pTypeProperty: String,
                                      pMinSurface: Int,
                                      pMaxSurface: Int,
@@ -25,15 +25,32 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
                                      pTransport: List<Int>,
                                      pParc: List<Int>,
                                      pStore: List<Int>,
-                                     pMinDateOfSale: Date,
-                                     pMaxDateOfSale: Date,
-                                     pSaleStatus: Int,
-                                     pMinDateSold: Date,
-                                     pMaxDateSold: Date,
                                      pCity: String,
                                      pNumberOfPhotos: Int,
                                      pMinPrice: Int,
-                                     pMaxPrice: Int): LiveData<List<Property>>
+                                     pMaxPrice: Int,
+                                     pMinDateOfSale: Date,
+                                     pMaxDateOfSale: Date): LiveData<List<Property>>
+
+    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor IN (:pDoctor) AND school IN (:pSchool) AND hobbies IN (:pHobbies) AND transport IN (:pTransport) AND parc IN (:pParc) AND store IN (:pStore) AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale AND saleStatus = :pSaleStatus AND dateSold BETWEEN :pMinDateSold AND :pMaxDateSold AND city = :pCity AND numberOfPhotos >= :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice")
+    abstract fun getPropertyResearchSold(pTypeProperty: String,
+                                         pMinSurface: Int,
+                                         pMaxSurface: Int,
+                                         pDoctor: List<Int>,
+                                         pSchool: List<Int>,
+                                         pHobbies: List<Int>,
+                                         pTransport: List<Int>,
+                                         pParc: List<Int>,
+                                         pStore: List<Int>,
+                                         pMinDateOfSale: Date,
+                                         pMaxDateOfSale: Date,
+                                         pSaleStatus: Int,
+                                         pMinDateSold: Date,
+                                         pMaxDateSold: Date,
+                                         pCity: String,
+                                         pNumberOfPhotos: Int,
+                                         pMinPrice: Int,
+                                         pMaxPrice: Int): LiveData<List<Property>>
 
     @Transaction
     open fun createProperty(property: Property, pictureList: ArrayList<Picture>){
