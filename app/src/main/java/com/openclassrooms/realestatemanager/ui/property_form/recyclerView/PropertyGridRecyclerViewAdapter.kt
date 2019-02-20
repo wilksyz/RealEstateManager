@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.property_create
+package com.openclassrooms.realestatemanager.ui.property_form.recyclerView
 
 import android.net.Uri
 import android.support.v7.widget.RecyclerView

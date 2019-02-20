@@ -1,30 +1,25 @@
-package com.openclassrooms.realestatemanager.ui.property_create
+package com.openclassrooms.realestatemanager.ui.property_form
 
 import android.Manifest
-import android.arch.lifecycle.ViewModelProviders
 import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.os.Environment.DIRECTORY_DCIM
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.InterestPoint
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
+import com.openclassrooms.realestatemanager.ui.property_form.recyclerView.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.activity_property_create.*
@@ -34,36 +29,26 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-
-private const val STATE_PICTURE_LIST = "state picture list"
 private const val RC_IMAGE_PERMS = 100
 private const val RC_CHOOSE_PHOTO = 200
 
-class PropertyCreateActivity : AppCompatActivity() {
+abstract class PropertyEditForms: AppCompatActivity() {
 
+    private lateinit var mView: View
+    protected var mPictureList = ArrayList<Picture>()
+    protected var mAdapterRecycler: PropertyGridRecyclerViewAdapter = PropertyGridRecyclerViewAdapter()
     private lateinit var mOutputFileUri: Uri
     private lateinit var mCurrentPhotoPath: String
-    private var mAdapterRecycler: PropertyGridRecyclerViewAdapter = PropertyGridRecyclerViewAdapter()
-    private var mPictureList = ArrayList<Picture>()
-    private lateinit var mPropertyCreateViewModel: PropertyCreateViewModel
-    private lateinit var mView: View
     private var mPictureUri: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_create)
-        this.configureSpinner()
-        this.configureViewModel()
-        this.configureGridRecyclerView()
-        this.configureClickGridRecyclerView()
-        add_photo_button.setOnClickListener {
-            onCreateDialog()
-        }
+
     }
 
-    private fun onCreateDialog() {
+    protected fun onCreateDialog() {
         val builder = AlertDialog.Builder(this)
         mView = layoutInflater.inflate(R.layout.dialog_add_picture, null)
         builder.setView(mView)
@@ -81,26 +66,18 @@ class PropertyCreateActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar_activity_property_create, menu)
-        return true
+    @AfterPermissionGranted(RC_IMAGE_PERMS)
+    private fun checkAccessImageFromPhone() {
+        val perms = Manifest.permission.WRITE_EXTERNAL_STORAGE
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            accessToImages()
+        } else {
+            EasyPermissions.requestPermissions(this, getString(R.string.popup_title_permission_files_access), RC_IMAGE_PERMS, perms)
+            return
+        }
     }
 
-    private fun configureViewModel() {
-        val mViewModelFactory = Injection().provideViewModelFactory(this)
-        this.mPropertyCreateViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyCreateViewModel::class.java)
-    }
-
-    private fun configureSpinner(){
-        val typePropertyAdapter = ArrayAdapter.createFromResource(this, R.array.type_property_array, android.R.layout.simple_spinner_item)
-        typePropertyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        type_of_property_spinner.adapter = typePropertyAdapter
-        val estateAgentAdapter = ArrayAdapter.createFromResource(this, R.array.estate_agent_array, android.R.layout.simple_spinner_item)
-        estateAgentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        estate_agent_spinner.adapter = estateAgentAdapter
-    }
-
-    private fun configureGridRecyclerView(){
+    protected fun configureGridRecyclerView(){
         val recyclerView = RecyclerView(this)
         val layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         recyclerView.layoutParams = layoutParams
@@ -109,10 +86,10 @@ class PropertyCreateActivity : AppCompatActivity() {
         picture_gridview_create.layoutManager = gridLayoutManager
     }
 
-    private fun configureClickGridRecyclerView(){
+    protected fun configureClickGridRecyclerView(){
         ItemClickSupport.addTo(picture_gridview_create, R.layout.item_grid_picture_property)
                 .setOnItemClickListener { _, position, _ ->
-                    val builder = AlertDialog.Builder(this@PropertyCreateActivity)
+                    val builder = AlertDialog.Builder(this@PropertyEditForms)
                     builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_the_image))
                             .setPositiveButton(getString(R.string.delete)) { _, _ ->
                                 mPictureList.removeAt(position)
@@ -125,16 +102,7 @@ class PropertyCreateActivity : AppCompatActivity() {
                 }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.create -> {
-            retrieveInformationEntered()
-            true
-        }else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun retrieveInformationEntered() {
+    protected fun retrieveInformationEntered(): Property {
         val surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else null
         val price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else null
         val rooms = number_of_room_edit_text.text.toString()
@@ -144,9 +112,7 @@ class PropertyCreateActivity : AppCompatActivity() {
         val estateAgent = estate_agent_spinner.selectedItem.toString()
         val interestPoint = retrieveInterestPoint()
         val numberOfPhotos = mPictureList.size
-        val property = Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, location, numberOfPhotos)
-        this.mPropertyCreateViewModel.createProperty(property, mPictureList)
-        onBackPressed()
+        return Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, location, numberOfPhotos)
     }
 
     private fun retrieveInterestPoint(): InterestPoint {
@@ -159,7 +125,7 @@ class PropertyCreateActivity : AppCompatActivity() {
                 radioButton_parc.isChecked)
     }
 
-    private fun retrieveAddress(): Address{
+    protected fun retrieveAddress(): Address {
         val number = number_edit_text.text.toString()
         val street = street_edit_text.text.toString()
         val postCode = postal_code_edit_text.text.toString()
@@ -167,27 +133,16 @@ class PropertyCreateActivity : AppCompatActivity() {
         return Address(number, street, postCode, city)
     }
 
-    @AfterPermissionGranted(RC_IMAGE_PERMS)
-    private fun checkAccessImageFromPhone() {
-        val perms = Manifest.permission.WRITE_EXTERNAL_STORAGE
-        if (EasyPermissions.hasPermissions(this, perms)) {
-            accessToImages()
-        } else {
-            EasyPermissions.requestPermissions(this, getString(R.string.popup_title_permission_files_access), RC_IMAGE_PERMS, perms)
-            return
-        }
-    }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    private fun accessToImages(){
+    protected fun accessToImages(){
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryIntent.type = "image/*"
 
-        val root = File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).toString() + File.separator + "Real Estate Manager" + File.separator)
+        val root = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + File.separator + "Real Estate Manager" + File.separator)
         root.mkdirs()
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(Date())
         val fileName = "$timeStamp.jpg"
@@ -195,7 +150,7 @@ class PropertyCreateActivity : AppCompatActivity() {
         mOutputFileUri = Uri.fromFile(imageMainDirectory)
         mCurrentPhotoPath = imageMainDirectory.absolutePath
         val cameraIntents = ArrayList<Intent>()
-        val captureIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val packageManager = packageManager
         val listCam = packageManager.queryIntentActivities(captureIntent, 0)
         for (res in listCam) {
@@ -250,21 +205,5 @@ class PropertyCreateActivity : AppCompatActivity() {
             mediaScanIntent.data = Uri.fromFile(f)
             sendBroadcast(mediaScanIntent)
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.run {
-            putAll(outState)
-            putParcelableArrayList(STATE_PICTURE_LIST, mPictureList)
-        }
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        savedInstanceState.run {
-            mPictureList = savedInstanceState?.getParcelableArrayList<Picture>(STATE_PICTURE_LIST) as ArrayList<Picture>
-            mAdapterRecycler.updateData(mPictureList)
-        }
-        super.onRestoreInstanceState(savedInstanceState)
     }
 }

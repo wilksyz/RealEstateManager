@@ -8,15 +8,22 @@ import android.view.MenuItem
 import com.facebook.stetho.Stetho
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateActivity
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailActivity
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
+import com.openclassrooms.realestatemanager.ui.property_form.property_create.PropertyCreateActivity
+import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditActivity
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
 import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
 private const val PROPERTY_ID: String = "property id"
+private const val VISIBILITY_EDIT_BUTTON:String = "visibility edit button"
+
 class PropertyListActivity : AppCompatActivity() {
+
+    private lateinit var mMenu: Menu
+    private var mProperty: Long? = null
+    private var mStateButtonEdit: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +34,9 @@ class PropertyListActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        menuInflater.inflate(R.menu.menu_toolbar_activity_property_list, menu)
+        menu.setGroupVisible(R.id.detail_menu_group, mStateButtonEdit)
+        mMenu = menu
         return true
     }
 
@@ -44,6 +53,12 @@ class PropertyListActivity : AppCompatActivity() {
         }
         R.id.research_property -> {
             val intent = Intent(this, PropertyResultOfResearchActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.edit -> {
+            val intent = Intent(this, PropertyEditActivity::class.java)
+            intent.putExtra(PROPERTY_ID, mProperty)
             startActivity(intent)
             true
         }
@@ -70,6 +85,9 @@ class PropertyListActivity : AppCompatActivity() {
             detailsPropertyFragment.arguments = args
             fragmentTransaction.replace(R.id.detail_of_the_property_container, detailsPropertyFragment)
             fragmentTransaction.commit()
+            mProperty = property.mPropertyId
+            mStateButtonEdit = true
+            updateOptionsMenu()
         }else{
             val intent = Intent(this, PropertyDetailActivity::class.java)
             intent.putExtra(PROPERTY_ID, property.mPropertyId)
@@ -77,10 +95,25 @@ class PropertyListActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateOptionsMenu(){
+        mMenu.setGroupVisible(R.id.detail_menu_group, mStateButtonEdit)
+    }
+
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.run {
             putAll(outState)
+            putBoolean(VISIBILITY_EDIT_BUTTON, mStateButtonEdit)
+            mProperty?.let { putLong(PROPERTY_ID, it) }
         }
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState != null){
+            mStateButtonEdit = savedInstanceState.getBoolean(VISIBILITY_EDIT_BUTTON)
+            mProperty = savedInstanceState.getLong(PROPERTY_ID)
+        }
+
     }
 }

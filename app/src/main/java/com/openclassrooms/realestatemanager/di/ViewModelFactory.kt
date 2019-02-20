@@ -4,8 +4,9 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.repository.PictureDataRepository
 import com.openclassrooms.realestatemanager.repository.PropertyDataRepository
-import com.openclassrooms.realestatemanager.ui.property_create.PropertyCreateViewModel
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailViewModel
+import com.openclassrooms.realestatemanager.ui.property_form.property_create.PropertyCreateViewModel
+import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditViewModel
 import com.openclassrooms.realestatemanager.ui.property_list.PropertyListViewModel
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsViewModel
 import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchViewModel
@@ -28,6 +29,9 @@ class ViewModelFactory(private val mPropertyDataRepository: PropertyDataReposito
         }
         if (modelClass.isAssignableFrom(PropertyResultOfResearchViewModel::class.java)){
             return PropertyResultOfResearchViewModel(mPropertyDataRepository, mPictureDataRepository) as T
+        }
+        if (modelClass.isAssignableFrom(PropertyEditViewModel::class.java)){
+            return PropertyEditViewModel(mPropertyDataRepository, mPictureDataRepository, mExecutor) as T
         }
             throw IllegalArgumentException("Unknown ViewModel class")
     }

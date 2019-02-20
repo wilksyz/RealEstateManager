@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.property_create
+package com.openclassrooms.realestatemanager.ui.property_form.property_create
 
 import android.arch.lifecycle.ViewModel
 import com.openclassrooms.realestatemanager.model.Picture

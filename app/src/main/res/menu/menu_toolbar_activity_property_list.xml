@@ -8,6 +8,15 @@
         android:title="@string/create_property"
         app:showAsAction="ifRoom"/>
 
+    <group
+        android:id="@+id/detail_menu_group">
+        <item
+            android:id="@+id/edit"
+            android:title="@string/edit"
+            android:icon="@drawable/ic_border_color"
+            app:showAsAction="ifRoom"/>
+    </group>
+
     <item
         android:id="@+id/maps_view"
         android:title="@string/maps_view"

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.property_create.PropertyCreateActivity">
+    tools:context=".ui.property_form.property_create.PropertyCreateActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

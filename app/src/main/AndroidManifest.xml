@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.property_result_research.PropertyResultOfResearchActivity"></activity>
+        <activity android:name=".ui.property_form.property_edit.PropertyEditActivity"></activity>
+        <activity android:name=".ui.property_result_research.PropertyResultOfResearchActivity" />
         <activity android:name=".ui.property_research.PropertyResearchActivity" />
 
         <uses-library
@@ -49,7 +50,7 @@
                 android:value=".ui.property_list.PropertyListActivity" />
         </activity>
         <activity
-            android:name=".ui.property_create.PropertyCreateActivity"
+            android:name=".ui.property_form.property_create.PropertyCreateActivity"
             android:parentActivityName=".ui.property_list.PropertyListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

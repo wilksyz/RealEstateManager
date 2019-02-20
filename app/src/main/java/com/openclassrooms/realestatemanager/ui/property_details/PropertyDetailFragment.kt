@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.ui.property_create.PropertyGridRecyclerViewAdapter
+import com.openclassrooms.realestatemanager.ui.property_form.recyclerView.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.android.synthetic.main.dialog_full_screen_picture.view.*
