@@ -29,6 +29,7 @@
     <string name="public_transport">Public transport</string>
     <string name="doctor">Doctor</string>
     <string name="hobbies">Hobbies</string>
+    <string name="edit">Edit</string>
     <string-array name="type_property_array">
         <item>House</item>
         <item>Loft</item>
@@ -59,6 +60,43 @@
     <string name="research">Research</string>
     <string name="maps_view">Maps view</string>
     <string name="finish">Finish</string>
-    <string name="edit">Edit</string>
+
+    // PropertyMortgageActivity
     <string name="mortgage_simulation">Mortgage simulation</string>
+    <string name="price_">Price</string>
+    <string name="bring">Bring</string>
+    <string name="rate">Rate</string>
+    <string-array name="duration_mortgage_simulation">
+        <item>Duration</item>
+        <item>2 years</item>
+        <item>3 years</item>
+        <item>4 years</item>
+        <item>5 years</item>
+        <item>6 years</item>
+        <item>7 years</item>
+        <item>8 years</item>
+        <item>9 years</item>
+        <item>10 years</item>
+        <item>11 years</item>
+        <item>12 years</item>
+        <item>13 years</item>
+        <item>14 years</item>
+        <item>15 years</item>
+        <item>16 years</item>
+        <item>17 years</item>
+        <item>18 years</item>
+        <item>19 years</item>
+        <item>20 years</item>
+        <item>21 years</item>
+        <item>22 years</item>
+        <item>23 years</item>
+        <item>24 years</item>
+        <item>25 years</item>
+        <item>26 years</item>
+        <item>27 years</item>
+        <item>28 years</item>
+        <item>29 years</item>
+        <item>30 years</item>
+    </string-array>
+
 </resources>

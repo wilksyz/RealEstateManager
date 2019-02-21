@@ -19,7 +19,7 @@
         <item
             android:id="@+id/mortgage"
             android:title="@string/mortgage_simulation"
-            android:icon="@drawable/ic_attach_money"
+            android:icon="@drawable/ic_equalizer"
             app:showAsAction="ifRoom"/>
     </group>
 

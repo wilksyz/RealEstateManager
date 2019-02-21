@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/price"
+        android:text="@string/price_"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:id="@+id/bring_mortgage_editext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Bring"
+            android:hint="@string/bring"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
@@ -64,7 +64,7 @@
             android:id="@+id/rate_mortgage_inputext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Rate"
+            android:hint="@string/rate"
             android:inputType="numberDecimal" />
     </android.support.design.widget.TextInputLayout>
 
