@@ -13,16 +13,19 @@ import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFr
 import com.openclassrooms.realestatemanager.ui.property_form.property_create.PropertyCreateActivity
 import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditActivity
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
+import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageActivity
 import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
 private const val PROPERTY_ID: String = "property id"
+private const val PROPERTY_PRICE: String = "property price"
 private const val VISIBILITY_EDIT_BUTTON:String = "visibility edit button"
 
 class PropertyListActivity : AppCompatActivity() {
 
     private lateinit var mMenu: Menu
-    private var mProperty: Long? = null
+    private var mPropertyId: Long? = null
+    private var mPropertyPrice: Int? = null
     private var mStateButtonEdit: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,11 +61,16 @@ class PropertyListActivity : AppCompatActivity() {
         }
         R.id.edit -> {
             val intent = Intent(this, PropertyEditActivity::class.java)
-            intent.putExtra(PROPERTY_ID, mProperty)
+            intent.putExtra(PROPERTY_ID, mPropertyId)
             startActivity(intent)
             true
         }
-        else -> {
+        R.id.mortgage -> {
+            val intent = Intent(this, PropertyMortgageActivity::class.java)
+            intent.putExtra(PROPERTY_PRICE, mPropertyPrice)
+            startActivity(intent)
+            true
+        }else -> {
             super.onOptionsItemSelected(item)
         }
     }
@@ -85,7 +93,8 @@ class PropertyListActivity : AppCompatActivity() {
             detailsPropertyFragment.arguments = args
             fragmentTransaction.replace(R.id.detail_of_the_property_container, detailsPropertyFragment)
             fragmentTransaction.commit()
-            mProperty = property.mPropertyId
+            mPropertyId = property.mPropertyId
+            mPropertyPrice = property.price
             mStateButtonEdit = true
             updateOptionsMenu()
         }else{
@@ -103,7 +112,8 @@ class PropertyListActivity : AppCompatActivity() {
         outState?.run {
             putAll(outState)
             putBoolean(VISIBILITY_EDIT_BUTTON, mStateButtonEdit)
-            mProperty?.let { putLong(PROPERTY_ID, it) }
+            mPropertyId?.let { putLong(PROPERTY_ID, it) }
+            mPropertyPrice?.let { putInt(PROPERTY_PRICE, it) }
         }
         super.onSaveInstanceState(outState)
     }
@@ -112,8 +122,8 @@ class PropertyListActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState != null){
             mStateButtonEdit = savedInstanceState.getBoolean(VISIBILITY_EDIT_BUTTON)
-            mProperty = savedInstanceState.getLong(PROPERTY_ID)
+            mPropertyId = savedInstanceState.getLong(PROPERTY_ID)
+            mPropertyPrice = savedInstanceState.getInt(PROPERTY_PRICE)
         }
-
     }
 }

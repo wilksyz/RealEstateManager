@@ -194,4 +194,8 @@ class PropertyDetailFragment : Fragment() {
             list?.let { mAdapterRecycler.updateData(it) }
         })
     }
+
+    fun getPrice(): Int {
+        return mProperty.price
+    }
 }
