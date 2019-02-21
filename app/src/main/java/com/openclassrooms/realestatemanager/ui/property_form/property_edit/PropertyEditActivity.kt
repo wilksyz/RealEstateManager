@@ -11,7 +11,7 @@ import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_form.PropertyEditForms
-import kotlinx.android.synthetic.main.activity_property_create.*
+import kotlinx.android.synthetic.main.activity_property_form.*
 import android.widget.Spinner
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Address

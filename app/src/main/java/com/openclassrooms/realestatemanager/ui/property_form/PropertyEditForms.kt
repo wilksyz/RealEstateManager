@@ -21,7 +21,7 @@ import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.ui.property_form.recyclerView.PropertyGridRecyclerViewAdapter
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import com.openclassrooms.realestatemanager.utils.Utils
-import kotlinx.android.synthetic.main.activity_property_create.*
+import kotlinx.android.synthetic.main.activity_property_form.*
 import kotlinx.android.synthetic.main.dialog_add_picture.view.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -43,7 +43,7 @@ abstract class PropertyEditForms: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_property_create)
+        setContentView(R.layout.activity_property_form)
 
     }
 

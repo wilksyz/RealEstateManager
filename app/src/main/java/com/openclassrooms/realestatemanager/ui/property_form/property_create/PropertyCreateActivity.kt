@@ -10,7 +10,7 @@ import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_form.PropertyEditForms
-import kotlinx.android.synthetic.main.activity_property_create.*
+import kotlinx.android.synthetic.main.activity_property_form.*
 import java.util.*
 
 private const val STATE_PICTURE_LIST = "state picture list"
