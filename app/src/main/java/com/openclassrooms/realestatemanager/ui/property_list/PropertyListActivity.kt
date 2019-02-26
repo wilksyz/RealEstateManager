@@ -34,6 +34,7 @@ class PropertyListActivity : AppCompatActivity() {
         Stetho.initializeWithDefaults(this)
 
         this.configureFragment()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

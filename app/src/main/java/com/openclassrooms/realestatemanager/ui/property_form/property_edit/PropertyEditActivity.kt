@@ -7,14 +7,13 @@ import android.text.SpannableStringBuilder
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Spinner
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_form.PropertyEditForms
 import kotlinx.android.synthetic.main.activity_property_form.*
-import android.widget.Spinner
-import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.model.Address
 
 
 private const val STATE_PICTURE_LIST = "state picture list"
@@ -69,7 +68,7 @@ class PropertyEditActivity : PropertyEditForms() {
         mProperty.numberOfRooms = number_of_room_edit_text.text.toString()
         mProperty.descriptionProperty = description_property_edit_text.text.toString()
         mProperty.address = retrieveAddress()
-        mProperty.typeProperty = type_of_property_spinner.selectedItem.toString()
+        //mProperty.typeProperty = type_of_property_spinner.selectedItem.toString()
         mProperty.estateAgent = estate_agent_spinner.selectedItem.toString()
         mProperty.interestPoint = retrieveInterestPoint()
         mProperty.numberOfPhotos = mPictureList.size
@@ -128,7 +127,7 @@ class PropertyEditActivity : PropertyEditForms() {
         val typePropertyAdapter = ArrayAdapter.createFromResource(this, R.array.type_property_array, android.R.layout.simple_spinner_item)
         typePropertyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         type_of_property_spinner.adapter = typePropertyAdapter
-        type_of_property_spinner.setSelection(getIndex(type_of_property_spinner, mProperty.typeProperty))
+        //type_of_property_spinner.setSelection(getIndex(type_of_property_spinner, mProperty.typeProperty))
         val estateAgentAdapter = ArrayAdapter.createFromResource(this, R.array.estate_agent_array, android.R.layout.simple_spinner_item)
         estateAgentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         estate_agent_spinner.adapter = estateAgentAdapter

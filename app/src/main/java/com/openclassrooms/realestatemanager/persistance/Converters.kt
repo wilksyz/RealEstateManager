@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utils
+package com.openclassrooms.realestatemanager.persistance
 
 import android.arch.persistence.room.TypeConverter
 import java.util.*

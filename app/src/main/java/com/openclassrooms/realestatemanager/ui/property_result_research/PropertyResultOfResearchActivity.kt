@@ -28,6 +28,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         this.configureViewModel()
         this.configureRecyclerView()
         //this.test()
+        tet()
         this.getPropertyTest()
     }
 
@@ -40,6 +41,12 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         this.mAdapter = PropertyRecyclerViewAdapter(Glide.with(this))
         property_recyclerView_research_container.adapter = this.mAdapter
         property_recyclerView_research_container.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun tet(){
+        mPropertyResultOfResearchViewModel.getAllProperty().observe(this, Observer {
+            Log.e("TAG", "${it?.size}")
+        })
     }
 
     private fun getPropertyTest(){
@@ -66,10 +73,10 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         val minDate = calendar.time
 
         val pictureList: MutableList<Picture?> = ArrayList()
-        mPropertyResultOfResearchViewModel.getPropertyResearch("Apartment",
+        mPropertyResultOfResearchViewModel.getPropertyResearch(3,
                 200,400,
-                doctor,school,hobbies,transport,parc,store,
-                "%Le Mans%",1,
+                true,false,false,true,false,false,
+                "%aubusson%",1,
                 100000, 400000,
                 minDate,maxDate).observe(this, Observer {list ->
             val propertyList = list?.iterator()

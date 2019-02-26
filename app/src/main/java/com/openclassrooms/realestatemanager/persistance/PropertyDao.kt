@@ -15,16 +15,16 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
     @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
     abstract fun getPropertyFromId(propertyId: Long): LiveData<Property>
 
-    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor IN (:pDoctor) AND school IN (:pSchool) AND hobbies IN (:pHobbies) AND transport IN (:pTransport) AND parc IN (:pParc) AND store IN (:pStore) AND city LIKE :pCity AND numberOfPhotos > :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale")
-    abstract fun getPropertyResearch(pTypeProperty: String,
+    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor = :isNearDoctor AND school = :isNearSchool AND hobbies = :isNearHobbies AND transport = :isNearTransport AND parc = :isNearParc AND store = :isNearStore AND city LIKE :pCity AND numberOfPhotos > :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale")
+    abstract fun getPropertyResearch(pTypeProperty: Int,
                                      pMinSurface: Int,
                                      pMaxSurface: Int,
-                                     pDoctor: List<Int>,
-                                     pSchool: List<Int>,
-                                     pHobbies: List<Int>,
-                                     pTransport: List<Int>,
-                                     pParc: List<Int>,
-                                     pStore: List<Int>,
+                                     isNearDoctor: Boolean,
+                                     isNearSchool: Boolean,
+                                     isNearHobbies: Boolean,
+                                     isNearTransport: Boolean,
+                                     isNearParc: Boolean,
+                                     isNearStore: Boolean,
                                      pCity: String,
                                      pNumberOfPhotos: Int,
                                      pMinPrice: Int,

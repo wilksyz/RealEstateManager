@@ -13,22 +13,22 @@ class PropertyResultOfResearchViewModel(private val mPropertyDataRepository: Pro
     // --- FOR PROPERTY ---
 
     // --- GET ---
-    fun getPropertyResearch(pTypeProperty: String,
+    fun getPropertyResearch(pTypeProperty: Int,
                             pMinSurface: Int,
                             pMaxSurface: Int,
-                            pDoctor: List<Int>,
-                            pSchool: List<Int>,
-                            pHobbies: List<Int>,
-                            pTransport: List<Int>,
-                            pParc: List<Int>,
-                            pStore: List<Int>,
+                            isNearDoctor: Boolean,
+                            isNearSchool: Boolean,
+                            isNearHobbies: Boolean,
+                            isNearTransport: Boolean,
+                            isNearParc: Boolean,
+                            isNearStore: Boolean,
                             pCity: String,
                             pNumberOfPhotos: Int,
                             pMinPrice: Int,
                             pMaxPrice: Int,
                             pMinDateOfSale: Date,
                             pMaxDateOfSale: Date): LiveData<List<Property>> {
-        return mPropertyDataRepository.getPropertyResearch(pTypeProperty,pMinSurface,pMaxSurface,pDoctor,pSchool,pHobbies,pTransport,pParc,pStore,pCity,pNumberOfPhotos,pMinPrice,pMaxPrice,pMinDateOfSale,pMaxDateOfSale)
+        return mPropertyDataRepository.getPropertyResearch(pTypeProperty,pMinSurface,pMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,pCity,pNumberOfPhotos,pMinPrice,pMaxPrice,pMinDateOfSale,pMaxDateOfSale)
     }
 
     fun getPropertyResearchSold(typeProperty: String,
@@ -51,6 +51,11 @@ class PropertyResultOfResearchViewModel(private val mPropertyDataRepository: Pro
                                 pMaxPrice: Int): LiveData<List<Property>>{
         return mPropertyDataRepository.getPropertyResearchSold(typeProperty, minSurface, maxSurface, doctor, school, hobbies, transport, parc, store, minDateOfSale, maxDateOfSale, saleStatus, minDateSold, maxDateSold, city, pNumberOfPhotos, pMinPrice, pMaxPrice)
     }
+
+    fun getAllProperty(): LiveData<List<Property>> {
+        return mPropertyDataRepository.getAllProperty()
+    }
+
 
     // --- FOR PICTURE ---
 

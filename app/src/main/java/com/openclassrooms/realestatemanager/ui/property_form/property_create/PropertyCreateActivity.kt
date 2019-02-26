@@ -70,10 +70,14 @@ class PropertyCreateActivity : PropertyEditForms() {
         val rooms = number_of_room_edit_text.text.toString()
         val description = description_property_edit_text.text.toString()
         val address = retrieveAddress()
-        val typeProperty = type_of_property_spinner.selectedItem.toString()
+        val typeProperty = when(type_of_property_spinner.selectedItemPosition){
+            3 -> Property.TYPE_APARTMENT
+            else -> -1
+        }
         val estateAgent = estate_agent_spinner.selectedItem.toString()
         val interestPoint = retrieveInterestPoint()
         val numberOfPhotos = mPictureList.size
+
         return Property(typeProperty, price, surface, rooms, description, Date(), interestPoint, estateAgent, address, numberOfPhotos)
     }
 

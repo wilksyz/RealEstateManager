@@ -17,22 +17,22 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
         return  this.mPropertyDao.getPropertyFromId(propertyId)
     }
 
-    fun getPropertyResearch(pTypeProperty: String,
+    fun getPropertyResearch(pTypeProperty: Int,
                             pMinSurface: Int,
                             pMaxSurface: Int,
-                            pDoctor: List<Int>,
-                            pSchool: List<Int>,
-                            pHobbies: List<Int>,
-                            pTransport: List<Int>,
-                            pParc: List<Int>,
-                            pStore: List<Int>,
+                            isNearDoctor: Boolean,
+                            isNearSchool: Boolean,
+                            isNearHobbies: Boolean,
+                            isNearTransport: Boolean,
+                            isNearParc: Boolean,
+                            isNearStore: Boolean,
                             pCity: String,
                             pNumberOfPhotos: Int,
                             pMinPrice: Int,
                             pMaxPrice: Int,
                             pMinDateOfSale: Date,
                             pMaxDateOfSale: Date): LiveData<List<Property>> {
-        return this.mPropertyDao.getPropertyResearch(pTypeProperty,pMinSurface,pMaxSurface,pDoctor,pSchool,pHobbies,pTransport,pParc,pStore,pCity,pNumberOfPhotos,pMinPrice,pMaxPrice,pMinDateOfSale,pMaxDateOfSale)
+        return this.mPropertyDao.getPropertyResearch(pTypeProperty,pMinSurface,pMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,pCity,pNumberOfPhotos,pMinPrice,pMaxPrice,pMinDateOfSale,pMaxDateOfSale)
     }
 
     fun getPropertyResearchSold(typeProperty: String,

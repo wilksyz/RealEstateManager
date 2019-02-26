@@ -66,8 +66,9 @@
     <string name="price_">Price</string>
     <string name="bring">Bring</string>
     <string name="rate">Rate</string>
+    <string name="simulate">Simulate</string>
+    <string name="duration">Duration</string>
     <string-array name="duration_mortgage_simulation">
-        <item>Duration</item>
         <item>2 years</item>
         <item>3 years</item>
         <item>4 years</item>
