@@ -23,6 +23,15 @@ data class Property(var typeProperty: Int,
     var saleStatus: Boolean = false
 
     companion object {
+
+        //TYPE OF PROPERTY
+        const val TYPE_HOUSE = 0
+        const val TYPE_LOFT = 1
+        const val TYPE_CASTLE = 2
         const val TYPE_APARTMENT = 3
+        const val TYPE_RANCH = 4
+        const val TYPE_PENTHOUSE = 5
+        const val TYPE_MANOR = 6
+
     }
 }

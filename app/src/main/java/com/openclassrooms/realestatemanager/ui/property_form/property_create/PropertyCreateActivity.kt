@@ -71,7 +71,13 @@ class PropertyCreateActivity : PropertyEditForms() {
         val description = description_property_edit_text.text.toString()
         val address = retrieveAddress()
         val typeProperty = when(type_of_property_spinner.selectedItemPosition){
+            0 -> Property.TYPE_HOUSE
+            1 -> Property.TYPE_LOFT
+            2 -> Property.TYPE_CASTLE
             3 -> Property.TYPE_APARTMENT
+            4 -> Property.TYPE_RANCH
+            5 -> Property.TYPE_PENTHOUSE
+            6 -> Property.TYPE_MANOR
             else -> -1
         }
         val estateAgent = estate_agent_spinner.selectedItem.toString()

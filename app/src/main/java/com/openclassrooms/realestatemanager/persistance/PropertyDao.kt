@@ -15,7 +15,7 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
     @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
     abstract fun getPropertyFromId(propertyId: Long): LiveData<Property>
 
-    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor = :isNearDoctor AND school = :isNearSchool AND hobbies = :isNearHobbies AND transport = :isNearTransport AND parc = :isNearParc AND store = :isNearStore AND city LIKE :pCity AND numberOfPhotos > :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale")
+    @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor = :isNearDoctor AND school = :isNearSchool AND hobbies = :isNearHobbies AND transport = :isNearTransport AND parc = :isNearParc AND store = :isNearStore AND city LIKE :pCity AND numberOfPhotos >= :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale")
     abstract fun getPropertyResearch(pTypeProperty: Int,
                                      pMinSurface: Int,
                                      pMaxSurface: Int,

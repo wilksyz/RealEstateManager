@@ -38,7 +38,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
     }
 
     private fun configureRecyclerView(){
-        this.mAdapter = PropertyRecyclerViewAdapter(Glide.with(this))
+        this.mAdapter = PropertyRecyclerViewAdapter(this)
         property_recyclerView_research_container.adapter = this.mAdapter
         property_recyclerView_research_container.layoutManager = LinearLayoutManager(this)
     }
@@ -50,22 +50,6 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
     }
 
     private fun getPropertyTest(){
-        val doctor: MutableList<Int> = ArrayList()
-        doctor.add(1)
-        val school: MutableList<Int> = ArrayList()
-        school.add(0)
-        school.add(1)
-        val hobbies: MutableList<Int> = ArrayList()
-        hobbies.add(0)
-        hobbies.add(1)
-        val store: MutableList<Int> = ArrayList()
-        store.add(0)
-        store.add(1)
-        val transport: MutableList<Int> = ArrayList()
-        transport.add(1)
-        val parc: MutableList<Int> = ArrayList()
-        parc.add(0)
-        parc.add(1)
         val maxDate = Date()
         val calendar = Calendar.getInstance()
         calendar.time = Date()

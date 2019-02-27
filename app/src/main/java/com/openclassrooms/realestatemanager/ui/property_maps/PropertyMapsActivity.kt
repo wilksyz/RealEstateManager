@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.property_maps
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -84,6 +85,10 @@ class PropertyMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+        if (requestCode == RESULT_OK && requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION){
+            finish()
+            startActivity(intent)
+        }
     }
 
     @AfterPermissionGranted(PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)

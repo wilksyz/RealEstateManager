@@ -33,12 +33,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12"
-            tools:text="TextView" />
+            tools:text="It's magic" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,14 +65,14 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="@string/n_c"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,14 +100,14 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="@string/n_c"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +135,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="@string/n_c"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -144,13 +144,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:text="@string/description"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_property_recycler_view" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_property_price_textView" />
 
         <TextView
             android:id="@+id/textView7"
@@ -163,14 +163,16 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_property_location_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/static_maps_imageView" />
 
         <ImageView
             android:id="@+id/school_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/doctor_imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             app:srcCompat="@mipmap/ic_school"
@@ -185,19 +187,19 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/school"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/school_imageView"
             app:layout_constraintStart_toEndOf="@+id/school_imageView"
             app:layout_constraintTop_toTopOf="@+id/school_imageView" />
 
         <ImageView
             android:id="@+id/doctor_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/stores_imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/school_imageView"
             app:srcCompat="@mipmap/ic_hospital"
             tools:src="@tools:sample/avatars" />
 
@@ -210,19 +212,19 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/doctor"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/doctor_imageView"
             app:layout_constraintStart_toEndOf="@+id/doctor_imageView"
             app:layout_constraintTop_toTopOf="@+id/doctor_imageView" />
 
         <ImageView
             android:id="@+id/stores_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doctor_imageView"
             app:srcCompat="@mipmap/ic_store"
             tools:src="@tools:sample/avatars" />
 
@@ -235,18 +237,19 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/stores"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/stores_imageView"
             app:layout_constraintStart_toEndOf="@+id/stores_imageView"
             app:layout_constraintTop_toTopOf="@+id/stores_imageView" />
 
         <ImageView
             android:id="@+id/parc_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/school_textView"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/public_transport_imageView"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             app:srcCompat="@drawable/ic_crop_square"
             tools:src="@tools:sample/avatars" />
@@ -258,31 +261,32 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/roboto"
             android:text="@string/parc"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/parc_imageView"
             app:layout_constraintStart_toEndOf="@+id/parc_imageView"
             app:layout_constraintTop_toTopOf="@+id/parc_imageView" />
 
         <ImageView
             android:id="@+id/static_maps_imageView"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.615"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/detail_property_location_textView"
             tools:src="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/public_transport_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/doctor_textView"
-            app:layout_constraintTop_toBottomOf="@+id/parc_imageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/hobbies_imageView"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:srcCompat="@drawable/ic_directions_transit"
             tools:src="@tools:sample/avatars" />
 
@@ -293,21 +297,18 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/public_transport"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/public_transport_imageView"
             app:layout_constraintStart_toEndOf="@+id/public_transport_imageView"
             app:layout_constraintTop_toTopOf="@+id/public_transport_imageView" />
 
         <ImageView
             android:id="@+id/hobbies_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toEndOf="@+id/stores_textView"
-            app:layout_constraintTop_toBottomOf="@+id/public_transport_imageView"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:srcCompat="@drawable/ic_videogame"
             tools:src="@tools:sample/avatars" />
 
@@ -328,9 +329,8 @@
             android:id="@+id/sold_buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
@@ -338,25 +338,30 @@
             android:textSize="18sp"
             app:backgroundTint="@android:color/holo_red_dark"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/static_maps_imageView" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sold_buttons" />
+            app:layout_constraintTop_toTopOf="@+id/detail_property_price_textView" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/guideline4"
+            android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="713dp" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/detail_property_price_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_property_recycler_view"
+            tools:text="$ 1000000" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

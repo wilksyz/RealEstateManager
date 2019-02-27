@@ -143,6 +143,7 @@ class PropertyDetailFragment : Fragment() {
                 detail_property_room_textView.text = property.numberOfRooms
         detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city
         detail_property_description_textView.text = property.descriptionProperty
+        detail_property_price_textView.text ="$ ${property.price}"
     }
 
     private fun getInterestPoint(property: Property){

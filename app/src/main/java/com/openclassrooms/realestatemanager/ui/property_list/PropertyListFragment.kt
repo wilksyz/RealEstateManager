@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
@@ -32,13 +31,13 @@ class PropertyListFragment : Fragment() {
         this.configureRecyclerView()
         this.configureViewModel()
         this.configureClickRecyclerView()
-        this.getAllProperty()
+
 
         return viewOfLayout
     }
 
     private fun configureRecyclerView(){
-        this.mAdapter = PropertyRecyclerViewAdapter(Glide.with(this))
+        this.mAdapter = PropertyRecyclerViewAdapter(context)
         viewOfLayout.property_recyclerView_container.adapter = this.mAdapter
         viewOfLayout.property_recyclerView_container.layoutManager = LinearLayoutManager(this.context)
     }
@@ -53,7 +52,7 @@ class PropertyListFragment : Fragment() {
     }
 
     override fun onResume() {
-
+        this.getAllProperty()
         super.onResume()
     }
 
@@ -64,6 +63,7 @@ class PropertyListFragment : Fragment() {
 
     // Get all properties in database
     private fun getAllProperty() {
+        this.mAdapter.clearList()
         val pictureList: MutableList<Picture?> = ArrayList()
         this.mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ list ->
             val propertyList = list?.iterator()

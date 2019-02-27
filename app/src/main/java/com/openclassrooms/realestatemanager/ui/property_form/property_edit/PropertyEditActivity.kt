@@ -68,7 +68,16 @@ class PropertyEditActivity : PropertyEditForms() {
         mProperty.numberOfRooms = number_of_room_edit_text.text.toString()
         mProperty.descriptionProperty = description_property_edit_text.text.toString()
         mProperty.address = retrieveAddress()
-        //mProperty.typeProperty = type_of_property_spinner.selectedItem.toString()
+        mProperty.typeProperty = when(type_of_property_spinner.selectedItemPosition){
+            0 -> Property.TYPE_HOUSE
+            1 -> Property.TYPE_LOFT
+            2 -> Property.TYPE_CASTLE
+            3 -> Property.TYPE_APARTMENT
+            4 -> Property.TYPE_RANCH
+            5 -> Property.TYPE_PENTHOUSE
+            6 -> Property.TYPE_MANOR
+            else -> -1
+        }
         mProperty.estateAgent = estate_agent_spinner.selectedItem.toString()
         mProperty.interestPoint = retrieveInterestPoint()
         mProperty.numberOfPhotos = mPictureList.size
@@ -127,7 +136,7 @@ class PropertyEditActivity : PropertyEditForms() {
         val typePropertyAdapter = ArrayAdapter.createFromResource(this, R.array.type_property_array, android.R.layout.simple_spinner_item)
         typePropertyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         type_of_property_spinner.adapter = typePropertyAdapter
-        //type_of_property_spinner.setSelection(getIndex(type_of_property_spinner, mProperty.typeProperty))
+        type_of_property_spinner.setSelection(mProperty.typeProperty)
         val estateAgentAdapter = ArrayAdapter.createFromResource(this, R.array.estate_agent_array, android.R.layout.simple_spinner_item)
         estateAgentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         estate_agent_spinner.adapter = estateAgentAdapter

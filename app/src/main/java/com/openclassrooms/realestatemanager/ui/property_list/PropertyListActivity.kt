@@ -14,6 +14,7 @@ import com.openclassrooms.realestatemanager.ui.property_form.property_create.Pro
 import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditActivity
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
 import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageActivity
+import com.openclassrooms.realestatemanager.ui.property_research.PropertyResearchActivity
 import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
@@ -56,7 +57,7 @@ class PropertyListActivity : AppCompatActivity() {
             true
         }
         R.id.research_property -> {
-            val intent = Intent(this, PropertyResultOfResearchActivity::class.java)
+            val intent = Intent(this, PropertyResearchActivity::class.java)
             startActivity(intent)
             true
         }
