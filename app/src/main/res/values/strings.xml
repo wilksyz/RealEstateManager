@@ -64,10 +64,15 @@
     // PropertyMortgageActivity
     <string name="mortgage_simulation">Mortgage simulation</string>
     <string name="price_">Price</string>
-    <string name="bring">Bring</string>
     <string name="rate">Rate</string>
     <string name="simulate">Simulate</string>
     <string name="duration">Duration</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="date_of_sale">Date of sale</string>
+    <string name="number_of_photos_minimum">Number of photos (minimum)</string>
+    <string name="provision">Provision</string>
+    <string name="your_simulation">Your simulation</string>
     <string-array name="duration_mortgage_simulation">
         <item>2 years</item>
         <item>3 years</item>
@@ -98,6 +103,16 @@
         <item>28 years</item>
         <item>29 years</item>
         <item>30 years</item>
+    </string-array>
+
+    <string-array name="choice_date_sold_search">
+        <item>All</item>
+        <item>Less than 1 week</item>
+        <item>Less than 2 weeks</item>
+        <item>Less than 1 month</item>
+        <item>Less than 2 months</item>
+        <item>Less than 6 months</item>
+        <item>Less than 1 year</item>
     </string-array>
 
 </resources>

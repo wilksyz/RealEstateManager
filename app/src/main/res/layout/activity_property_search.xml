@@ -40,6 +40,7 @@
 
         <Spinner
             android:id="@+id/type_of_property_spinner_search"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -66,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Min"
+            android:text="@string/min"
             app:layout_constraintEnd_toStartOf="@+id/surface_mini_spinner_search"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:dropDownWidth="match_parent"
+            android:dropDownWidth="wrap_content"
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toStartOf="@+id/textView15"
             app:layout_constraintHorizontal_bias="0.5"
@@ -94,6 +95,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:spinnerMode="dropdown"
             android:textAlignment="gravity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -106,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Max"
+            android:text="@string/max"
             app:layout_constraintEnd_toStartOf="@+id/surface_maxi_spinner_search"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/surface_mini_spinner_search"
@@ -188,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Date of sale"
+            android:text="@string/date_of_sale"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,21 +202,23 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Min"
+            android:text="@string/min"
             app:layout_constraintEnd_toStartOf="@+id/date_min_search_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-        <Button
+        <android.support.design.button.MaterialButton
             android:id="@+id/date_min_search_button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:drawableEnd="@mipmap/ic_school"
             android:text="Date"
+            android:textColor="?attr/editTextColor"
+            app:icon="@drawable/ic_arrow_drop_down"
+            app:iconTint="@color/common_google_signin_btn_text_light_default"
             app:layout_constraintEnd_toStartOf="@+id/textView20"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView19"
@@ -225,20 +229,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Max"
+            android:text="@string/max"
             app:layout_constraintEnd_toStartOf="@+id/date_max_serach_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/date_min_search_button"
             app:layout_constraintTop_toTopOf="@+id/textView19" />
 
-        <Button
+        <android.support.design.button.MaterialButton
             android:id="@+id/date_max_serach_button"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:drawableRight="@drawable/ic_arrow_drop_down"
             android:text="Date"
+            android:textColor="?attr/editTextColor"
+            app:icon="@drawable/ic_arrow_drop_down"
+            app:iconTint="@color/common_google_signin_btn_text_light_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView20"
@@ -256,23 +264,25 @@
 
         <EditText
             android:id="@+id/city_search_editText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
-            android:hint="City"
-            android:inputType="textPersonName"
+            android:hint="@string/city"
+            android:inputType="textPostalAddress"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sold_search_checkBox" />
 
         <Spinner
             android:id="@+id/number_photo_search_spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:dropDownWidth="match_parent"
-            android:spinnerMode="dropdown"
             app:layout_constraintStart_toEndOf="@+id/textView21"
             app:layout_constraintTop_toTopOf="@+id/textView21" />
 
@@ -282,7 +292,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Photo"
+            android:text="@string/number_of_photos_minimum"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -295,18 +305,87 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/price"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <Spinner
-            android:id="@+id/price_search_spinner"
+            android:id="@+id/price_min_search_spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView27"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView26"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:dropDownWidth="wrap_content"
-            android:spinnerMode="dropdown"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toTopOf="@+id/textView22" />
+            android:layout_marginTop="16dp"
+            android:text="@string/min"
+            app:layout_constraintEnd_toStartOf="@+id/price_min_search_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/max"
+            app:layout_constraintEnd_toStartOf="@+id/price_max_search_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/price_min_search_spinner"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <Spinner
+            android:id="@+id/price_max_search_spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView27"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <Spinner
+            android:id="@+id/date_sold_search_spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/sold_search_checkBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sold_search_checkBox"
+            app:layout_constraintTop_toTopOf="@+id/sold_search_checkBox" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/button"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/research"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_min_search_spinner" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

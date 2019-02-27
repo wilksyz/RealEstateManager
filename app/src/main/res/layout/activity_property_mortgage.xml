@@ -48,7 +48,7 @@
                 android:id="@+id/bring_mortgage_editext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/bring"
+                android:hint="@string/provision"
                 android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Your simulation"
+            android:text="@string/your_simulation"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
             android:textSize="24sp"

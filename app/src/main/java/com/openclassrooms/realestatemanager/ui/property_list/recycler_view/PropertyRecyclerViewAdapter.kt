@@ -10,8 +10,8 @@ import com.openclassrooms.realestatemanager.model.Property
 
 class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.Adapter<PropertyViewHolder>(){
 
-    private var mPropertyList: List<Property> = ArrayList()
-    private var mPictureList: List<Picture?> = ArrayList()
+    private var mPropertyList: MutableList<Property> = ArrayList()
+    private var mPictureList: MutableList<Picture?> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): PropertyViewHolder {
         val context = parent.context
@@ -29,14 +29,14 @@ class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.
     }
 
     fun updateData(propertyList: List<Property>, pictureList: List<Picture?>) {
-        this.mPropertyList = propertyList
-        this.mPictureList = pictureList
+        this.mPropertyList = propertyList as MutableList<Property>
+        this.mPictureList = pictureList as MutableList<Picture?>
         this.notifyDataSetChanged()
     }
 
     fun clearList(){
-        this.mPropertyList = ArrayList()
-        this.mPictureList = ArrayList()
+        this.mPropertyList.clear()
+        this.mPictureList.clear()
         this.notifyDataSetChanged()
     }
 
