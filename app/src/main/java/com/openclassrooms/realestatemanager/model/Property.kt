@@ -32,6 +32,7 @@ data class Property(var typeProperty: Int,
         const val TYPE_RANCH = 4
         const val TYPE_PENTHOUSE = 5
         const val TYPE_MANOR = 6
+        const val TYPE_ALL = 7
 
     }
 }

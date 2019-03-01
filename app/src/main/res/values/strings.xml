@@ -73,6 +73,10 @@
     <string name="number_of_photos_minimum">Number of photos (minimum)</string>
     <string name="provision">Provision</string>
     <string name="your_simulation">Your simulation</string>
+    <string name="date_null">__/__/__</string>
+    <string name="the_minimum_area_must_be_less_than_the_maximum_area">The minimum area must be less than the maximum area</string>
+    <string name="the_minimum_price_must_be_less_than_the_maximum_area">The minimum price must be less than the maximum area</string>
+    <string name="all">All</string>
     <string-array name="duration_mortgage_simulation">
         <item>2 years</item>
         <item>3 years</item>
