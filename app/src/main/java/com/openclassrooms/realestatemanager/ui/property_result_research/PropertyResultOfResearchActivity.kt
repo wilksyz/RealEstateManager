@@ -15,6 +15,21 @@ import kotlinx.android.synthetic.main.activity_property_result_of_research.*
 import java.util.*
 import kotlin.collections.ArrayList
 
+private const val TYPE_PROPERTY = "type property"
+private const val SURFACE_MIN = "surface min"
+private const val SURFACE_MAX = "surface max"
+private const val SCHOOL = "school"
+private const val PARC = "parc"
+private const val STORES = "stores"
+private const val PUBLIC_TRANSPORT = "public transport"
+private const val DOCTOR = "doctor"
+private const val HOBBIES = "hobbies"
+private const val PROPERTY_SOLD = "property sold"
+private const val SOLD_DATE = "sold date"
+private const val CITY_NAME = "city name"
+private const val NUMBER_PHOTO = "number photo"
+private const val PRICE_MIN = "price min"
+private const val PRICE_MAX = "price max"
 
 class PropertyResultOfResearchActivity : AppCompatActivity() {
 
@@ -50,6 +65,8 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
     }
 
     private fun getPropertyTest(){
+        val typeProperty = arrayListOf<Int>()
+        typeProperty.add(3)
         val maxDate = Date()
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -57,9 +74,9 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         val minDate = calendar.time
 
         val pictureList: MutableList<Picture?> = ArrayList()
-        mPropertyResultOfResearchViewModel.getPropertyResearch(3,
+        mPropertyResultOfResearchViewModel.getPropertyResearch(typeProperty,
                 200,400,
-                true,false,false,true,false,false,
+                true,false,true,false,true,false,
                 "%aubusson%",1,
                 100000, 400000,
                 minDate,maxDate).observe(this, Observer {list ->
@@ -80,31 +97,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         })
     }
 
-    private fun test(){
-        val doctor: MutableList<Int> = ArrayList()
-        doctor.add(1)
-        val school: MutableList<Int> = ArrayList()
-        school.add(0)
-        school.add(1)
-        val hobbies: MutableList<Int> = ArrayList()
-        hobbies.add(0)
-        hobbies.add(1)
-        val store: MutableList<Int> = ArrayList()
-        store.add(0)
-        store.add(1)
-        val transport: MutableList<Int> = ArrayList()
-        transport.add(1)
-        val parc: MutableList<Int> = ArrayList()
-        parc.add(0)
-        parc.add(1)
-        val maxDate = Date()
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_YEAR, -7)
-        val minDate = calendar.time
-        Log.e("TAG","Date: $minDate  $maxDate")
-        getPropertyResearchSold("Apartment",300,200,doctor,school,hobbies,transport,parc,store,minDate,maxDate,1,minDate,maxDate,"le mans",1,450000,150000)
-    }
+
 
     private fun getPropertyResearchSold(typeProperty: String,
                                         minSurface: Int,

@@ -17,22 +17,25 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
         return  this.mPropertyDao.getPropertyFromId(propertyId)
     }
 
-    fun getPropertyResearch(pTypeProperty: Int,
-                            pMinSurface: Int,
-                            pMaxSurface: Int,
+    fun getPropertyResearch(isNearTypeProperty: List<Int>,
+                            isNearMinSurface: Int,
+                            isNearMaxSurface: Int,
                             isNearDoctor: Boolean,
                             isNearSchool: Boolean,
                             isNearHobbies: Boolean,
                             isNearTransport: Boolean,
                             isNearParc: Boolean,
                             isNearStore: Boolean,
-                            pCity: String,
-                            pNumberOfPhotos: Int,
-                            pMinPrice: Int,
-                            pMaxPrice: Int,
-                            pMinDateOfSale: Date,
-                            pMaxDateOfSale: Date): LiveData<List<Property>> {
-        return this.mPropertyDao.getPropertyResearch(pTypeProperty,pMinSurface,pMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,pCity,pNumberOfPhotos,pMinPrice,pMaxPrice,pMinDateOfSale,pMaxDateOfSale)
+                            isNearCity: String,
+                            isNearNumberOfPhotos: Int,
+                            isNearMinPrice: Int,
+                            isNearMaxPrice: Int,
+                            isNearMinDateOfSale: Date,
+                            isNearMaxDateOfSale: Date,
+                            isNearSaleStatus: Int,
+                            isNearMinDateSold: Date,
+                            isNearMaxDateSold: Date): LiveData<List<Property>> {
+        return this.mPropertyDao.getPropertyResearch(isNearTypeProperty,isNearMinSurface,isNearMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,isNearCity,isNearNumberOfPhotos,isNearMinPrice,isNearMaxPrice,isNearMinDateOfSale,isNearMaxDateOfSale,isNearSaleStatus,isNearMinDateSold,isNearMaxDateSold)
     }
 
     fun getPropertyResearchSold(typeProperty: String,
