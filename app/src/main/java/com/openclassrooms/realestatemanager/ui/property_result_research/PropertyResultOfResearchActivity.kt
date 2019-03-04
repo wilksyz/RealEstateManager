@@ -121,9 +121,6 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         val typeProperty = getTypeProperty(typePropertyIndex)
         val cityNameLike = "%$cityName%"
 
-        Log.e("TAG", "$typeProperty, $surfaceMin, $surfaceMax, $school, $parc, $stores, $publicTransport," +
-                " $doctor, $hobbies, $propertySold, $soldMinDate, $cityNameLike, $numberPhoto, $priceMin, $priceMax, $dateMinSale, $dateMaxSale")
-
         mPropertyResultOfResearchViewModel.getPropertyResearch(typeProperty,
                 surfaceMin,surfaceMax,
                 doctor,school,hobbies,publicTransport,parc,stores,

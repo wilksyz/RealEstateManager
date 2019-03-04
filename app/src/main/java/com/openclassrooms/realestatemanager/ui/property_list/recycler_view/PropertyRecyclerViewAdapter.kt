@@ -26,7 +26,7 @@ class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.
     }
 
     override fun onBindViewHolder(propertyViewHolder: PropertyViewHolder, position: Int) {
-        Log.e("TAG Adapter", "${mPropertyList[position]}, ${mPictureList[position]}")
+        Log.e("TAG Adapter", "${mPropertyList.size}, ${mPictureList.size}")
         return propertyViewHolder.updateListOfProperty(mPropertyList[position], mPictureList[position], context)
     }
 

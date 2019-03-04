@@ -116,11 +116,13 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
                 ViewCompat.setBackgroundTintList(surface_mini_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
                 ViewCompat.setBackgroundTintList(surface_maxi_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
                 mSurfaceCorrect = false
+                research_button.isEnabled = false
             }else {
                 error_surface_search_textView.visibility = View.GONE
                 ViewCompat.setBackgroundTintList(surface_mini_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
                 ViewCompat.setBackgroundTintList(surface_maxi_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
                 mSurfaceCorrect = true
+                research_button.isEnabled = true
             }
         }
         if (parent?.tag == 1943 || parent?.tag == 1944){
@@ -129,11 +131,13 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
                 ViewCompat.setBackgroundTintList(price_min_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
                 ViewCompat.setBackgroundTintList(price_max_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
                 mPriceCorrect = false
+                research_button.isEnabled = false
             }else {
                 error_price_search_textView.visibility = View.GONE
                 ViewCompat.setBackgroundTintList(price_min_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
                 ViewCompat.setBackgroundTintList(price_max_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
                 mPriceCorrect = true
+                research_button.isEnabled = true
             }
         }
     }
@@ -210,10 +214,12 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
         return if (mDateMaxSale >= mDateMinSale){
             date_max_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
             date_min_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
+            research_button.isEnabled = true
             true
         }else {
             date_max_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed))
             date_min_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed))
+            research_button.isEnabled = false
             false
         }
     }

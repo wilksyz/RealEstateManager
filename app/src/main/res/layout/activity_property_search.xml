@@ -51,12 +51,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/min"
+            app:layout_constraintBottom_toBottomOf="@+id/surface_mini_spinner_search"
             app:layout_constraintEnd_toStartOf="@+id/surface_mini_spinner_search"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toTopOf="@+id/surface_mini_spinner_search" />
 
         <Spinner
             android:id="@+id/surface_mini_spinner_search"
@@ -90,12 +90,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/max"
+            app:layout_constraintBottom_toBottomOf="@+id/surface_maxi_spinner_search"
             app:layout_constraintEnd_toStartOf="@+id/surface_maxi_spinner_search"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/surface_mini_spinner_search"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toTopOf="@+id/surface_maxi_spinner_search" />
 
         <TextView
             android:id="@+id/textView17"
