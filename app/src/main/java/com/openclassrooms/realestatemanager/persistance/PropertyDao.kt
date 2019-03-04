@@ -31,9 +31,9 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
                                      isNearMaxPrice: Int,
                                      isNearMinDateOfSale: Date,
                                      isNearMaxDateOfSale: Date,
-                                     isNearSaleStatus: Int,
-                                     isNearMinDateSold: Date,
-                                     isNearMaxDateSold: Date): LiveData<List<Property>>
+                                     isNearSaleStatus: Boolean,
+                                     isNearMinDateSold: Date?,
+                                     isNearMaxDateSold: Date?): LiveData<List<Property>>
 
     @Query("SELECT * FROM Property WHERE typeProperty = :pTypeProperty AND surface BETWEEN :pMinSurface AND :pMaxSurface AND doctor IN (:pDoctor) AND school IN (:pSchool) AND hobbies IN (:pHobbies) AND transport IN (:pTransport) AND parc IN (:pParc) AND store IN (:pStore) AND dateOfSale BETWEEN :pMinDateOfSale AND :pMaxDateOfSale AND saleStatus = :pSaleStatus AND dateSold BETWEEN :pMinDateSold AND :pMaxDateSold AND city = :pCity AND numberOfPhotos >= :pNumberOfPhotos AND price BETWEEN :pMinPrice AND :pMaxPrice")
     abstract fun getPropertyResearchSold(pTypeProperty: String,

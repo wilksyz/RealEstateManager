@@ -33,25 +33,27 @@ private const val CITY_NAME = "city name"
 private const val NUMBER_PHOTO = "number photo"
 private const val PRICE_MIN = "price min"
 private const val PRICE_MAX = "price max"
+private const val DATE_MIN_SALE = "date min sale"
+private const val DATE_MAX_SALE = "date max sale"
 
 class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
 
-    private val surfaceBoard = arrayOf(0, 100, 200, 300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000)
-    private val numberPhotoBoard = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    private val priceBoard = arrayOf(0, 50_000, 100_000, 150_000, 200_000, 250_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000)
-    private val typePropertySearch = arrayListOf<String>()
-    private var dateMinSale: Date = Date(1551100025819)
-    private var dateMaxSale: Date = Date()
-    private var dateCorrect: Boolean = true
-    private var surfaceCorrect: Boolean = true
-    private var priceCorrect: Boolean = true
+    private val mSurfaceBoard = arrayOf(0, 100, 200, 300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 3000)
+    private val mNumberPhotoBoard = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    private val mPriceBoard = arrayOf(0, 50_000, 100_000, 150_000, 200_000, 250_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000)
+    private val mTypePropertySearch = arrayListOf<String>()
+    private var mDateMinSale: Date = Date(1551100025819)
+    private var mDateMaxSale: Date = Date()
+    private var mDateCorrect: Boolean = true
+    private var mSurfaceCorrect: Boolean = true
+    private var mPriceCorrect: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_search)
-        typePropertySearch.add(getString(R.string.all))
-        typePropertySearch.addAll(resources.getStringArray(R.array.type_property_array))
+        mTypePropertySearch.add(getString(R.string.all))
+        mTypePropertySearch.addAll(resources.getStringArray(R.array.type_property_array))
         this.configureSpinner()
 
         date_min_search_button.setOnClickListener {
@@ -72,29 +74,29 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     private fun configureSpinner(){
-        val typePropertyAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, typePropertySearch)
+        val typePropertyAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mTypePropertySearch)
         typePropertyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         type_of_property_spinner_search.adapter = typePropertyAdapter
-        val surfaceMinAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, surfaceBoard)
+        val surfaceMinAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mSurfaceBoard)
         surfaceMinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         surface_mini_spinner_search.adapter = surfaceMinAdapter
         surface_mini_spinner_search.tag = 1941
         surface_mini_spinner_search.onItemSelectedListener = this
-        val surfaceMaxAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, surfaceBoard)
+        val surfaceMaxAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mSurfaceBoard)
         surfaceMaxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         surface_maxi_spinner_search.adapter = surfaceMaxAdapter
         surface_maxi_spinner_search.setSelection(13)
         surface_maxi_spinner_search.tag = 1942
         surface_maxi_spinner_search.onItemSelectedListener = this
-        val numberOfPhoto = ArrayAdapter(this, android.R.layout.simple_spinner_item, numberPhotoBoard)
+        val numberOfPhoto = ArrayAdapter(this, android.R.layout.simple_spinner_item, mNumberPhotoBoard)
         numberOfPhoto.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         number_photo_search_spinner.adapter = numberOfPhoto
-        val priceMinAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, priceBoard)
+        val priceMinAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mPriceBoard)
         priceMinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         price_min_search_spinner.adapter = priceMinAdapter
         price_min_search_spinner.tag = 1943
         price_min_search_spinner.onItemSelectedListener = this
-        val priceMaxAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, priceBoard)
+        val priceMaxAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mPriceBoard)
         priceMaxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         price_max_search_spinner.adapter = priceMaxAdapter
         price_max_search_spinner.setSelection(13)
@@ -113,12 +115,12 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
                 error_surface_search_textView.visibility = View.VISIBLE
                 ViewCompat.setBackgroundTintList(surface_mini_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
                 ViewCompat.setBackgroundTintList(surface_maxi_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
-                surfaceCorrect = false
+                mSurfaceCorrect = false
             }else {
                 error_surface_search_textView.visibility = View.GONE
                 ViewCompat.setBackgroundTintList(surface_mini_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
                 ViewCompat.setBackgroundTintList(surface_maxi_spinner_search, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
-                surfaceCorrect = true
+                mSurfaceCorrect = true
             }
         }
         if (parent?.tag == 1943 || parent?.tag == 1944){
@@ -126,22 +128,22 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
                 error_price_search_textView.visibility = View.VISIBLE
                 ViewCompat.setBackgroundTintList(price_min_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
                 ViewCompat.setBackgroundTintList(price_max_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorRed)))
-                priceCorrect = false
+                mPriceCorrect = false
             }else {
                 error_price_search_textView.visibility = View.GONE
                 ViewCompat.setBackgroundTintList(price_min_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
                 ViewCompat.setBackgroundTintList(price_max_search_spinner, ColorStateList.valueOf(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default)))
-                priceCorrect = true
+                mPriceCorrect = true
             }
         }
     }
 
     private fun retrieveTheParametersOfTheResearch(){
-        if (dateCorrect && surfaceCorrect && priceCorrect){
+        if (mDateCorrect && mSurfaceCorrect && mPriceCorrect){
             val intent = Intent(this, PropertyResultOfResearchActivity::class.java)
             intent.putExtra(TYPE_PROPERTY, getTypeProperty())
-            intent.putExtra(SURFACE_MIN, surfaceBoard[surface_mini_spinner_search.selectedItemPosition])
-            intent.putExtra(SURFACE_MAX, surfaceBoard[surface_maxi_spinner_search.selectedItemPosition])
+            intent.putExtra(SURFACE_MIN, mSurfaceBoard[surface_mini_spinner_search.selectedItemPosition])
+            intent.putExtra(SURFACE_MAX, mSurfaceBoard[surface_maxi_spinner_search.selectedItemPosition])
             intent.putExtra(SCHOOL, school_search_checkBox.isChecked)
             intent.putExtra(PARC, parc_search_checkBox.isChecked)
             intent.putExtra(STORES, stores_search_checkBox.isChecked)
@@ -151,9 +153,11 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
             intent.putExtra(PROPERTY_SOLD, sold_search_checkBox.isChecked)
             intent.putExtra(SOLD_DATE, date_sold_search_spinner.selectedItemPosition)
             intent.putExtra(CITY_NAME, city_search_editText.text.toString())
-            intent.putExtra(NUMBER_PHOTO, numberPhotoBoard[number_photo_search_spinner.selectedItemPosition])
-            intent.putExtra(PRICE_MIN, priceBoard[price_min_search_spinner.selectedItemPosition])
-            intent.putExtra(PRICE_MAX, priceBoard[price_max_search_spinner.selectedItemPosition])
+            intent.putExtra(NUMBER_PHOTO, mNumberPhotoBoard[number_photo_search_spinner.selectedItemPosition])
+            intent.putExtra(PRICE_MIN, mPriceBoard[price_min_search_spinner.selectedItemPosition])
+            intent.putExtra(PRICE_MAX, mPriceBoard[price_max_search_spinner.selectedItemPosition])
+            intent.putExtra(DATE_MIN_SALE, mDateMinSale.time)
+            intent.putExtra(DATE_MAX_SALE, mDateMaxSale.time)
             startActivity(intent)
         }
     }
@@ -189,21 +193,21 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
             when(tagButton){
                 0 -> {
                     date_min_search_button.text = dateString
-                    dateMinSale = date
+                    mDateMinSale = date
                 }
                 1 -> {
                     date_max_serach_button.text = dateString
-                    dateMaxSale = date
+                    mDateMaxSale = date
                 }
             }
-            dateCorrect = this.checkDate()
+            mDateCorrect = this.checkDate()
         }, year, month, day)
         dialog.datePicker.maxDate = Date().time
         dialog.show()
     }
 
     private fun checkDate(): Boolean{
-        return if (dateMaxSale >= dateMinSale){
+        return if (mDateMaxSale >= mDateMinSale){
             date_max_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
             date_min_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
             true

@@ -28,9 +28,9 @@ class PropertyResultOfResearchViewModel(private val mPropertyDataRepository: Pro
                             isNearMaxPrice: Int,
                             isNearMinDateOfSale: Date,
                             isNearMaxDateOfSale: Date,
-                            isNearSaleStatus: Int,
-                            isNearMinDateSold: Date,
-                            isNearMaxDateSold: Date): LiveData<List<Property>> {
+                            isNearSaleStatus: Boolean,
+                            isNearMinDateSold: Date?,
+                            isNearMaxDateSold: Date?): LiveData<List<Property>> {
         return mPropertyDataRepository.getPropertyResearch(isNearTypeProperty,isNearMinSurface,isNearMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,isNearCity,isNearNumberOfPhotos,isNearMinPrice,isNearMaxPrice,isNearMinDateOfSale,isNearMaxDateOfSale,isNearSaleStatus,isNearMinDateSold,isNearMaxDateSold)
     }
 

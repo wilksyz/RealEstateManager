@@ -19,7 +19,7 @@ data class Property(var typeProperty: Int,
                     ) {
 
     @PrimaryKey(autoGenerate = true) var mPropertyId: Long = 0
-    var dateSold: Date? = null
+    var dateSold: Date? = Date()
     var saleStatus: Boolean = false
 
     companion object {
