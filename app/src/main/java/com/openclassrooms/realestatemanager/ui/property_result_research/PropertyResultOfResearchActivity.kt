@@ -47,7 +47,6 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         this.configureViewModel()
         this.configureRecyclerView()
         this.getSettingsOfResearch()
-        //this.getPropertyTest()
     }
 
     private fun configureViewModel() {
@@ -83,12 +82,12 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         this.startRequestOnDatabase(typePropertyIndex,
                 surfaceMin,
                 surfaceMax,
-                school,
-                parc,
-                stores,
-                publicTransport,
-                doctor,
-                hobbies,
+                getInterestPointList(school),
+                getInterestPointList(parc),
+                getInterestPointList(stores),
+                getInterestPointList(publicTransport),
+                getInterestPointList(doctor),
+                getInterestPointList(hobbies),
                 propertySold,
                 soldDateIndex,
                 cityName,
@@ -102,12 +101,12 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
     private fun startRequestOnDatabase(typePropertyIndex: Int,
                                        surfaceMin: Int,
                                        surfaceMax: Int,
-                                       school: Boolean,
-                                       parc: Boolean,
-                                       stores: Boolean,
-                                       publicTransport: Boolean,
-                                       doctor: Boolean,
-                                       hobbies: Boolean,
+                                       school: List<Boolean>,
+                                       parc: List<Boolean>,
+                                       stores: List<Boolean>,
+                                       publicTransport: List<Boolean>,
+                                       doctor: List<Boolean>,
+                                       hobbies: List<Boolean>,
                                        propertySold: Boolean,
                                        soldDateIndex: Int,
                                        cityName: String,
@@ -122,11 +121,6 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         val typeProperty = getTypeProperty(typePropertyIndex)
         val cityNameLike = "%$cityName%"
 
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_YEAR, -14)
-        val minDate = calendar.time
-
         Log.e("TAG", "$typeProperty, $surfaceMin, $surfaceMax, $school, $parc, $stores, $publicTransport," +
                 " $doctor, $hobbies, $propertySold, $soldMinDate, $cityNameLike, $numberPhoto, $priceMin, $priceMax, $dateMinSale, $dateMaxSale")
 
@@ -140,7 +134,6 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
             val propertyList = list?.iterator()
             if (propertyList != null) {
                 for (property in propertyList){
-                    Log.e("TAG","Date: ${property.dateOfSale}")
                     this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, Observer {l ->
                         if (l?.size == 0){
                             pictureList.add(null)
@@ -178,38 +171,10 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun getPropertyTest(){
-        this.mAdapter.clearList()
-        val typeProperty = arrayListOf<Int>()
-        typeProperty.add(3)
-        val maxDate = Date()
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_YEAR, -14)
-        val minDate = calendar.time
-
-        val pictureList: MutableList<Picture?> = ArrayList()
-        mPropertyResultOfResearchViewModel.getPropertyResearch(typeProperty,
-                200,400,
-                false,true,true,false,true,false,
-                "%aubusson%",1,
-                100000, 400000,
-                minDate,maxDate,
-        true,minDate,maxDate).observe(this, Observer {list ->
-            val propertyList = list?.iterator()
-            if (propertyList != null) {
-                for (property in propertyList){
-                    Log.e("TAG","Date: ${property.dateOfSale}")
-                    this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, Observer {l ->
-                        if (l?.size == 0){
-                            pictureList.add(null)
-                        }else{
-                            l?.let { pictureList.add(it[0]) }
-                        }
-                        this.mAdapter.updateData(list, pictureList)
-                    })
-                }
-            }
-        })
+    private fun getInterestPointList(interestPoint: Boolean): ArrayList<Boolean>{
+        val interestPointList = arrayListOf<Boolean>()
+        interestPointList.add(true)
+        if (!interestPoint) interestPointList.add(false)
+        return interestPointList
     }
 }

@@ -20,12 +20,12 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
     fun getPropertyResearch(isNearTypeProperty: List<Int>,
                             isNearMinSurface: Int,
                             isNearMaxSurface: Int,
-                            isNearDoctor: Boolean,
-                            isNearSchool: Boolean,
-                            isNearHobbies: Boolean,
-                            isNearTransport: Boolean,
-                            isNearParc: Boolean,
-                            isNearStore: Boolean,
+                            isNearDoctor: List<Boolean>,
+                            isNearSchool: List<Boolean>,
+                            isNearHobbies: List<Boolean>,
+                            isNearTransport: List<Boolean>,
+                            isNearParc: List<Boolean>,
+                            isNearStore: List<Boolean>,
                             isNearCity: String,
                             isNearNumberOfPhotos: Int,
                             isNearMinPrice: Int,
@@ -36,27 +36,6 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
                             isNearMinDateSold: Date?,
                             isNearMaxDateSold: Date?): LiveData<List<Property>> {
         return this.mPropertyDao.getPropertyResearch(isNearTypeProperty,isNearMinSurface,isNearMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,isNearCity,isNearNumberOfPhotos,isNearMinPrice,isNearMaxPrice,isNearMinDateOfSale,isNearMaxDateOfSale,isNearSaleStatus,isNearMinDateSold,isNearMaxDateSold)
-    }
-
-    fun getPropertyResearchSold(typeProperty: String,
-                                minSurface: Int,
-                                maxSurface: Int,
-                                doctor: List<Int>,
-                                school: List<Int>,
-                                hobbies: List<Int>,
-                                transport: List<Int>,
-                                parc: List<Int>,
-                                store: List<Int>,
-                                minDateOfSale: Date,
-                                maxDateOfSale: Date,
-                                saleStatus: Int,
-                                minDateSold: Date,
-                                maxDateSold: Date,
-                                city: String,
-                                pNumberOfPhotos: Int,
-                                pMinPrice: Int,
-                                pMaxPrice: Int): LiveData<List<Property>> {
-        return this.mPropertyDao.getPropertyResearchSold(typeProperty, minSurface, maxSurface, doctor, school, hobbies, transport, parc, store, minDateOfSale, maxDateOfSale, saleStatus, minDateSold, maxDateSold, city, pNumberOfPhotos, pMinPrice, pMaxPrice)
     }
 
     // --- CREATE ---

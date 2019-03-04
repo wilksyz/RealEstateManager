@@ -15,7 +15,6 @@ import com.openclassrooms.realestatemanager.ui.property_form.property_edit.Prope
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
 import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageActivity
 import com.openclassrooms.realestatemanager.ui.property_research.PropertyResearchActivity
-import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
 private const val PROPERTY_ID: String = "property id"
