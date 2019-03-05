@@ -6,6 +6,10 @@
     <string name="create_property">Create property</string>
     <string name="popup_title_permission_files_access">this application needs to access the images to create a new property</string>
 
+    // Bottom Navigation Bar
+    <string name="list_view">List View</string>
+    <string name="map_view">Map View</string>
+    <string name="simulation">Simulation</string>
 
     // PropertyCreateActivity
     <string name="surface_m2">Surface ( m2 )</string>

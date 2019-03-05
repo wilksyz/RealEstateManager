@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.property_list
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -17,12 +18,16 @@ import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgag
 import com.openclassrooms.realestatemanager.ui.property_research.PropertyResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
+
+
 private const val PROPERTY_ID: String = "property id"
 private const val PROPERTY_PRICE: String = "property price"
 private const val VISIBILITY_EDIT_BUTTON:String = "visibility edit button"
 
 class PropertyListActivity : AppCompatActivity() {
 
+    private val mFragmentManager = supportFragmentManager
+    private val mFragmentTransaction = mFragmentManager.beginTransaction()
     private lateinit var mMenu: Menu
     private var mPropertyId: Long? = null
     private var mPropertyPrice: Int? = null
@@ -33,8 +38,27 @@ class PropertyListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list_property)
         Stetho.initializeWithDefaults(this)
 
+        bottom_Navigation_View.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         this.configureFragment()
 
+    }
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+        when(menuItem.itemId){
+            R.id.action_home -> {
+
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.action_maps -> {
+                //full_fragment_container
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.action_mortgage_simulation -> {
+
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,11 +101,9 @@ class PropertyListActivity : AppCompatActivity() {
     }
 
     private fun configureFragment(){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = PropertyListFragment()
-        fragmentTransaction.add(R.id.main_fragment_container, fragment)
-        fragmentTransaction.commit()
+        mFragmentTransaction.add(R.id.main_fragment_container, fragment)
+        mFragmentTransaction.commit()
     }
 
     fun configureDetailsPropertyFragment(property: Property){
