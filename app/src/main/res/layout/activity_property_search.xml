@@ -184,12 +184,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/min"
+            app:layout_constraintBottom_toBottomOf="@+id/date_min_search_button"
             app:layout_constraintEnd_toStartOf="@+id/date_min_search_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toTopOf="@+id/date_min_search_button" />
 
         <android.support.design.button.MaterialButton
             android:id="@+id/date_min_search_button"
@@ -222,10 +222,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/max"
+            app:layout_constraintBottom_toBottomOf="@+id/date_max_serach_button"
             app:layout_constraintEnd_toStartOf="@+id/date_max_serach_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/date_min_search_button"
-            app:layout_constraintTop_toTopOf="@+id/textView19" />
+            app:layout_constraintTop_toTopOf="@+id/date_max_serach_button" />
 
         <android.support.design.button.MaterialButton
             android:id="@+id/date_max_serach_button"
@@ -233,6 +234,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/date_null"
             android:textColor="?attr/editTextColor"
@@ -241,7 +243,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView20"
-            app:layout_constraintTop_toTopOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <View
             android:id="@+id/date_min_search_view"
@@ -327,24 +329,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/min"
+            app:layout_constraintBottom_toBottomOf="@+id/price_min_search_spinner"
             app:layout_constraintEnd_toStartOf="@+id/price_min_search_spinner"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toTopOf="@+id/price_min_search_spinner" />
 
         <TextView
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/max"
+            app:layout_constraintBottom_toBottomOf="@+id/price_max_search_spinner"
             app:layout_constraintEnd_toStartOf="@+id/price_max_search_spinner"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/price_min_search_spinner"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toTopOf="@+id/price_max_search_spinner" />
 
         <Spinner
             android:id="@+id/price_max_search_spinner"
