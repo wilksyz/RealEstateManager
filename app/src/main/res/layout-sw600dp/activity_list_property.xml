@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_tablet_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.openclassrooms.realestatemanager.ui.property_list.PropertyListActivity">
-
-    <FrameLayout
-        android:id="@+id/full_fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_Navigation_View"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <FrameLayout
         android:id="@+id/main_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_Navigation_View"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/view_tablet_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/view_tablet_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -38,18 +29,18 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_Navigation_View"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/tablet_display_line"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/tablet_display_line"
         android:layout_width="1dp"
         android:layout_height="0dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/bottom_Navigation_View"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/view_tablet_guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.BottomNavigationView

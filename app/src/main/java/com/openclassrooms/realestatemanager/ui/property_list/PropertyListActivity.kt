@@ -2,10 +2,12 @@ package com.openclassrooms.realestatemanager.ui.property_list
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.constraint.ConstraintSet
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.facebook.stetho.Stetho
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Property
@@ -27,7 +29,7 @@ private const val VISIBILITY_EDIT_BUTTON:String = "visibility edit button"
 class PropertyListActivity : AppCompatActivity() {
 
     private val mFragmentManager = supportFragmentManager
-    private val mFragmentTransaction = mFragmentManager.beginTransaction()
+    private var mDetailsPropertyFragment = PropertyDetailFragment()
     private lateinit var mMenu: Menu
     private var mPropertyId: Long? = null
     private var mPropertyPrice: Int? = null
@@ -46,11 +48,11 @@ class PropertyListActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
         when(menuItem.itemId){
             R.id.action_home -> {
-
+                this.configureFragment()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_maps -> {
-                mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMapFragment()).commit()
+                this.configureMapFragment()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_mortgage_simulation -> {
@@ -59,6 +61,43 @@ class PropertyListActivity : AppCompatActivity() {
             }
         }
         false
+    }
+
+    @Suppress("PLUGIN_WARNING")
+    private fun configureFragment(){
+        if (view_tablet_guideline != null){
+            this.setConstrainOfFragmentContainer(false)
+            tablet_display_line.visibility = View.VISIBLE
+            mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyListFragment()).commit()
+        }else {
+            mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyListFragment()).commit()
+        }
+    }
+
+    @Suppress("PLUGIN_WARNING")
+    private fun configureMapFragment(){
+        if (view_tablet_guideline != null){
+            mFragmentManager.beginTransaction().detach(mDetailsPropertyFragment).commit()
+            this.setConstrainOfFragmentContainer(true)
+            this.updateOptionsMenu(false)
+            tablet_display_line.visibility = View.GONE
+            mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMapFragment()).commit()
+        }else {
+            mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMapFragment()).commit()
+        }
+    }
+
+    @Suppress("PLUGIN_WARNING")
+    private fun setConstrainOfFragmentContainer(widenContainer: Boolean){
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(view_tablet_constraint_layout)
+        if (widenContainer){
+            constraintSet.connect(main_fragment_container.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+            constraintSet.applyTo(view_tablet_constraint_layout)
+        }else{
+            constraintSet.connect(main_fragment_container.id, ConstraintSet.END, view_tablet_guideline.id, ConstraintSet.START)
+            constraintSet.applyTo(view_tablet_constraint_layout)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -95,26 +134,20 @@ class PropertyListActivity : AppCompatActivity() {
         }
     }
 
-    private fun configureFragment(){
-        val fragment = PropertyListFragment()
-        mFragmentTransaction.add(R.id.main_fragment_container, fragment)
-        mFragmentTransaction.commit()
-    }
-
     fun configureDetailsPropertyFragment(property: Property){
         if (detail_of_the_property_container != null){
             val fragmentManager = supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            val detailsPropertyFragment = PropertyDetailFragment()
             val args = Bundle()
             args.putLong(PROPERTY_ID, property.mPropertyId)
-            detailsPropertyFragment.arguments = args
-            fragmentTransaction.replace(R.id.detail_of_the_property_container, detailsPropertyFragment)
+            mDetailsPropertyFragment = PropertyDetailFragment()
+            mDetailsPropertyFragment.arguments = args
+            fragmentTransaction.replace(R.id.detail_of_the_property_container, mDetailsPropertyFragment)
             fragmentTransaction.commit()
             mPropertyId = property.mPropertyId
             mPropertyPrice = property.price
             mStateButtonEdit = true
-            updateOptionsMenu()
+            updateOptionsMenu(mStateButtonEdit)
         }else{
             val intent = Intent(this, PropertyDetailActivity::class.java)
             intent.putExtra(PROPERTY_ID, property.mPropertyId)
@@ -122,8 +155,8 @@ class PropertyListActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateOptionsMenu(){
-        mMenu.setGroupVisible(R.id.detail_menu_group, mStateButtonEdit)
+    private fun updateOptionsMenu(stateGroup: Boolean){
+        mMenu.setGroupVisible(R.id.detail_menu_group, stateGroup)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

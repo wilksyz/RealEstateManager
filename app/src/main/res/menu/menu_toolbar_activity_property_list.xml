@@ -26,6 +26,7 @@
     <item
         android:id="@+id/research_property"
         android:title="@string/research"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"/>
 
 </menu>
