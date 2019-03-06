@@ -24,11 +24,6 @@
     </group>
 
     <item
-        android:id="@+id/maps_view"
-        android:title="@string/maps_view"
-        app:showAsAction="never"/>
-
-    <item
         android:id="@+id/research_property"
         android:title="@string/research"
         app:showAsAction="never"/>

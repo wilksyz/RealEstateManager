@@ -59,7 +59,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.property_list.PropertyListActivity" />
         </activity>
-        <activity android:name=".ui.property_maps.PropertyMapsActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

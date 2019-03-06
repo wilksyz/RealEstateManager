@@ -13,7 +13,7 @@ import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailAc
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFragment
 import com.openclassrooms.realestatemanager.ui.property_form.property_create.PropertyCreateActivity
 import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditActivity
-import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsActivity
+import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapFragment
 import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageActivity
 import com.openclassrooms.realestatemanager.ui.property_research.PropertyResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
@@ -50,7 +50,7 @@ class PropertyListActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_maps -> {
-                //full_fragment_container
+                mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMapFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_mortgage_simulation -> {
@@ -71,11 +71,6 @@ class PropertyListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.create_property -> {
             val intent= Intent(this, PropertyCreateActivity::class.java)
-            startActivity(intent)
-            true
-        }
-        R.id.maps_view -> {
-            val intent = Intent(this, PropertyMapsActivity::class.java)
             startActivity(intent)
             true
         }
