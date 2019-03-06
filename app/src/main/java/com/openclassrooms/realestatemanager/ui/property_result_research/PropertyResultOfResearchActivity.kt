@@ -57,7 +57,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
     private fun configureRecyclerView(){
         this.mAdapter = PropertyRecyclerViewAdapter(this)
         property_recyclerView_research_container.adapter = this.mAdapter
-        property_recyclerView_research_container.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
+        property_recyclerView_research_container.layoutManager = LinearLayoutManager(this)
     }
 
     private fun getSettingsOfResearch(){

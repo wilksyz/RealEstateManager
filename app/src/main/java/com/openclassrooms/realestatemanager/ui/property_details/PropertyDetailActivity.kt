@@ -8,10 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditActivity
-import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageActivity
 
 private const val PROPERTY_ID: String = "property id"
-private const val PROPERTY_PRICE: String = "property price"
 
 class PropertyDetailActivity : AppCompatActivity() {
 
@@ -37,10 +35,6 @@ class PropertyDetailActivity : AppCompatActivity() {
         R.id.edit -> {
             startActivityEditProperty()
             true
-        }
-        R.id.mortgage -> {
-            startActivityMortgageSimulation()
-            true
         }else -> {
             super.onOptionsItemSelected(item)
         }
@@ -53,13 +47,6 @@ class PropertyDetailActivity : AppCompatActivity() {
             intent.putExtra(PROPERTY_ID, propertyId)
             startActivity(intent)
         }
-    }
-
-    private fun startActivityMortgageSimulation(){
-        val mPropertyPrice: Int = fragment.getPrice()
-        val intent = Intent(this, PropertyMortgageActivity::class.java)
-        intent.putExtra(PROPERTY_PRICE, mPropertyPrice)
-        startActivity(intent)
     }
 
     private fun configureFragment(){

@@ -171,8 +171,6 @@ class PropertyMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, OnMapRe
             mDisposable = GeocodingApiStream.getLocation(queryLocation).subscribeWith(object: DisposableObserver<GeocodingApi>() {
 
                 override fun onNext(geocodingApi: GeocodingApi) {
-                    val lat: Double = geocodingApi.results[0].geometry.location.lat
-                    val lng: Double = geocodingApi.results[0].geometry.location.lng
                     addMarker(geocodingApi, i)
                     i++
                 }

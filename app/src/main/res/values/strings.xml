@@ -34,6 +34,7 @@
     <string name="doctor">Doctor</string>
     <string name="hobbies">Hobbies</string>
     <string name="edit">Edit</string>
+    <string name="edit_property">Edit property</string>
     <string-array name="type_property_array">
         <item>House</item>
         <item>Loft</item>
@@ -81,6 +82,8 @@
     <string name="the_minimum_area_must_be_less_than_the_maximum_area">The minimum area must be less than the maximum area</string>
     <string name="the_minimum_price_must_be_less_than_the_maximum_area">The minimum price must be less than the maximum area</string>
     <string name="all">All</string>
+    <string name="the_contribution_must_not_exceed_the_price_of_the_property">The contribution must not exceed the price of the property</string>
+    <string name="price_must_not_be_zero">Price must not be zero</string>
     <string-array name="duration_mortgage_simulation">
         <item>2 years</item>
         <item>3 years</item>

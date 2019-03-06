@@ -16,14 +16,13 @@ import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailFr
 import com.openclassrooms.realestatemanager.ui.property_form.property_create.PropertyCreateActivity
 import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditActivity
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapFragment
-import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageActivity
+import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageFragment
 import com.openclassrooms.realestatemanager.ui.property_research.PropertyResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
 
 
 
 private const val PROPERTY_ID: String = "property id"
-private const val PROPERTY_PRICE: String = "property price"
 private const val VISIBILITY_EDIT_BUTTON:String = "visibility edit button"
 
 class PropertyListActivity : AppCompatActivity() {
@@ -32,7 +31,6 @@ class PropertyListActivity : AppCompatActivity() {
     private var mDetailsPropertyFragment = PropertyDetailFragment()
     private lateinit var mMenu: Menu
     private var mPropertyId: Long? = null
-    private var mPropertyPrice: Int? = null
     private var mStateButtonEdit: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +54,7 @@ class PropertyListActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_mortgage_simulation -> {
-
+                this.configureMortgageSimulation()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -84,6 +82,19 @@ class PropertyListActivity : AppCompatActivity() {
             mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMapFragment()).commit()
         }else {
             mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMapFragment()).commit()
+        }
+    }
+
+    @Suppress("PLUGIN_WARNING")
+    private fun configureMortgageSimulation(){
+        if (view_tablet_guideline != null){
+            mFragmentManager.beginTransaction().detach(mDetailsPropertyFragment).commit()
+            this.setConstrainOfFragmentContainer(true)
+            this.updateOptionsMenu(false)
+            tablet_display_line.visibility = View.GONE
+            mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMortgageFragment()).commit()
+        }else {
+            mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, PropertyMortgageFragment()).commit()
         }
     }
 
@@ -123,12 +134,6 @@ class PropertyListActivity : AppCompatActivity() {
             intent.putExtra(PROPERTY_ID, mPropertyId)
             startActivity(intent)
             true
-        }
-        R.id.mortgage -> {
-            val intent = Intent(this, PropertyMortgageActivity::class.java)
-            intent.putExtra(PROPERTY_PRICE, mPropertyPrice)
-            startActivity(intent)
-            true
         }else -> {
             super.onOptionsItemSelected(item)
         }
@@ -145,7 +150,6 @@ class PropertyListActivity : AppCompatActivity() {
             fragmentTransaction.replace(R.id.detail_of_the_property_container, mDetailsPropertyFragment)
             fragmentTransaction.commit()
             mPropertyId = property.mPropertyId
-            mPropertyPrice = property.price
             mStateButtonEdit = true
             updateOptionsMenu(mStateButtonEdit)
         }else{
@@ -164,7 +168,6 @@ class PropertyListActivity : AppCompatActivity() {
             putAll(outState)
             putBoolean(VISIBILITY_EDIT_BUTTON, mStateButtonEdit)
             mPropertyId?.let { putLong(PROPERTY_ID, it) }
-            mPropertyPrice?.let { putInt(PROPERTY_PRICE, it) }
         }
         super.onSaveInstanceState(outState)
     }
@@ -174,7 +177,6 @@ class PropertyListActivity : AppCompatActivity() {
         if (savedInstanceState != null){
             mStateButtonEdit = savedInstanceState.getBoolean(VISIBILITY_EDIT_BUTTON)
             mPropertyId = savedInstanceState.getLong(PROPERTY_ID)
-            mPropertyPrice = savedInstanceState.getInt(PROPERTY_PRICE)
         }
     }
 }

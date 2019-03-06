@@ -20,6 +20,7 @@ data class Picture(
 
     @PrimaryKey(autoGenerate = true) var mPictureId: Long = 0
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     constructor(parcel: Parcel) : this(
             parcel.readLong(),
             parcel.readString(),
