@@ -325,7 +325,7 @@
             app:layout_constraintStart_toEndOf="@+id/hobbies_imageView"
             app:layout_constraintTop_toTopOf="@+id/hobbies_imageView" />
 
-        <Button
+        <android.support.design.button.MaterialButton
             android:id="@+id/sold_buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -336,6 +336,7 @@
             android:paddingRight="15dp"
             android:text="@string/sold"
             android:textSize="18sp"
+            android:visibility="visible"
             app:backgroundTint="@android:color/holo_red_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
@@ -362,6 +363,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_property_recycler_view"
             tools:text="$ 1000000" />
+
+        <TextView
+            android:id="@+id/sold_property_detail_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="serif"
+            android:text="@string/sold"
+            android:textAllCaps="true"
+            android:textColor="@color/colorRed"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/detail_property_description_textView"
+            app:layout_constraintEnd_toStartOf="@+id/sold_buttons"
+            app:layout_constraintStart_toEndOf="@+id/detail_property_price_textView"
+            app:layout_constraintTop_toBottomOf="@+id/detail_property_recycler_view" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

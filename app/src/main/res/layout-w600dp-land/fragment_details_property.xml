@@ -338,6 +338,7 @@
             tools:layout_editor_absoluteY="218dp" />
 
         <Space
+            android:id="@+id/space"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -366,5 +367,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="331dp" />
+
+        <TextView
+            android:id="@+id/sold_property_detail_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="serif"
+            android:text="@string/sold"
+            android:textAllCaps="true"
+            android:textColor="@color/colorRed"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/space"
+            app:layout_constraintEnd_toStartOf="@+id/sold_buttons"
+            app:layout_constraintStart_toEndOf="@+id/detail_property_price_textView"
+            app:layout_constraintTop_toBottomOf="@+id/detail_property_recycler_view" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

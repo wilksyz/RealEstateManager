@@ -27,8 +27,13 @@ class PropertyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             6 -> context?.resources?.getStringArray(R.array.type_property_array)?.get(6)
             else -> "NC"
         }
-        itemView.price_view_holder_textView.text = "$ ${property.price}"
-        itemView.location_view_holder_textView.text = "${property.address.postCode} ${property.address.city}"
+        if (property.saleStatus){
+            itemView.sold_property_list_textView.visibility = View.VISIBLE
+        }
+        val priceProperty = "$ ${property.price}"
+        itemView.price_view_holder_textView.text = priceProperty
+        val locationProperty = "${property.address.postCode} ${property.address.city}"
+        itemView.location_view_holder_textView.text = locationProperty
     }
 
 }

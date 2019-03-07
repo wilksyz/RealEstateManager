@@ -67,17 +67,21 @@ class PropertyListFragment : Fragment() {
     private fun getAllProperty() {
         this.mAdapter.clearList()
         val pictureList: MutableList<Picture?> = ArrayList()
-        this.mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ list ->
-            val propertyList = list?.iterator()
+        this.mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ propertyListLambda ->
+            val propertyList = propertyListLambda?.iterator()
             if (propertyList != null) {
+                var i = 0
                 for (property in propertyList){
-                    this.mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {l ->
-                        if (l?.size == 0){
+                    this.mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
+                        if (pictureListLambda?.size == 0){
                             pictureList.add(null)
                         }else{
-                            l?.let { pictureList.add(it[0]) }
+                            pictureListLambda?.let { pictureList.add(it[0]) }
                         }
-                        this.mAdapter.updateData(list, pictureList)
+                        i++
+                        if (i == propertyListLambda.size){
+                            this.mAdapter.updateData(propertyListLambda, pictureList)
+                        }
                     })
                 }
             }

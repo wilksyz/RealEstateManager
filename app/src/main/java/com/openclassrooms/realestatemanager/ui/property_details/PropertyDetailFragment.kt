@@ -112,6 +112,7 @@ class PropertyDetailFragment : Fragment() {
             val date: Date
             date = df.parse(dateString)
             updateProperty(date)
+            this.updateUiPropertySold(true)
         }, year, month, day)
         dialog.datePicker.maxDate = Date().time
         dialog.show()
@@ -130,9 +131,10 @@ class PropertyDetailFragment : Fragment() {
         this.mPropertyDetailViewModel.getProperty(id).observe(this, Observer { property ->
             if (property != null) {
                 mProperty = property
-                updateUI(property)
-                getInterestPoint(property)
-                getStaticMap(property)
+                this.updateUI(property)
+                this.getInterestPoint(property)
+                this.getStaticMap(property)
+                this.updateUiPropertySold(property.saleStatus)
             }
         })
     }
@@ -190,13 +192,20 @@ class PropertyDetailFragment : Fragment() {
         }
     }
 
+    //Modify the view based on the state of the sale
+    private fun updateUiPropertySold(saleStatus: Boolean){
+        if (saleStatus){
+            viewOfLayout.sold_buttons.visibility = View.GONE
+            viewOfLayout.sold_property_detail_textview.visibility = View.VISIBLE
+        }else{
+            viewOfLayout.sold_buttons.visibility = View.VISIBLE
+            viewOfLayout.sold_property_detail_textview.visibility = View.GONE
+        }
+    }
+
     private fun getPicture(id: Long){
         this.mPropertyDetailViewModel.getPicture(id).observe(this, Observer { list ->
             list?.let { mAdapterRecycler.updateData(it) }
         })
-    }
-
-    fun getPrice(): Int {
-        return mProperty.price
     }
 }

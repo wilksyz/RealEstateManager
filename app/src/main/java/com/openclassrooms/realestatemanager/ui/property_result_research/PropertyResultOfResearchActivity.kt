@@ -125,17 +125,21 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
                 cityNameLike,numberPhoto,
                 priceMin, priceMax,
                 dateMinSale,dateMaxSale,
-                propertySold,soldMinDate, Date()).observe(this, Observer { list ->
-            val propertyList = list?.iterator()
+                propertySold,soldMinDate, Date()).observe(this, Observer { propertyListLambda ->
+            val propertyList = propertyListLambda?.iterator()
             if (propertyList != null) {
                 for (property in propertyList){
-                    this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, Observer {l ->
-                        if (l?.size == 0){
+                    var i = 0
+                    this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, Observer {pictureListLambda ->
+                        if (pictureListLambda?.size == 0){
                             pictureList.add(null)
                         }else{
-                            l?.let { pictureList.add(it[0]) }
+                            pictureListLambda?.let { pictureList.add(it[0]) }
                         }
-                        this.mAdapter.updateData(list, pictureList)
+                        i++
+                        if (i == propertyListLambda.size){
+                            this.mAdapter.updateData(propertyListLambda, pictureList)
+                        }
                     })
                 }
             }
