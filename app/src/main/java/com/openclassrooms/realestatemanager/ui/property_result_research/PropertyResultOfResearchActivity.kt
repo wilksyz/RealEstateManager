@@ -5,8 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture

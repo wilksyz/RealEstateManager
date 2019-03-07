@@ -126,4 +126,8 @@
         <item>Less than 1 year</item>
     </string-array>
 
+    // Notification
+    <string name="the_new_property_has_been_successfully_created">The new property has been successfully created</string>
+    <string name="new_property">New Property</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

@@ -5,10 +5,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.Observer
-import android.os.Bundle
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.location.Location
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,7 +20,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.*
-
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.data.GeocodingApiStream
 import com.openclassrooms.realestatemanager.di.Injection

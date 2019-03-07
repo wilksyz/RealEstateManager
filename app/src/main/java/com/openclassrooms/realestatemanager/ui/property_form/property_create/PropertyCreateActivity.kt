@@ -60,8 +60,8 @@ class PropertyCreateActivity : PropertyEditForms() {
 
     private fun createProperty(){
         val property = retrieveInformationEntered()
-        this.mPropertyCreateViewModel.createProperty(property, mPictureList)
-        onBackPressed()
+        this.mPropertyCreateViewModel.createProperty(property, mPictureList, this)
+        finish()
     }
 
     private fun retrieveInformationEntered(): Property {
