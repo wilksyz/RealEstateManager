@@ -8,14 +8,14 @@ import com.openclassrooms.realestatemanager.model.Property
 import android.content.ContentUris
 import com.openclassrooms.realestatemanager.persistance.RealEstateManagerDatabase
 
-
-const val AUTHORITY = "com.openclassrooms.realestatemanager.provider"
-
 class PropertyContentProvider: ContentProvider() {
 
     // FOR DATA
-    val TABLE_NAME = Property::class.java.simpleName
-    val URI_PROPERTY = Uri.parse("content://$AUTHORITY/$TABLE_NAME")
+    companion object {
+        const val AUTHORITY = "com.openclassrooms.realestatemanager.provider"
+        val TABLE_NAME: String = Property::class.java.simpleName
+        val URI_PROPERTY: Uri = Uri.parse("content://$AUTHORITY/$TABLE_NAME")
+    }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         if (context != null){
