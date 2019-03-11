@@ -12,6 +12,12 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.DOCTOR
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.HOBBIES
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PARC
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PUBLIC_TRANSPORT
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.SCHOOL
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.STORES
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_property_search.*
@@ -21,12 +27,6 @@ import java.util.*
 private const val TYPE_PROPERTY = "type property"
 private const val SURFACE_MIN = "surface min"
 private const val SURFACE_MAX = "surface max"
-private const val SCHOOL = "school"
-private const val PARC = "parc"
-private const val STORES = "stores"
-private const val PUBLIC_TRANSPORT = "public transport"
-private const val DOCTOR = "doctor"
-private const val HOBBIES = "hobbies"
 private const val PROPERTY_SOLD = "property sold"
 private const val SOLD_DATE = "sold date"
 private const val CITY_NAME = "city name"

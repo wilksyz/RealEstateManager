@@ -34,8 +34,8 @@ class PropertyDataRepository(private val mPropertyDao: PropertyDao) {
                             isNearMinDateOfSale: Date,
                             isNearMaxDateOfSale: Date,
                             isNearSaleStatus: Boolean,
-                            isNearMinDateSold: Date?,
-                            isNearMaxDateSold: Date?): LiveData<List<Property>> {
+                            isNearMinDateSold: Date,
+                            isNearMaxDateSold: Date): LiveData<List<Property>> {
         return this.mPropertyDao.getPropertyResearch(isNearTypeProperty,isNearMinSurface,isNearMaxSurface,isNearDoctor,isNearSchool,isNearHobbies,isNearTransport,isNearParc,isNearStore,isNearCity,isNearNumberOfPhotos,isNearMinPrice,isNearMaxPrice,isNearMinDateOfSale,isNearMaxDateOfSale,isNearSaleStatus,isNearMinDateSold,isNearMaxDateSold)
     }
 

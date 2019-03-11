@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.persistance
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import android.content.Context
+import android.database.Cursor
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.notification.Notification
@@ -34,8 +35,11 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
                                      isNearMinDateOfSale: Date,
                                      isNearMaxDateOfSale: Date,
                                      isNearSaleStatus: Boolean,
-                                     isNearMinDateSold: Date?,
-                                     isNearMaxDateSold: Date?): LiveData<List<Property>>
+                                     isNearMinDateSold: Date,
+                                     isNearMaxDateSold: Date): LiveData<List<Property>>
+
+    @Query("SELECT * FROM Property WHERE mPropertyId = :propertyId")
+    abstract fun getPropertyWithCursor(propertyId: Long): Cursor
 
     @Transaction
     open fun createProperty(property: Property, pictureList: ArrayList<Picture>, context: Context){

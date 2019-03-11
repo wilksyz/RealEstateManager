@@ -31,6 +31,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <provider
+            android:name=".provider.PropertyContentProvider"
+            android:authorities="com.openclassrooms.realestatemanager.provider"
+            android:exported="true"/>
+
         <activity android:name=".ui.property_list.PropertyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

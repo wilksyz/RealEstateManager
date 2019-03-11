@@ -7,6 +7,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.DOCTOR
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.HOBBIES
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PARC
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PUBLIC_TRANSPORT
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.SCHOOL
+import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.STORES
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.property_list.recycler_view.PropertyRecyclerViewAdapter
@@ -17,12 +23,6 @@ import kotlin.collections.ArrayList
 private const val TYPE_PROPERTY = "type property"
 private const val SURFACE_MIN = "surface min"
 private const val SURFACE_MAX = "surface max"
-private const val SCHOOL = "school"
-private const val PARC = "parc"
-private const val STORES = "stores"
-private const val PUBLIC_TRANSPORT = "public transport"
-private const val DOCTOR = "doctor"
-private const val HOBBIES = "hobbies"
 private const val PROPERTY_SOLD = "property sold"
 private const val SOLD_DATE = "sold date"
 private const val CITY_NAME = "city name"
