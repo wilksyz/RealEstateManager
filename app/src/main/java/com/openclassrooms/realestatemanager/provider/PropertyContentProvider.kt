@@ -54,7 +54,7 @@ class PropertyContentProvider: ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        throw IllegalStateException("It's impossible to delete property")
     }
 
     override fun getType(uri: Uri): String? {

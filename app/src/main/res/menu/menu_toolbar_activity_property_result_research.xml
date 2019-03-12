@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/detail_menu_result_research_group">
+        <item
+            android:id="@+id/edit"
+            android:title="@string/edit"
+            android:icon="@drawable/ic_border_color"
+            app:showAsAction="ifRoom"/>
+    </group>
+</menu>

@@ -2,11 +2,9 @@ package com.openclassrooms.realestatemanager.persistance
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-import android.content.Context
 import android.database.Cursor
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.notification.Notification
 import java.util.*
 
 @Dao
@@ -42,12 +40,11 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
     abstract fun getPropertyWithCursor(propertyId: Long): Cursor
 
     @Transaction
-    open fun createProperty(property: Property, pictureList: ArrayList<Picture>, context: Context){
+    open fun createProperty(property: Property, pictureList: ArrayList<Picture>){
         val id = this.insertProperty(property)
         for (picture in pictureList){
             database.pictureDao().insertPicture(picture.apply { propertyId = id })
         }
-        Notification.sendNotification(context)
     }
 
     @Transaction

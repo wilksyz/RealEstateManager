@@ -4,11 +4,15 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_resu
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.widget.Toast
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.InterestPoint
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.base_property_list.BasePropertyListFragment
+import com.openclassrooms.realestatemanager.utils.ItemClickSupport
+import kotlinx.android.synthetic.main.fragment_base_list_property.view.*
 import java.util.*
 
 /**
@@ -37,12 +41,22 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
         super.onActivityCreated(savedInstanceState)
 
         this.configureViewModel()
+        this.configureClickRecyclerView()
         this.getSettingsOfResearch()
     }
 
     private fun configureViewModel() {
         val mViewModelFactory = context?.let { Injection().provideViewModelFactory(it) }
         this.mPropertyResultOfResearchViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyResultOfResearchViewModel::class.java)
+    }
+
+    private fun configureClickRecyclerView(){
+        ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
+                .setOnItemClickListener { _, position, _ ->
+                    Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
+                    val property = mAdapter.getProperty(position)
+                    (activity as PropertyResultOfResearchActivity).configureDetailsPropertyFragment(property)
+                }
     }
 
     private fun getSettingsOfResearch(){
