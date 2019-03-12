@@ -111,11 +111,20 @@ class PropertyDetailFragment : Fragment() {
             val df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE)
             val date: Date
             date = df.parse(dateString)
-            updateProperty(date)
-            this.updateUiPropertySold(true)
+            this.checkDate(date)
         }, year, month, day)
         dialog.datePicker.maxDate = Date().time
         dialog.show()
+    }
+
+    //Check that the date of sale is after the date of placing on the market
+    private fun checkDate(date: Date){
+        if (date >= mProperty.dateOfSale ){
+            updateProperty(date)
+            this.updateUiPropertySold(true)
+        }else{
+            Toast.makeText(context, getString(R.string.the_date_of_sold_must_be_greater_than_the_date_of_sale), Toast.LENGTH_LONG).show()
+        }
     }
 
     // Update an property

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
@@ -59,9 +60,13 @@ class PropertyCreateActivity : PropertyEditForms() {
     }
 
     private fun createProperty(){
-        val property = retrieveInformationEntered()
-        this.mPropertyCreateViewModel.createProperty(property, mPictureList, this)
-        finish()
+        if (mPictureList.size > 0){
+            val property = retrieveInformationEntered()
+            this.mPropertyCreateViewModel.createProperty(property, mPictureList, this)
+            finish()
+        }else {
+            Toast.makeText(this, getString(R.string.you_must_select_at_least_one_picture), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun retrieveInformationEntered(): Property {

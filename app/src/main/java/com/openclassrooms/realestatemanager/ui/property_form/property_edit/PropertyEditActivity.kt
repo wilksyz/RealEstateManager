@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
@@ -57,9 +58,13 @@ class PropertyEditActivity : PropertyEditForms() {
     }
 
     private fun updateProperty(){
-        retrieveInformationEntered()
-        this.mPropertyEditViewModel.updatePropertyAndPictures(mProperty, mPictureList)
-        finish()
+        if (mPictureList.size > 0){
+            retrieveInformationEntered()
+            this.mPropertyEditViewModel.updatePropertyAndPictures(mProperty, mPictureList)
+            finish()
+        }else{
+            Toast.makeText(this, getString(R.string.you_must_select_at_least_one_picture), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun retrieveInformationEntered(){

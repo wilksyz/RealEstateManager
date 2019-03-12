@@ -35,6 +35,7 @@
     <string name="hobbies">Hobbies</string>
     <string name="edit">Edit</string>
     <string name="edit_property">Edit property</string>
+    <string name="you_must_select_at_least_one_picture">You must select at least one picture</string>
     <string-array name="type_property_array">
         <item>House</item>
         <item>Loft</item>
@@ -65,6 +66,7 @@
     <string name="research">Research</string>
     <string name="maps_view">Maps view</string>
     <string name="finish">Finish</string>
+    <string name="the_date_of_sold_must_be_greater_than_the_date_of_sale">The date of sold must be greater than the date of sale</string>
 
     // PropertyMortgageActivity
     <string name="mortgage_simulation">Mortgage simulation</string>
@@ -131,4 +133,6 @@
     <string name="new_property">New Property</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="error_when_creating_the_property">Error when creating the property</string>
+
+
 </resources>
