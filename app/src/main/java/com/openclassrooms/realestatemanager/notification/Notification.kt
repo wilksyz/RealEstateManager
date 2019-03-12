@@ -9,7 +9,7 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.ui.property_list.PropertyListActivity
+import com.openclassrooms.realestatemanager.ui.base_property_list.property_list.PropertyListActivity
 
 object Notification {
 

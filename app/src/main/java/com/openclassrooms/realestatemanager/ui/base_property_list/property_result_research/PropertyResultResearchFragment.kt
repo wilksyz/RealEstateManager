@@ -1,24 +1,20 @@
-package com.openclassrooms.realestatemanager.ui.property_result_research
+package com.openclassrooms.realestatemanager.ui.base_property_list.property_result_research
 
-import android.arch.lifecycle.Observer
+
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import com.openclassrooms.realestatemanager.R
+import android.support.v4.app.Fragment
 import com.openclassrooms.realestatemanager.di.Injection
-import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.DOCTOR
-import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.HOBBIES
-import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PARC
-import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PUBLIC_TRANSPORT
-import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.SCHOOL
-import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.STORES
+import com.openclassrooms.realestatemanager.model.InterestPoint
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.ui.property_list.recycler_view.PropertyRecyclerViewAdapter
-import kotlinx.android.synthetic.main.activity_property_result_of_research.*
+import com.openclassrooms.realestatemanager.ui.base_property_list.BasePropertyListFragment
 import java.util.*
-import kotlin.collections.ArrayList
+
+/**
+ * A simple [Fragment] subclass.
+ *
+ */
 
 private const val TYPE_PROPERTY = "type property"
 private const val SURFACE_MIN = "surface min"
@@ -32,50 +28,41 @@ private const val PRICE_MAX = "price max"
 private const val DATE_MIN_SALE = "date min sale"
 private const val DATE_MAX_SALE = "date max sale"
 
-class PropertyResultOfResearchActivity : AppCompatActivity() {
+class PropertyResultResearchFragment : BasePropertyListFragment() {
 
     private lateinit var mPropertyResultOfResearchViewModel: PropertyResultOfResearchViewModel
-    private lateinit var mAdapter: PropertyRecyclerViewAdapter
     private val mIntervalDate = arrayOf(-730, -7, -14, -30, -60, -180, -365)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_property_result_of_research)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         this.configureViewModel()
-        this.configureRecyclerView()
         this.getSettingsOfResearch()
     }
 
     private fun configureViewModel() {
-        val mViewModelFactory = Injection().provideViewModelFactory(this)
+        val mViewModelFactory = context?.let { Injection().provideViewModelFactory(it) }
         this.mPropertyResultOfResearchViewModel = ViewModelProviders.of(this, mViewModelFactory).get(PropertyResultOfResearchViewModel::class.java)
     }
 
-    private fun configureRecyclerView(){
-        this.mAdapter = PropertyRecyclerViewAdapter(this)
-        property_recyclerView_research_container.adapter = this.mAdapter
-        property_recyclerView_research_container.layoutManager = LinearLayoutManager(this)
-    }
-
     private fun getSettingsOfResearch(){
-        val typePropertyIndex = intent.getIntExtra(TYPE_PROPERTY, -1)
-        val surfaceMin = intent.getIntExtra(SURFACE_MIN, -1)
-        val surfaceMax = intent.getIntExtra(SURFACE_MAX, -1)
-        val school = intent.getBooleanExtra(SCHOOL, false)
-        val parc = intent.getBooleanExtra(PARC, false)
-        val stores = intent.getBooleanExtra(STORES, false)
-        val publicTransport = intent.getBooleanExtra(PUBLIC_TRANSPORT, false)
-        val doctor = intent.getBooleanExtra(DOCTOR, false)
-        val hobbies = intent.getBooleanExtra(HOBBIES, false)
-        val propertySold = intent.getBooleanExtra(PROPERTY_SOLD, false)
-        val soldDateIndex = intent.getIntExtra(SOLD_DATE, -1)
-        val cityName = intent.getStringExtra(CITY_NAME)
-        val numberPhoto = intent.getIntExtra(NUMBER_PHOTO, -1)
-        val priceMin = intent.getIntExtra(PRICE_MIN, -1)
-        val priceMax = intent.getIntExtra(PRICE_MAX, -1)
-        val dateMinSale = Date(intent.getLongExtra(DATE_MIN_SALE, -1))
-        val dateMaxSale = Date(intent.getLongExtra(DATE_MAX_SALE, -1))
+        val typePropertyIndex = activity?.intent?.getIntExtra(TYPE_PROPERTY, -1)!!
+        val surfaceMin = activity?.intent?.getIntExtra(SURFACE_MIN, -1)!!
+        val surfaceMax = activity?.intent?.getIntExtra(SURFACE_MAX, -1)!!
+        val school = activity?.intent?.getBooleanExtra(InterestPoint.SCHOOL, false)!!
+        val parc = activity?.intent?.getBooleanExtra(InterestPoint.PARC, false)!!
+        val stores = activity?.intent?.getBooleanExtra(InterestPoint.STORES, false)!!
+        val publicTransport = activity?.intent?.getBooleanExtra(InterestPoint.PUBLIC_TRANSPORT, false)!!
+        val doctor = activity?.intent?.getBooleanExtra(InterestPoint.DOCTOR, false)!!
+        val hobbies = activity?.intent?.getBooleanExtra(InterestPoint.HOBBIES, false)!!
+        val propertySold = activity?.intent?.getBooleanExtra(PROPERTY_SOLD, false)!!
+        val soldDateIndex = activity?.intent?.getIntExtra(SOLD_DATE, -1)!!
+        val cityName = activity?.intent?.getStringExtra(CITY_NAME)!!
+        val numberPhoto = activity?.intent?.getIntExtra(NUMBER_PHOTO, -1)!!
+        val priceMin = activity?.intent?.getIntExtra(PRICE_MIN, -1)!!
+        val priceMax = activity?.intent?.getIntExtra(PRICE_MAX, -1)!!
+        val dateMinSale = activity?.intent?.getLongExtra(DATE_MIN_SALE, -1)?.let { Date(it) }!!
+        val dateMaxSale = activity?.intent?.getLongExtra(DATE_MAX_SALE, -1)?.let { Date(it) }!!
 
         this.startRequestOnDatabase(typePropertyIndex,
                 surfaceMin,
@@ -125,12 +112,12 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
                 cityNameLike,numberPhoto,
                 priceMin, priceMax,
                 dateMinSale,dateMaxSale,
-                propertySold,soldMinDate, Date()).observe(this, Observer { propertyListLambda ->
+                propertySold,soldMinDate, Date()).observe(this, android.arch.lifecycle.Observer { propertyListLambda ->
             val propertyList = propertyListLambda?.iterator()
             if (propertyList != null) {
                 for (property in propertyList){
                     var i = 0
-                    this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, Observer {pictureListLambda ->
+                    this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
                         if (pictureListLambda?.size == 0){
                             pictureList.add(null)
                         }else{
@@ -146,7 +133,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
         })
     }
 
-    private fun getSoldDate(soldDateIndex: Int, propertySold: Boolean): Date{
+    private fun getSoldDate(soldDateIndex: Int, propertySold: Boolean): Date {
         val calendar = Calendar.getInstance()
         calendar.time = Date()
         return if (propertySold){

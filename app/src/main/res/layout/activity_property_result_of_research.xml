@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.property_result_research.PropertyResultOfResearchActivity">
+    tools:context=".ui.base_property_list.property_result_research.PropertyResultOfResearchActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/property_recyclerView_research_container"
+    <FrameLayout
+        android:id="@+id/result_research_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

@@ -4,12 +4,12 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.openclassrooms.realestatemanager.repository.PictureDataRepository
 import com.openclassrooms.realestatemanager.repository.PropertyDataRepository
+import com.openclassrooms.realestatemanager.ui.base_property_list.property_list.PropertyListViewModel
+import com.openclassrooms.realestatemanager.ui.base_property_list.property_result_research.PropertyResultOfResearchViewModel
 import com.openclassrooms.realestatemanager.ui.property_details.PropertyDetailViewModel
 import com.openclassrooms.realestatemanager.ui.property_form.property_create.PropertyCreateViewModel
 import com.openclassrooms.realestatemanager.ui.property_form.property_edit.PropertyEditViewModel
-import com.openclassrooms.realestatemanager.ui.property_list.PropertyListViewModel
 import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapsViewModel
-import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchViewModel
 import java.util.concurrent.Executor
 
 class ViewModelFactory(private val mPropertyDataRepository: PropertyDataRepository, private val mPictureDataRepository: PictureDataRepository, private val mExecutor: Executor) :ViewModelProvider.Factory{

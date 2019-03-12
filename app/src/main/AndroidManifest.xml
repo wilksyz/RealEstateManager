@@ -36,7 +36,7 @@
             android:authorities="com.openclassrooms.realestatemanager.provider"
             android:exported="true"/>
 
-        <activity android:name=".ui.property_list.PropertyListActivity">
+        <activity android:name=".ui.base_property_list.property_list.PropertyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -46,23 +46,23 @@
         </activity>
         <activity
             android:name=".ui.property_details.PropertyDetailActivity"
-            android:parentActivityName=".ui.property_list.PropertyListActivity">
+            android:parentActivityName=".ui.base_property_list.property_list.PropertyListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.property_list.PropertyListActivity" />
+                android:value=".ui.base_property_list.property_list.PropertyListActivity" />
         </activity>
         <activity
             android:name=".ui.property_form.property_create.PropertyCreateActivity"
-            android:parentActivityName=".ui.property_list.PropertyListActivity"
+            android:parentActivityName=".ui.base_property_list.property_list.PropertyListActivity"
             android:label="@string/create_property">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.property_list.PropertyListActivity" />
+                android:value=".ui.base_property_list.property_list.PropertyListActivity" />
         </activity>
         <activity
             android:name=".ui.property_form.property_edit.PropertyEditActivity"
             android:label="@string/edit_property"/>
-        <activity android:name=".ui.property_result_research.PropertyResultOfResearchActivity"
+        <activity android:name="com.openclassrooms.realestatemanager.ui.base_property_list.property_result_research.PropertyResultOfResearchActivity"
             android:parentActivityName=".ui.property_research.PropertyResearchActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -71,10 +71,10 @@
         <activity
             android:name=".ui.property_research.PropertyResearchActivity"
             android:label="@string/research"
-            android:parentActivityName=".ui.property_list.PropertyListActivity">
+            android:parentActivityName=".ui.base_property_list.property_list.PropertyListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.property_list.PropertyListActivity" />
+                android:value=".ui.base_property_list.property_list.PropertyListActivity" />
         </activity>
         <meta-data
             android:name="preloaded_fonts"

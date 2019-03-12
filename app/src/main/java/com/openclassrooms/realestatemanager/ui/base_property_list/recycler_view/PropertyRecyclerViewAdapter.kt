@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.property_list.recycler_view
+package com.openclassrooms.realestatemanager.ui.base_property_list.recycler_view
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

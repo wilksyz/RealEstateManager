@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.realestatemanager.ui.property_list.PropertyListActivity">
+    tools:context="com.openclassrooms.realestatemanager.ui.base_property_list.property_list.PropertyListActivity">
 
     <FrameLayout
         android:id="@+id/main_fragment_container"

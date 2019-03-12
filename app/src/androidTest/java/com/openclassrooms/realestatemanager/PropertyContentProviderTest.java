@@ -39,7 +39,7 @@ public class PropertyContentProviderTest {
     }
 
     @Test
-    public void getItemsWhenNoItemInserted() {
+    public void getItemsWhenNoPropertyInserted() {
         final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyContentProvider.Companion.getURI_PROPERTY(), USER_ID), null, null, null, null);
         assertThat(cursor, notNullValue());
         assertThat(cursor.getCount(), is(0));
@@ -47,9 +47,9 @@ public class PropertyContentProviderTest {
     }
 
     @Test
-    public void insertAndGetItem() {
-        // BEFORE : Adding demo item
-        final Uri userUri = mContentResolver.insert(PropertyContentProvider.Companion.getURI_PROPERTY(), generateItem());
+    public void insertAndGetProperty() {
+        // BEFORE : Adding demo property
+        final Uri userUri = mContentResolver.insert(PropertyContentProvider.Companion.getURI_PROPERTY(), generateProperty());
         // TEST
         final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyContentProvider.Companion.getURI_PROPERTY(), USER_ID), null, null, null, null);
         assertThat(cursor, notNullValue());
@@ -60,7 +60,7 @@ public class PropertyContentProviderTest {
 
     // ---
 
-    private ContentValues generateItem(){
+    private ContentValues generateProperty(){
         final ContentValues values = new ContentValues();
         values.put("text", "Visite cet endroit de rêve !");
         values.put("category", "0");

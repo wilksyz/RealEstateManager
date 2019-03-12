@@ -1,11 +1,11 @@
 package com.openclassrooms.realestatemanager.provider
 
 import android.content.ContentProvider
+import android.content.ContentUris
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import com.openclassrooms.realestatemanager.model.Property
-import android.content.ContentUris
 import com.openclassrooms.realestatemanager.persistance.RealEstateManagerDatabase
 
 class PropertyContentProvider: ContentProvider() {

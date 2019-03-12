@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.model
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import java.util.*
 import android.content.ContentValues
 import com.openclassrooms.realestatemanager.model.Address.Companion.CITY
 import com.openclassrooms.realestatemanager.model.Address.Companion.NUMBER
@@ -15,6 +14,7 @@ import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PARC
 import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PUBLIC_TRANSPORT
 import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.SCHOOL
 import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.STORES
+import java.util.*
 
 @Entity
 data class Property(var typeProperty: Int = -1,

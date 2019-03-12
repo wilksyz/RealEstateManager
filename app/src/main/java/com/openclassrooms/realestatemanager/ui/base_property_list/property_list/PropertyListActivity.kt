@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.property_list
+package com.openclassrooms.realestatemanager.ui.base_property_list.property_list
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,8 +19,6 @@ import com.openclassrooms.realestatemanager.ui.property_maps.PropertyMapFragment
 import com.openclassrooms.realestatemanager.ui.property_mortgage.PropertyMortgageFragment
 import com.openclassrooms.realestatemanager.ui.property_research.PropertyResearchActivity
 import kotlinx.android.synthetic.main.activity_list_property.*
-
-
 
 private const val PROPERTY_ID: String = "property id"
 private const val VISIBILITY_EDIT_BUTTON:String = "visibility edit button"

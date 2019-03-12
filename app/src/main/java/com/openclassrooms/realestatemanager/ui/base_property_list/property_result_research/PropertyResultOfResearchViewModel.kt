@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.property_result_research
+package com.openclassrooms.realestatemanager.ui.base_property_list.property_result_research
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel

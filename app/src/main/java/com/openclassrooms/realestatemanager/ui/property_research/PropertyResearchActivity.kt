@@ -19,7 +19,7 @@ import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.PUBLIC
 import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.SCHOOL
 import com.openclassrooms.realestatemanager.model.InterestPoint.Companion.STORES
 import com.openclassrooms.realestatemanager.model.Property
-import com.openclassrooms.realestatemanager.ui.property_result_research.PropertyResultOfResearchActivity
+import com.openclassrooms.realestatemanager.ui.base_property_list.property_result_research.PropertyResultOfResearchActivity
 import kotlinx.android.synthetic.main.activity_property_search.*
 import java.text.DateFormat
 import java.util.*
