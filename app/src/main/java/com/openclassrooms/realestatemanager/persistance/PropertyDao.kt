@@ -40,21 +40,23 @@ abstract class PropertyDao(private val database: RealEstateManagerDatabase) {
     abstract fun getPropertyWithCursor(propertyId: Long): Cursor
 
     @Transaction
-    open fun createProperty(property: Property, pictureList: ArrayList<Picture>){
+    open fun createProperty(property: Property, pictureList: ArrayList<Picture>): Long{
         val id = this.insertProperty(property)
         for (picture in pictureList){
             database.pictureDao().insertPicture(picture.apply { propertyId = id })
         }
+        return id
     }
 
     @Transaction
-    open fun updatePropertyAndPictures(property: Property, pictureList: ArrayList<Picture>){
-        this.updateProperty(property)
+    open fun updatePropertyAndPictures(property: Property, pictureList: ArrayList<Picture>): Int{
+        val count = this.updateProperty(property)
         val id = property.mPropertyId
         database.pictureDao().deleteAllPictureFromProperty(id)
         for (picture in pictureList){
             database.pictureDao().insertPicture(picture.apply { propertyId = id })
         }
+        return count
     }
 
     @Insert

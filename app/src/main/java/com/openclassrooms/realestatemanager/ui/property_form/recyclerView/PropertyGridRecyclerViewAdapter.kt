@@ -38,7 +38,7 @@ class PropertyGridRecyclerViewAdapter: RecyclerView.Adapter<PropertyGridRecycler
 
         fun updateUiGridLayout(picture: Picture){
             view.picture_imageview_gridview.setImageURI(Uri.parse(picture.uri))
-            view.tittle_imageview_gridview.text = picture.title
+            view.tittle_imageview_gridview.text = picture.description
         }
     }
 }

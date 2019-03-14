@@ -12,10 +12,10 @@ import android.os.Parcelable
         childColumns = arrayOf("propertyId"))]
 )
 data class Picture(
-        var propertyId: Long,
-        var title: String,
-        var uri: String,
-        var creationDate: String): Parcelable
+        var propertyId: Long = 0,
+        var description: String = "",
+        var uri: String = "",
+        var creationDate: String = ""): Parcelable
 {
 
     @PrimaryKey(autoGenerate = true) var mPictureId: Long = 0
@@ -31,7 +31,7 @@ data class Picture(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(propertyId)
-        parcel.writeString(title)
+        parcel.writeString(description)
         parcel.writeString(uri)
         parcel.writeString(creationDate)
         parcel.writeLong(mPictureId)

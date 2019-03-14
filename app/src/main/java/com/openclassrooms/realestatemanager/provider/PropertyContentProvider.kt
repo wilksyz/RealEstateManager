@@ -5,9 +5,11 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
+import com.openclassrooms.realestatemanager.model.FromContentValues
 import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.persistance.RealEstateManagerDatabase
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class PropertyContentProvider: ContentProvider() {
 
     // FOR DATA
@@ -17,11 +19,13 @@ class PropertyContentProvider: ContentProvider() {
         val URI_PROPERTY: Uri = Uri.parse("content://$AUTHORITY/$TABLE_NAME")
     }
 
-    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+    override fun insert(uri: Uri, values: ContentValues): Uri? {
         if (context != null){
-            val id: Long? = values?.let { Property.fromContentValues(it) }?.let { RealEstateManagerDatabase.getInstance(context)?.propertyDao()?.insertProperty(it) }
+            val property = FromContentValues.propertyFromContentValues(values)
+            val picturesList = FromContentValues.picturesFromContentValues(values)
+            val id = RealEstateManagerDatabase.getInstance(context)?.propertyDao()?.createProperty(property, picturesList)
             if (id != null) {
-                if (!id.equals(0)){
+                if (id > 0){
                     context.contentResolver.notifyChange(uri, null)
                     return ContentUris.withAppendedId(uri, id)
                 }
@@ -34,7 +38,7 @@ class PropertyContentProvider: ContentProvider() {
         if (context != null) {
             val propertyId = ContentUris.parseId(uri)
             val cursor: Cursor? = RealEstateManagerDatabase.getInstance(context)?.propertyDao()?.getPropertyWithCursor(propertyId)
-            cursor?.setNotificationUri(context!!.contentResolver, uri)
+            cursor?.setNotificationUri(context.contentResolver, uri)
             return cursor
         }
         throw IllegalArgumentException("Failed to query row for uri $uri")
@@ -44,11 +48,14 @@ class PropertyContentProvider: ContentProvider() {
         return true
     }
 
-    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
+    override fun update(uri: Uri, values: ContentValues, selection: String?, selectionArgs: Array<String>?): Int {
         if (context != null){
-            val count = values?.let { Property.fromContentValues(it) }?.let { RealEstateManagerDatabase.getInstance(context)?.propertyDao()?.updateProperty(it) }
+            val property = FromContentValues.propertyFromContentValues(values)
+            val picturesList = FromContentValues.picturesFromContentValues(values)
+            val count = RealEstateManagerDatabase.getInstance(context)?.propertyDao()?.updatePropertyAndPictures(property, picturesList)
             context.contentResolver.notifyChange(uri, null)
-            return count!!
+            if (count != null)
+            return count
         }
         throw IllegalArgumentException("Failed to update row into $uri")
     }
