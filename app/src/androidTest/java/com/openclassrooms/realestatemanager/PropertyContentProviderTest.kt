@@ -7,7 +7,6 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.util.Log
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.InterestPoint
 import com.openclassrooms.realestatemanager.model.Property
