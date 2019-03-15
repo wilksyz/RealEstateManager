@@ -6,7 +6,7 @@ object MortgageSimulation {
 
         fun getMonthly(duration: Double, borrowedMoney: Int, rate: Double): Double{
             val monthDuration = getMonth(duration)
-            val decimalFormat = DecimalFormat("#.###")
+            val decimalFormat = DecimalFormat("0.00")
             return if (rate != 0.0){
                 val rateNumberDecimal = rate / 100
                 val firstPart = borrowedMoney * rateNumberDecimal / 12
@@ -22,7 +22,7 @@ object MortgageSimulation {
         }
 
         fun getCostMortgage(duration: Double, borrowedMoney: Int, monthly: Double): Double{
-            val decimalFormat = DecimalFormat("#.###")
+            val decimalFormat = DecimalFormat("0.00")
             val monthDuration = getMonth(duration)
             return decimalFormat.format((monthly * monthDuration) - borrowedMoney).toDouble()
         }

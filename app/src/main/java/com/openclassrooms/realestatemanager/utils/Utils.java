@@ -83,29 +83,6 @@ public class Utils extends AsyncTask<Void,Void,Boolean> {
         mConsumer.accept(internet);
     }
 
-    public static String getRealPathFromURI(Context context,Uri contentURI) {
-        String result;
-        Cursor cursor = context.getContentResolver().query(contentURI, null,
-                null, null, null);
-
-        if (cursor == null) {
-            // path
-            result = contentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            try {
-                int idx = cursor
-                        .getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                result = cursor.getString(idx);
-            } catch (Exception e) {
-                Log.e("Exception getRealPath", "e: " + e);
-                result = "";
-            }
-            cursor.close();
-        }
-        return result;
-    }
-
     /*
     public static Boolean isInternetAvailable(Context context){
         WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -117,28 +94,6 @@ public class Utils extends AsyncTask<Void,Void,Boolean> {
         (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo netInfo = cm.getActiveNetworkInfo();
     return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
-     */
-
-    /*
-    fun hasInternetConnection(): Single<Boolean> {
-        return Single.fromCallable {
-            try {
-                // Connect to Google DNS to check for connection
-                val timeoutMs = 1500
-                val socket = Socket()
-                val socketAddress = InetSocketAddress("8.8.8.8", 53)
-
-                socket.connect(socketAddress, timeoutMs)
-                socket.close()
-
-                true
-            } catch (e: IOException) {
-                false
-            }
-        }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
     }
      */
 }

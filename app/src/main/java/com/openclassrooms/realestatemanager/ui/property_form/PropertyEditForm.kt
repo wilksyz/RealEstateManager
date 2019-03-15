@@ -172,13 +172,13 @@ abstract class PropertyEditForms: AppCompatActivity() {
                     }
                 }
 
-                if (isCamera) {
+                mPictureUri = if (isCamera) {
                     mView.image_button_dialog.setImageURI(mOutputFileUri)
                     galleryAddPic()
-                    mPictureUri = Utils.getRealPathFromURI(this, mOutputFileUri)
+                    RealPath.getRealPathFromURI(this, mOutputFileUri)
                 } else {
                     mView.image_button_dialog.setImageURI(data?.data)
-                    mPictureUri = Utils.getRealPathFromURI(this, data?.data)
+                    data?.data?.let { RealPath.getRealPathFromURI(this, it) }
                 }
                 mView.image_button_dialog.setBackgroundResource(R.color.colorWhite)
             }

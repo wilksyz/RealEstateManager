@@ -15,12 +15,19 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class UnitTest {
+public class UnitTestClassUtils {
     @Test
     public void convertEurosInDollars(){
         int dollars = Utils.convertEuroDollar(25876);
 
         assertEquals(30741, dollars);
+    }
+
+    @Test
+    public void convertDollarsToEuros(){
+        int euros = Utils.convertDollarToEuro(30741);
+
+        assertEquals(24962, euros);
     }
 
     @Test

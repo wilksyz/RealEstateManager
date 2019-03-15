@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class InstrumentedTest {
+public class InstrumentedTestClassUtils {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
@@ -30,8 +30,8 @@ public class InstrumentedTest {
     public void testConnectionWifi(){
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        //boolean stateConnection = Utils.isInternetAvailable(appContext);
+        boolean stateConnection = Utils.isInternetAvailable();
 
-        //assertEquals(true, stateConnection);
+        assertTrue(stateConnection);
     }
 }
