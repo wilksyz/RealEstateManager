@@ -70,7 +70,7 @@
         </activity>
         <activity
             android:name=".ui.property_research.PropertyResearchActivity"
-            android:label="@string/research"
+            android:label="@string/search"
             android:parentActivityName=".ui.base_property_list.property_list.PropertyListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

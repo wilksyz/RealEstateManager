@@ -1,22 +1,19 @@
 package com.openclassrooms.realestatemanager.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import android.os.Parcel
 import android.os.Parcelable
 
 @Entity(foreignKeys = [ForeignKey(
         entity = Property::class,
         parentColumns = arrayOf("mPropertyId"),
-        childColumns = arrayOf("propertyId"))]
+        childColumns = arrayOf("property_id"))]
 )
 data class Picture(
-        var propertyId: Long = 0,
-        var description: String = "",
-        var uri: String = "",
-        var creationDate: String = ""): Parcelable
-{
+        @ColumnInfo(name = "property_id") var propertyId: Long,
+        var description: String,
+        var uri: String,
+        var creationDate: String): Parcelable {
 
     @PrimaryKey(autoGenerate = true) var mPictureId: Long = 0
 
@@ -28,6 +25,11 @@ data class Picture(
             parcel.readString()) {
         mPictureId = parcel.readLong()
     }
+
+    @Ignore constructor() : this( propertyId = 0,
+            description = "",
+            uri = "",
+            creationDate = "")
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(propertyId)

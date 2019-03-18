@@ -62,7 +62,7 @@
     <string name="interest_point">Interest point</string>
     <string name="sold">Sold</string>
     <string name="to_see_the_good_around_you">to see the good around you, the app needs your current location.</string>
-    <string name="research">Research</string>
+    <string name="search">Search</string>
     <string name="maps_view">Maps view</string>
     <string name="finish">Finish</string>
     <string name="the_date_of_sold_must_be_greater_than_the_date_of_sale">The date of sold must be greater than the date of sale</string>

@@ -2,27 +2,38 @@ package com.openclassrooms.realestatemanager.model
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class Property(var typeProperty: Int = -1,
-                    var price: Int = 0,
-                    var surface: Int = 0,
-                    var numberOfRooms: String = "",
-                    var descriptionProperty: String = "",
-                    var dateOfSale: Date = Date(),
-                    @Embedded var interestPoint: InterestPoint = InterestPoint(),
-                    var estateAgent: String = "",
-                    @Embedded var address: Address = Address(),
-                    var numberOfPhotos: Int = 0) {
+data class Property(var typeProperty: Int,
+                    var price: Int,
+                    var surface: Int,
+                    var numberOfRooms: String,
+                    var descriptionProperty: String,
+                    var dateOfSale: Date,
+                    @Embedded var interestPoint: InterestPoint,
+                    var estateAgent: String,
+                    @Embedded var address: Address,
+                    var numberOfPhotos: Int) {
 
     @PrimaryKey(autoGenerate = true) var mPropertyId: Long = 0
     var dateSold: Date = Date()
     var saleStatus: Boolean = false
 
-    companion object {
+    @Ignore constructor() : this(typeProperty = -1,
+            price = 0,
+            surface = 0,
+            numberOfRooms = "",
+            descriptionProperty = "",
+            dateOfSale = Date(),
+            interestPoint = InterestPoint(),
+            estateAgent = "",
+            address = Address(),
+            numberOfPhotos = 0)
 
+    companion object {
         //TYPE OF PROPERTY
         const val TYPE_HOUSE = 0
         const val TYPE_LOFT = 1
