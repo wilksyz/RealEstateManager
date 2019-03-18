@@ -131,13 +131,15 @@
 
         <TextView
             android:id="@+id/detail_property_location_textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/roboto"
             android:paddingBottom="16dp"
             android:text="@string/n_c"
             android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/stores_imageView"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 

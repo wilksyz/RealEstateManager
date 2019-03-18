@@ -132,6 +132,7 @@
     <string name="new_property">New Property</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="error_when_creating_the_property">Error when creating the property</string>
+    <string name="no_result">No result</string>
 
 
 </resources>

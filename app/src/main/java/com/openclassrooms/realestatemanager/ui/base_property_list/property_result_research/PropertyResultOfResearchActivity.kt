@@ -35,7 +35,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar_activity_property_result_research, menu)
-        menu.setGroupVisible(R.id.detail_menu_group, mStateButtonEdit)
+        menu.setGroupVisible(R.id.detail_menu_result_research_group, mStateButtonEdit)
         mMenu = menu
         return true
     }
@@ -59,7 +59,7 @@ class PropertyResultOfResearchActivity : AppCompatActivity() {
             args.putLong(PROPERTY_ID, property.mPropertyId)
             mDetailsPropertyFragment = PropertyDetailFragment()
             mDetailsPropertyFragment.arguments = args
-            fragmentTransaction.replace(R.id.detail_of_the_property_container, mDetailsPropertyFragment)
+            fragmentTransaction.replace(R.id.detail_of_the_property_research_container, mDetailsPropertyFragment)
             fragmentTransaction.commit()
             mPropertyId = property.mPropertyId
             mStateButtonEdit = true

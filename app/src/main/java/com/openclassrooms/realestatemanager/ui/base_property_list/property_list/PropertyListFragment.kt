@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_list
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.widget.Toast
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
@@ -39,7 +38,6 @@ class PropertyListFragment: BasePropertyListFragment() {
     private fun configureClickRecyclerView(){
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
                 .setOnItemClickListener { _, position, _ ->
-                    Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
                     val property = mAdapter.getProperty(position)
                     (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
                 }

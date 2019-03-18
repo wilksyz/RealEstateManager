@@ -186,10 +186,9 @@ class PropertyDetailFragment : Fragment() {
 
     private fun getStaticMap(property: Property){
         Utils{
-            Toast.makeText(context,"$it", Toast.LENGTH_SHORT).show()
             if (it){
                 val key = getString(R.string.google_maps_api)
-                val url = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=color:blue%7C${property.address.number}${property.address.street}${property.address.postCode}${property.address.city}&key=$key"
+                val url = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&markers=color:blue%7C${property.address.number} ${property.address.street} ${property.address.postCode} ${property.address.city}&key=$key"
                 activity?.let { it1 ->
                     Glide.with(it1)
                             .load(url)

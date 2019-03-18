@@ -4,7 +4,8 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_resu
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.widget.Toast
+import android.util.Log
+import android.view.View
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.InterestPoint
@@ -53,7 +54,6 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
     private fun configureClickRecyclerView(){
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
                 .setOnItemClickListener { _, position, _ ->
-                    Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
                     val property = mAdapter.getProperty(position)
                     (activity as PropertyResultOfResearchActivity).configureDetailsPropertyFragment(property)
                 }
@@ -128,20 +128,25 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
                 dateMinSale,dateMaxSale,
                 propertySold,soldMinDate, Date()).observe(this, android.arch.lifecycle.Observer { propertyListLambda ->
             val propertyList = propertyListLambda?.iterator()
+            Log.e("TAG", "$propertyListLambda")
             if (propertyList != null) {
-                for (property in propertyList){
-                    var i = 0
-                    this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
-                        if (pictureListLambda?.size == 0){
-                            pictureList.add(null)
-                        }else{
-                            pictureListLambda?.let { pictureList.add(it[0]) }
-                        }
-                        i++
-                        if (i == propertyListLambda.size){
-                            this.mAdapter.updateData(propertyListLambda, pictureList)
-                        }
-                    })
+                var i = 0
+                if (propertyListLambda.isNotEmpty()){
+                    for (property in propertyList){
+                        this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
+                            if (pictureListLambda?.size == 0){
+                                pictureList.add(null)
+                            }else{
+                                pictureListLambda?.let { pictureList.add(it[0]) }
+                            }
+                            i++
+                            if (i == propertyListLambda.size){
+                                this.mAdapter.updateData(propertyListLambda, pictureList)
+                            }
+                        })
+                    }
+                }else {
+                    viewOfLayout.no_result_research_textView.visibility = View.VISIBLE
                 }
             }
         })

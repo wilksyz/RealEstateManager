@@ -1,11 +1,6 @@
 package com.openclassrooms.realestatemanager.utils;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
-import android.util.Log;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
