@@ -4,14 +4,15 @@ import android.app.Application
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import com.openclassrooms.realestatemanager.ui.property_form.RealPath
-import com.openclassrooms.realestatemanager.utils.MortgageSimulation
+import com.openclassrooms.realestatemanager.ui.property_mortgage.MortgageSimulation
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class UnitTest {
+class MortgageSimulationUnitTest {
 
     @Test
     fun getMonthlyTest(){
@@ -31,9 +32,8 @@ class UnitTest {
     fun getRealPath(){
         val context = ApplicationProvider.getApplicationContext<Application>().applicationContext
 
-
         val realPathPicture = RealPath.getRealPathFromURI(context, Uri.parse("/storage/emulated/0/DCIM/Real Estate Manager/20190215_104146.jpg"))
 
-        assertEquals("/storage/emulated/0/DCIM/Real Estate Manager/20190215_104146.jpg", realPathPicture)
+        Assert.assertEquals("/storage/emulated/0/DCIM/Real Estate Manager/20190215_104146.jpg", realPathPicture)
     }
 }

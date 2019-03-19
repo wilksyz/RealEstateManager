@@ -3,9 +3,11 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_list
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.View
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
 import com.openclassrooms.realestatemanager.model.Picture
+import com.openclassrooms.realestatemanager.model.Property
 import com.openclassrooms.realestatemanager.ui.base_property_list.BasePropertyListFragment
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import kotlinx.android.synthetic.main.fragment_base_list_property.view.*
@@ -46,26 +48,32 @@ class PropertyListFragment: BasePropertyListFragment() {
     // Get all properties in database
     private fun getAllProperty() {
         this.mAdapter.clearList()
+        mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ propertyListLambda ->
+            propertyListLambda?.let { this.getPicture(it) }
+        })
+    }
+
+    // Get the pictures of the property
+    private fun getPicture(propertyList: List<Property>){
         val pictureList: MutableList<Picture?> = ArrayList()
-        this.mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ propertyListLambda ->
-            val propertyList = propertyListLambda?.iterator()
-            if (propertyList != null) {
-                var i = 0
-                for (property in propertyList){
-                    this.mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
-                        if (pictureListLambda?.size == 0){
-                            pictureList.add(null)
-                        }else{
-                            pictureListLambda?.let { pictureList.add(it[0]) }
-                        }
-                        i++
-                        if (i == propertyListLambda.size){
-                            this.mAdapter.updateData(propertyListLambda, pictureList)
-                        }
-                    })
-                }
+        var i = 0
+        if (propertyList.isNotEmpty()){
+            for (property in propertyList){
+                mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
+                    if (pictureListLambda?.size == 0){
+                        pictureList.add(null)
+                    }else{
+                        pictureListLambda?.let { pictureList.add(it[0]) }
+                    }
+                    i++
+                    if (i == propertyList.size){
+                        this.mAdapter.updateData(propertyList, pictureList)
+                    }
+                })
             }
-        } )
+        }else {
+            viewOfLayout.no_result_research_textView.visibility = View.VISIBLE
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

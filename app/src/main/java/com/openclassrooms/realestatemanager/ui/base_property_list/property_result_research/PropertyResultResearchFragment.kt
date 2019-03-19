@@ -36,7 +36,6 @@ private const val DATE_MAX_SALE = "date max sale"
 class PropertyResultResearchFragment : BasePropertyListFragment() {
 
     private lateinit var mPropertyResultOfResearchViewModel: PropertyResultOfResearchViewModel
-    private val mIntervalDate = arrayOf(-730, -7, -14, -30, -60, -180, -365)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -59,6 +58,7 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
                 }
     }
 
+    // Get the parameters for the search request
     private fun getSettingsOfResearch(){
         val typePropertyIndex = activity?.intent?.getIntExtra(TYPE_PROPERTY, -1)!!
         val surfaceMin = activity?.intent?.getIntExtra(SURFACE_MIN, -1)!!
@@ -81,12 +81,12 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
         this.startRequestOnDatabase(typePropertyIndex,
                 surfaceMin,
                 surfaceMax,
-                getInterestPointList(school),
-                getInterestPointList(parc),
-                getInterestPointList(stores),
-                getInterestPointList(publicTransport),
-                getInterestPointList(doctor),
-                getInterestPointList(hobbies),
+                SearchParameters.getInterestPointList(school),
+                SearchParameters.getInterestPointList(parc),
+                SearchParameters.getInterestPointList(stores),
+                SearchParameters.getInterestPointList(publicTransport),
+                SearchParameters.getInterestPointList(doctor),
+                SearchParameters.getInterestPointList(hobbies),
                 propertySold,
                 soldDateIndex,
                 cityName,
@@ -97,6 +97,7 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
                 dateMaxSale)
     }
 
+    // Search in database the properties corresponding to the request
     private fun startRequestOnDatabase(typePropertyIndex: Int,
                                        surfaceMin: Int,
                                        surfaceMax: Int,
@@ -115,9 +116,8 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
                                        dateMinSale: Date,
                                        dateMaxSale: Date){
         this.mAdapter.clearList()
-        val pictureList: MutableList<Picture?> = ArrayList()
-        val soldMinDate = getSoldDate(soldDateIndex, propertySold)
-        val typeProperty = getTypeProperty(typePropertyIndex)
+        val soldMinDate = SearchParameters.getSoldDate(soldDateIndex, propertySold, Date())
+        val typeProperty = SearchParameters.getTypeProperty(typePropertyIndex)
         val cityNameLike = "%$cityName%"
 
         mPropertyResultOfResearchViewModel.getPropertyResearch(typeProperty,
@@ -127,59 +127,30 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
                 priceMin, priceMax,
                 dateMinSale,dateMaxSale,
                 propertySold,soldMinDate, Date()).observe(this, android.arch.lifecycle.Observer { propertyListLambda ->
-            val propertyList = propertyListLambda?.iterator()
-            Log.e("TAG", "$propertyListLambda")
-            if (propertyList != null) {
-                var i = 0
-                if (propertyListLambda.isNotEmpty()){
-                    for (property in propertyList){
-                        this.mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
-                            if (pictureListLambda?.size == 0){
-                                pictureList.add(null)
-                            }else{
-                                pictureListLambda?.let { pictureList.add(it[0]) }
-                            }
-                            i++
-                            if (i == propertyListLambda.size){
-                                this.mAdapter.updateData(propertyListLambda, pictureList)
-                            }
-                        })
-                    }
-                }else {
-                    viewOfLayout.no_result_research_textView.visibility = View.VISIBLE
-                }
-            }
+            propertyListLambda?.let { this.getPicture(it) }
         })
     }
 
-    private fun getSoldDate(soldDateIndex: Int, propertySold: Boolean): Date {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        return if (propertySold){
-            calendar.add(Calendar.DAY_OF_YEAR, mIntervalDate[soldDateIndex])
-            calendar.time
-        }else{
-            calendar.add(Calendar.DAY_OF_YEAR, mIntervalDate[0])
-            calendar.time
+    // Get the pictures of the property
+    private fun getPicture(propertyList: List<Property>){
+        val pictureList: MutableList<Picture?> = ArrayList()
+        var i = 0
+        if (propertyList.isNotEmpty()){
+            for (property in propertyList){
+                mPropertyResultOfResearchViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
+                    if (pictureListLambda?.size == 0){
+                        pictureList.add(null)
+                    }else{
+                        pictureListLambda?.let { pictureList.add(it[0]) }
+                    }
+                    i++
+                    if (i == propertyList.size){
+                        this.mAdapter.updateData(propertyList, pictureList)
+                    }
+                })
+            }
+        }else {
+            viewOfLayout.no_result_research_textView.visibility = View.VISIBLE
         }
-    }
-
-    private fun getTypeProperty(typePropertyIndex: Int): ArrayList<Int>{
-        val typeProperty = arrayListOf<Int>()
-        val typePropertyInt = arrayOf(0, 1, 2, 3, 4, 5, 6)
-        return if (typePropertyIndex == Property.TYPE_ALL){
-            typeProperty.addAll(typePropertyInt)
-            typeProperty
-        }else{
-            typeProperty.add(typePropertyIndex)
-            typeProperty
-        }
-    }
-
-    private fun getInterestPointList(interestPoint: Boolean): ArrayList<Boolean>{
-        val interestPointList = arrayListOf<Boolean>()
-        interestPointList.add(true)
-        if (!interestPoint) interestPointList.add(false)
-        return interestPointList
     }
 }

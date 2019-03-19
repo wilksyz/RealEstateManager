@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.utils.MortgageSimulation
 import kotlinx.android.synthetic.main.fragment_property_mortgage.view.*
 
 /**

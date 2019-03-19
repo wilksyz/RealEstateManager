@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utils
+package com.openclassrooms.realestatemanager.ui.property_mortgage
 
 import java.text.DecimalFormat
 
