@@ -12,6 +12,7 @@ import com.openclassrooms.realestatemanager.ui.base_property_list.BasePropertyLi
 import com.openclassrooms.realestatemanager.utils.ItemClickSupport
 import kotlinx.android.synthetic.main.fragment_base_list_property.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass.
@@ -71,8 +72,6 @@ class PropertyListFragment: BasePropertyListFragment() {
                     }
                 })
             }
-        }else {
-            viewOfLayout.no_result_research_textView.visibility = View.VISIBLE
         }
     }
 

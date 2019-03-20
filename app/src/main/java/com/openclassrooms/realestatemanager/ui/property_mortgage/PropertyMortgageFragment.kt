@@ -63,7 +63,7 @@ class PropertyMortgageFragment : Fragment() {
 
     private fun getSettingsForSimulate(){
         mPropertyPrice = if (viewOfLayout.price_mortgage_edit_text.text.toString().isNotEmpty()) Integer.parseInt(viewOfLayout.price_mortgage_edit_text.text.toString()) else 0
-        mContribution = if (viewOfLayout.bring_mortgage_editext.text.toString().isNotEmpty()) Integer.parseInt(viewOfLayout.bring_mortgage_editext.text.toString()) else 0
+        mContribution = if (viewOfLayout.provision_mortgage_editext.text.toString().isNotEmpty()) Integer.parseInt(viewOfLayout.provision_mortgage_editext.text.toString()) else 0
         mRate = if (viewOfLayout.rate_mortgage_inputext.text.toString().isNotEmpty()) viewOfLayout.rate_mortgage_inputext.text.toString().toDouble() else 0.0
         mDuration = (viewOfLayout.duration_mortgage_spinner.selectedItemPosition + 2).toDouble()
 
