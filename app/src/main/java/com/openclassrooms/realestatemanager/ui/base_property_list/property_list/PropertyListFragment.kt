@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_list
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
@@ -18,12 +19,20 @@ import kotlin.collections.ArrayList
  * A simple [Fragment] subclass.
  *
  */
+
+private const val SELECTED_POSITION = "selected position"
+
 class PropertyListFragment: BasePropertyListFragment() {
 
     private lateinit var mPropertyListViewModel: PropertyListViewModel
+    private var mSelectedPosition: Int = RecyclerView.NO_POSITION
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        if (savedInstanceState != null){
+            mSelectedPosition = savedInstanceState.getInt(SELECTED_POSITION)
+            mAdapter.onClickRecyclerView(mSelectedPosition)
+        }
         this.configureViewModel()
         this.configureClickRecyclerView()
     }
@@ -42,6 +51,8 @@ class PropertyListFragment: BasePropertyListFragment() {
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
                 .setOnItemClickListener { _, position, _ ->
                     val property = mAdapter.getProperty(position)
+                    mSelectedPosition = position
+                    mAdapter.onClickRecyclerView(position)
                     (activity as PropertyListActivity).configureDetailsPropertyFragment(property)
                 }
     }
@@ -78,6 +89,7 @@ class PropertyListFragment: BasePropertyListFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
             putAll(outState)
+            putInt(SELECTED_POSITION, mSelectedPosition)
         }
         super.onSaveInstanceState(outState)
     }

@@ -13,6 +13,7 @@ class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.
 
     private var mPropertyList: MutableList<Property> = ArrayList()
     private var mPictureList: MutableList<Picture?> = ArrayList()
+    private var mSelectedPosition: Int = RecyclerView.NO_POSITION
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): PropertyViewHolder {
         val context = parent.context
@@ -26,6 +27,8 @@ class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.
     }
 
     override fun onBindViewHolder(propertyViewHolder: PropertyViewHolder, position: Int) {
+        propertyViewHolder.itemView.isSelected = mSelectedPosition == position
+
         Log.e("TAG Adapter", "${mPropertyList.size}, ${mPictureList.size}")
         return propertyViewHolder.updateListOfProperty(mPropertyList[position], mPictureList[position], context)
     }
@@ -44,5 +47,11 @@ class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.
 
     fun getProperty(position: Int): Property {
         return mPropertyList[position]
+    }
+
+    fun onClickRecyclerView(position: Int){
+        notifyItemChanged(mSelectedPosition)
+        mSelectedPosition = position
+        notifyItemChanged(mSelectedPosition)
     }
 }
