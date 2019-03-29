@@ -7,6 +7,7 @@ import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -95,7 +96,10 @@ class PropertyMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, OnMapRe
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-        if (requestCode == RESULT_OK && requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION){
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION){
+            this.createMap(mSavedInstanceState)
+            this.getLastLocation()
+            this.updateLocationUI()
         }
     }
 

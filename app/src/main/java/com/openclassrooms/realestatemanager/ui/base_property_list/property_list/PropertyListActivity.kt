@@ -2,12 +2,14 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_list
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.constraint.ConstraintSet
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.facebook.stetho.Stetho
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Property
@@ -30,6 +32,7 @@ class PropertyListActivity : AppCompatActivity() {
     private lateinit var mMenu: Menu
     private var mPropertyId: Long? = null
     private var mStateButtonEdit: Boolean = false
+    private var mDoubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,5 +179,19 @@ class PropertyListActivity : AppCompatActivity() {
             mStateButtonEdit = savedInstanceState.getBoolean(VISIBILITY_EDIT_BUTTON)
             mPropertyId = savedInstanceState.getLong(PROPERTY_ID)
         }
+    }
+
+    override fun onBackPressed() {
+
+        if (mDoubleBackToExitPressedOnce) {
+            finishAffinity()
+            System.exit(0)
+            return
+        }
+
+        this.mDoubleBackToExitPressedOnce = true
+        Toast.makeText(this, getString(R.string.press_again), Toast.LENGTH_SHORT).show()
+        Handler().postDelayed({ mDoubleBackToExitPressedOnce = false }, 2000)
+
     }
 }

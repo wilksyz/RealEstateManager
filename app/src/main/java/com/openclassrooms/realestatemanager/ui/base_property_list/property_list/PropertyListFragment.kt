@@ -29,12 +29,12 @@ class PropertyListFragment: BasePropertyListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        this.configureViewModel()
+        this.configureClickRecyclerView()
         if (savedInstanceState != null){
             mSelectedPosition = savedInstanceState.getInt(SELECTED_POSITION)
             mAdapter.onClickRecyclerView(mSelectedPosition)
         }
-        this.configureViewModel()
-        this.configureClickRecyclerView()
     }
 
     override fun onResume() {
