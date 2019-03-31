@@ -69,6 +69,7 @@ class PropertyCreateActivity : PropertyEditForms() {
         }
     }
 
+    //Retrieves the details of the new property
     private fun retrieveInformationEntered(): Property {
         val surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else 0
         val price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else 0

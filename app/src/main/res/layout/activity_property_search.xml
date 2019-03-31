@@ -207,15 +207,6 @@
             app:layout_constraintStart_toEndOf="@+id/textView19"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-        <View
-            android:id="@+id/date_max_search_view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/common_google_signin_btn_text_light_default"
-            app:layout_constraintEnd_toEndOf="@+id/date_max_serach_button"
-            app:layout_constraintStart_toStartOf="@+id/date_max_serach_button"
-            app:layout_constraintTop_toBottomOf="@+id/date_max_serach_button" />
-
         <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
@@ -245,24 +236,15 @@
             app:layout_constraintStart_toEndOf="@+id/textView20"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-        <View
-            android:id="@+id/date_min_search_view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/common_google_signin_btn_text_light_default"
-            app:layout_constraintEnd_toEndOf="@+id/date_min_search_button"
-            app:layout_constraintStart_toStartOf="@+id/date_min_search_button"
-            app:layout_constraintTop_toBottomOf="@+id/date_min_search_button" />
-
         <CheckBox
             android:id="@+id/sold_search_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/sold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_min_search_button" />
+            app:layout_constraintTop_toBottomOf="@+id/error_date_search_textView" />
 
         <EditText
             android:id="@+id/city_search_editText"
@@ -409,13 +391,27 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/the_minimum_price_must_be_less_than_the_maximum_area"
+            android:text="@string/the_minimum_price_must_be_less_than_the_maximum_price"
             android:textColor="@color/colorRed"
             android:textSize="12sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/price_max_search_spinner"
             app:layout_constraintStart_toStartOf="@+id/price_min_search_spinner"
             app:layout_constraintTop_toBottomOf="@+id/price_min_search_spinner" />
+
+        <TextView
+            android:id="@+id/error_date_search_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/the_minimum_date_must_be_less_than_the_maximum_date"
+            android:textColor="@color/colorRed"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/date_max_serach_button"
+            app:layout_constraintStart_toStartOf="@+id/date_min_search_button"
+            app:layout_constraintTop_toBottomOf="@+id/date_min_search_button" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

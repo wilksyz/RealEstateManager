@@ -49,13 +49,18 @@ class PropertyDetailFragment : Fragment() {
         this.configureViewModel()
         this.configureGridRecyclerView()
         this.configureClickGridRecyclerView()
-        this.getProperty(mPropertyId)
-        this.getPicture(mPropertyId)
+
         viewOfLayout.sold_buttons.setOnClickListener {
             getSoldDate()
         }
 
         return viewOfLayout
+    }
+
+    override fun onStart() {
+        super.onStart()
+        this.getProperty(mPropertyId)
+        this.getPicture(mPropertyId)
     }
 
     private fun getPropertyId(): Long{

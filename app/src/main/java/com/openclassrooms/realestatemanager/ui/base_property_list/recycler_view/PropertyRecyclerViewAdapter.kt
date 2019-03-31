@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.recycler_view
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.openclassrooms.realestatemanager.R
@@ -29,7 +28,6 @@ class PropertyRecyclerViewAdapter(private val context: Context?) : RecyclerView.
     override fun onBindViewHolder(propertyViewHolder: PropertyViewHolder, position: Int) {
         propertyViewHolder.itemView.isSelected = mSelectedPosition == position
 
-        Log.e("TAG Adapter", "${mPropertyList.size}, ${mPictureList.size}")
         return propertyViewHolder.updateListOfProperty(mPropertyList[position], mPictureList[position], context)
     }
 

@@ -67,6 +67,7 @@ class PropertyEditActivity : PropertyEditForms() {
         }
     }
 
+    //find the changes made to the property
     private fun retrieveInformationEntered(){
         mProperty.surface = if (surface_edit_text.text.toString().isNotEmpty()) Integer.parseInt(surface_edit_text.text.toString()) else 0
         mProperty.price = if (price_edit_text.text.toString().isNotEmpty()) Integer.parseInt(price_edit_text.text.toString()) else 0

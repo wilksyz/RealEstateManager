@@ -82,7 +82,8 @@
     <string name="your_simulation">Your simulation</string>
     <string name="date_null">__/__/__</string>
     <string name="the_minimum_area_must_be_less_than_the_maximum_area">The minimum area must be less than the maximum area</string>
-    <string name="the_minimum_price_must_be_less_than_the_maximum_area">The minimum price must be less than the maximum area</string>
+    <string name="the_minimum_price_must_be_less_than_the_maximum_price">The minimum price must be less than the maximum price</string>
+    <string name="the_minimum_date_must_be_less_than_the_maximum_date">The minimum date must be less than the maximum date</string>
     <string name="all">All</string>
     <string name="the_contribution_must_not_exceed_the_price_of_the_property">The contribution must not exceed the price of the property</string>
     <string name="price_must_not_be_zero">Price must not be zero</string>
@@ -134,6 +135,5 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="error_when_creating_the_property">Error when creating the property</string>
     <string name="no_result">No result</string>
-
 
 </resources>

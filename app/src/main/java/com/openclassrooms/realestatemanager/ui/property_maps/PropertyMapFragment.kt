@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.ui.property_maps
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -120,6 +119,7 @@ class PropertyMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, OnMapRe
         }
     }
 
+    //Retrieve the position of user
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
         activity?.let {
@@ -135,6 +135,7 @@ class PropertyMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, OnMapRe
         }
     }
 
+    // Center the camera on the position of user
     private fun centerCameraOnLocation(mLastKnownLocation: Location) {
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 LatLng(mLastKnownLocation.latitude,
@@ -189,6 +190,7 @@ class PropertyMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, OnMapRe
         }
     }
 
+    //add a marker for each property
     private fun addMarker(geocodingApi: GeocodingApi, position: Int){
         val lat: Double = geocodingApi.results[0].geometry.location.lat
         val lng: Double = geocodingApi.results[0].geometry.location.lng

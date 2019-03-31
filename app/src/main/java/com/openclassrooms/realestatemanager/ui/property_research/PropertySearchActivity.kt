@@ -109,6 +109,7 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
 
     override fun onNothingSelected(parent: AdapterView<*>?) { }
 
+    //Check the order of surfaces and prices
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (parent?.tag == 1941 || parent?.tag == 1942){
             if (surface_maxi_spinner_search.selectedItemPosition < surface_mini_spinner_search.selectedItemPosition){
@@ -210,15 +211,18 @@ class PropertyResearchActivity : AppCompatActivity(), OnItemSelectedListener {
         dialog.show()
     }
 
+    //Check the order of dates
     private fun checkDate(): Boolean{
         return if (mDateMaxSale >= mDateMinSale){
-            date_max_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
-            date_min_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
+            date_min_search_button.setTextColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
+            date_max_serach_button.setTextColor(ContextCompat.getColor(this, R.color.common_google_signin_btn_text_light_default))
+            error_date_search_textView.visibility = View.GONE
             research_button.isEnabled = true
             true
         }else {
-            date_max_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed))
-            date_min_search_view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed))
+            date_min_search_button.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
+            date_max_serach_button.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
+            error_date_search_textView.visibility = View.VISIBLE
             research_button.isEnabled = false
             false
         }

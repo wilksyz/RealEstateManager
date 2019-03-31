@@ -4,7 +4,7 @@ package com.openclassrooms.realestatemanager.ui.base_property_list.property_resu
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.di.Injection
@@ -32,10 +32,12 @@ private const val PRICE_MIN = "price min"
 private const val PRICE_MAX = "price max"
 private const val DATE_MIN_SALE = "date min sale"
 private const val DATE_MAX_SALE = "date max sale"
+private const val SELECTED_POSITION = "selected position"
 
 class PropertyResultResearchFragment : BasePropertyListFragment() {
 
     private lateinit var mPropertyResultOfResearchViewModel: PropertyResultOfResearchViewModel
+    private var mSelectedPosition: Int = RecyclerView.NO_POSITION
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -43,6 +45,10 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
         this.configureViewModel()
         this.configureClickRecyclerView()
         this.getSettingsOfResearch()
+        if (savedInstanceState != null){
+            mSelectedPosition = savedInstanceState.getInt(SELECTED_POSITION)
+            mAdapter.onClickRecyclerView(mSelectedPosition)
+        }
     }
 
     private fun configureViewModel() {
@@ -53,6 +59,8 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
     private fun configureClickRecyclerView(){
         ItemClickSupport.addTo(viewOfLayout.property_recyclerView_container, R.layout.item_list_property)
                 .setOnItemClickListener { _, position, _ ->
+                    mSelectedPosition = position
+                    mAdapter.onClickRecyclerView(position)
                     val property = mAdapter.getProperty(position)
                     (activity as PropertyResultOfResearchActivity).configureDetailsPropertyFragment(property)
                 }
@@ -152,5 +160,13 @@ class PropertyResultResearchFragment : BasePropertyListFragment() {
         }else {
             viewOfLayout.no_result_research_textView.visibility = View.VISIBLE
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.run {
+            putAll(outState)
+            putInt(SELECTED_POSITION, mSelectedPosition)
+        }
+        super.onSaveInstanceState(outState)
     }
 }
