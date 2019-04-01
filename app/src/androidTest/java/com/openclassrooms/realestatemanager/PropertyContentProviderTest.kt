@@ -41,7 +41,7 @@ class PropertyContentProviderTest {
     fun getItemsWhenNoPropertyInserted() {
         val cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyContentProvider.URI_PROPERTY, propertyID), null, null, null, null)
         assertThat<Cursor>(cursor, notNullValue())
-        assertThat<Int>(cursor!!.count, `is`<Int>(1))
+        assertThat<Int>(cursor!!.count, `is`<Int>(0))
         cursor.close()
     }
 

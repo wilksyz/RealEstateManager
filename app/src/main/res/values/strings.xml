@@ -58,7 +58,7 @@
     <string name="postal_code">Postal code</string>
     <string name="number">Number</string>
     <string name="street">Street</string>
-    <string name="n_c">N C</string>
+    <string name="n_c">NC</string>
     <string name="description">Description</string>
     <string name="interest_point">Interest point</string>
     <string name="sold">Sold</string>
@@ -135,5 +135,6 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="error_when_creating_the_property">Error when creating the property</string>
     <string name="no_result">No result</string>
+    <string name="no_description">No description</string>
 
 </resources>

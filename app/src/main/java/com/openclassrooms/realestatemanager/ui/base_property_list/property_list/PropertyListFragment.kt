@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.base_property_list.property_list
 
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -57,7 +58,7 @@ class PropertyListFragment: BasePropertyListFragment() {
     // Get all properties in database
     private fun getAllProperty() {
         this.mAdapter.clearList()
-        mPropertyListViewModel.getAllProperty().observe(this, android.arch.lifecycle.Observer{ propertyListLambda ->
+        mPropertyListViewModel.getAllProperty().observe(this, Observer{ propertyListLambda ->
             propertyListLambda?.let { this.getPicture(it) }
         })
     }
@@ -68,7 +69,7 @@ class PropertyListFragment: BasePropertyListFragment() {
         var i = 0
         if (propertyList.isNotEmpty()){
             for (property in propertyList){
-                mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, android.arch.lifecycle.Observer {pictureListLambda ->
+                mPropertyListViewModel.getPicture(property.mPropertyId).observe(this, Observer {pictureListLambda ->
                     if (pictureListLambda?.size == 0){
                         pictureList.add(null)
                     }else{

@@ -140,7 +140,6 @@ class PropertyDetailFragment : Fragment() {
     }
 
     // get an property
-
     private fun getProperty(id: Long) {
         this.mPropertyDetailViewModel.getProperty(id).observe(this, Observer { property ->
             if (property != null) {
@@ -155,37 +154,56 @@ class PropertyDetailFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(property: Property){
-        if (property.surface != 0) detail_property_surface_textView.text = property.surface.toString() else detail_property_surface_textView.text = "N.C"
-                detail_property_room_textView.text = property.numberOfRooms
-        detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city
-        detail_property_description_textView.text = property.descriptionProperty
+        if (property.surface != 0) detail_property_surface_textView.text = property.surface.toString() else detail_property_surface_textView.text = getString(R.string.n_c)
+        if (property.numberOfRooms.isNotEmpty()) detail_property_room_textView.text = property.numberOfRooms else detail_property_room_textView.text = getString(R.string.n_c)
+        if (property.address.city.isNotEmpty()) detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city else detail_property_location_textView.text = getString(R.string.n_c)
+        if (property.descriptionProperty.isNotEmpty()) detail_property_description_textView.text = property.descriptionProperty else detail_property_description_textView.text = getString(R.string.no_description)
         detail_property_price_textView.text ="$ ${property.price}"
     }
 
+    // Show or not the points of interest if they are available
     private fun getInterestPoint(property: Property){
         if (!property.interestPoint.doctor){
             doctor_imageView.visibility = View.GONE
             doctor_textView.visibility = View.GONE
+        }else {
+            doctor_imageView.visibility = View.VISIBLE
+            doctor_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.hobbies){
             hobbies_imageView.visibility = View.GONE
             hobbies_textView.visibility = View.GONE
+        }else {
+            hobbies_imageView.visibility = View.VISIBLE
+            hobbies_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.parc){
             parc_imageView.visibility = View.GONE
             parc_textView.visibility = View.GONE
+        }else {
+            parc_imageView.visibility = View.VISIBLE
+            parc_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.school){
             school_imageView.visibility = View.GONE
             school_textView.visibility = View.GONE
+        }else {
+            school_imageView.visibility = View.VISIBLE
+            school_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.store){
             stores_imageView.visibility = View.GONE
             stores_textView.visibility = View.GONE
+        }else {
+            stores_imageView.visibility = View.VISIBLE
+            stores_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.transport){
             public_transport_imageView.visibility = View.GONE
             public_transport_textView.visibility = View.GONE
+        }else {
+            public_transport_imageView.visibility = View.VISIBLE
+            public_transport_textView.visibility = View.VISIBLE
         }
     }
 
