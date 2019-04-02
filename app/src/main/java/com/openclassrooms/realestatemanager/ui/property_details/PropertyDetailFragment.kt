@@ -164,43 +164,43 @@ class PropertyDetailFragment : Fragment() {
     // Show or not the points of interest if they are available
     private fun getInterestPoint(property: Property){
         if (!property.interestPoint.doctor){
-            doctor_imageView.visibility = View.GONE
-            doctor_textView.visibility = View.GONE
+            doctor_imageView.visibility = View.INVISIBLE
+            doctor_textView.visibility = View.INVISIBLE
         }else {
             doctor_imageView.visibility = View.VISIBLE
             doctor_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.hobbies){
-            hobbies_imageView.visibility = View.GONE
-            hobbies_textView.visibility = View.GONE
+            hobbies_imageView.visibility = View.INVISIBLE
+            hobbies_textView.visibility = View.INVISIBLE
         }else {
             hobbies_imageView.visibility = View.VISIBLE
             hobbies_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.parc){
-            parc_imageView.visibility = View.GONE
-            parc_textView.visibility = View.GONE
+            parc_imageView.visibility = View.INVISIBLE
+            parc_textView.visibility = View.INVISIBLE
         }else {
             parc_imageView.visibility = View.VISIBLE
             parc_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.school){
-            school_imageView.visibility = View.GONE
-            school_textView.visibility = View.GONE
+            school_imageView.visibility = View.INVISIBLE
+            school_textView.visibility = View.INVISIBLE
         }else {
             school_imageView.visibility = View.VISIBLE
             school_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.store){
-            stores_imageView.visibility = View.GONE
-            stores_textView.visibility = View.GONE
+            stores_imageView.visibility = View.INVISIBLE
+            stores_textView.visibility = View.INVISIBLE
         }else {
             stores_imageView.visibility = View.VISIBLE
             stores_textView.visibility = View.VISIBLE
         }
         if (!property.interestPoint.transport){
-            public_transport_imageView.visibility = View.GONE
-            public_transport_textView.visibility = View.GONE
+            public_transport_imageView.visibility = View.INVISIBLE
+            public_transport_textView.visibility = View.INVISIBLE
         }else {
             public_transport_imageView.visibility = View.VISIBLE
             public_transport_textView.visibility = View.VISIBLE
