@@ -8,6 +8,9 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import kotlinx.android.synthetic.main.item_list_property.view.*
+import android.widget.TextView
+import java.text.NumberFormat
+import java.util.*
 
 class PropertyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -30,8 +33,10 @@ class PropertyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         if (property.saleStatus){
             itemView.sold_property_list_textView.visibility = View.VISIBLE
         }
-        val priceProperty = "$ ${property.price}"
-        itemView.price_view_holder_textView.text = priceProperty
+
+        val moneyFormat = NumberFormat.getCurrencyInstance(Locale.US)
+        itemView.price_view_holder_textView.text = moneyFormat.format(property.price)
+
         if (property.address.city.isNotEmpty()){
             val locationProperty = "${property.address.postCode} ${property.address.city}"
             itemView.location_view_holder_textView.text = locationProperty

@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.dialog_full_screen_picture.view.*
 import kotlinx.android.synthetic.main.fragment_details_property.*
 import kotlinx.android.synthetic.main.fragment_details_property.view.*
 import java.text.DateFormat
+import java.text.NumberFormat
 import java.util.*
 
 /**
@@ -158,7 +159,8 @@ class PropertyDetailFragment : Fragment() {
         if (property.numberOfRooms.isNotEmpty()) detail_property_room_textView.text = property.numberOfRooms else detail_property_room_textView.text = getString(R.string.n_c)
         if (property.address.city.isNotEmpty()) detail_property_location_textView.text = property.address.number+" "+property.address.street+"\n"+property.address.postCode+"\n"+property.address.city else detail_property_location_textView.text = getString(R.string.n_c)
         if (property.descriptionProperty.isNotEmpty()) detail_property_description_textView.text = property.descriptionProperty else detail_property_description_textView.text = getString(R.string.no_description)
-        detail_property_price_textView.text ="$ ${property.price}"
+        val moneyFormat = NumberFormat.getCurrencyInstance(Locale.US)
+        detail_property_price_textView.text = moneyFormat.format(property.price)
     }
 
     // Show or not the points of interest if they are available
