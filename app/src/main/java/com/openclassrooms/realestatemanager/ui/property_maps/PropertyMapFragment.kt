@@ -192,14 +192,16 @@ class PropertyMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, OnMapRe
 
     //add a marker for each property
     private fun addMarker(geocodingApi: GeocodingApi, position: Int){
-        val lat: Double = geocodingApi.results[0].geometry.location.lat
-        val lng: Double = geocodingApi.results[0].geometry.location.lng
-        val location = LatLng(lat, lng)
-        val marker = mGoogleMap.addMarker(MarkerOptions()
-                .position(location)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
-        marker.tag = position
-        mGoogleMap.setOnMarkerClickListener(this)
+        if (geocodingApi.results.isNotEmpty()){
+            val lat: Double = geocodingApi.results[0].geometry.location.lat
+            val lng: Double = geocodingApi.results[0].geometry.location.lng
+            val location = LatLng(lat, lng)
+            val marker = mGoogleMap.addMarker(MarkerOptions()
+                    .position(location)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+            marker.tag = position
+            mGoogleMap.setOnMarkerClickListener(this)
+        }
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
