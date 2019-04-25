@@ -1,12 +1,14 @@
 package com.openclassrooms.realestatemanager.ui.property_mortgage
 
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 object MortgageSimulation {
 
         fun getMonthly(duration: Double, borrowedMoney: Int, rate: Double): Double{
             val monthDuration = getMonth(duration)
-            val decimalFormat = DecimalFormat("0.00")
+            val decimalFormat = DecimalFormat("0.00", DecimalFormatSymbols(Locale.US))
             return if (rate != 0.0){
                 val rateNumberDecimal = rate / 100
                 val firstPart = borrowedMoney * rateNumberDecimal / 12
@@ -22,7 +24,7 @@ object MortgageSimulation {
         }
 
         fun getCostMortgage(duration: Double, borrowedMoney: Int, monthly: Double): Double{
-            val decimalFormat = DecimalFormat("0.00")
+            val decimalFormat = DecimalFormat("0.00", DecimalFormatSymbols(Locale.US))
             val monthDuration = getMonth(duration)
             return decimalFormat.format((monthly * monthDuration) - borrowedMoney).toDouble()
         }

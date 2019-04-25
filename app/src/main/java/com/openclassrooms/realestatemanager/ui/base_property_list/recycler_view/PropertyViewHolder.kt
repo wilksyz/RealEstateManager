@@ -8,7 +8,6 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Picture
 import com.openclassrooms.realestatemanager.model.Property
 import kotlinx.android.synthetic.main.item_list_property.view.*
-import android.widget.TextView
 import java.text.NumberFormat
 import java.util.*
 
